@@ -1,14 +1,12 @@
 # IT326 Project | Body performance
 
- Student name: Rawan Alsaif | student ID: 443200449
- 
- Student name: Hadeel Alsaleh | student ID: 441201424
- 
- Student name: Razan Alkhaluqy | student ID: 443204373
- 
- Student name: Lama Alnahabi | student ID: 4432014174
+|Student name|  Student ID |Section |
+|------------|------------|---------|
+|Rawan Alsaif | 443200449| 71680|
+|Hadeel Alsaleh |441201424| 71680|
+|Razan Alkhaluqy |443204373|71680|
+|Lama Alnahabi |4432014174|71680|
 
- section: 71680
  
 # Introduction 
 
