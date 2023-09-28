@@ -1,26 +1,31 @@
-#The getwd() function tells you what the current working directory is getwd()
+### Importing the dataset
 
-## Importing the dataset
 ```{r}
 dataset = read.csv('bodyPerformance.csv')
 
-View(dataset) summary(dataset) str(dataset)
+View(dataset)
+summary(dataset)
+str(dataset)
 ```
-# Dealing with the missing values - Outliers
+
+################# Dealing with the missing values - Outliers
+
 ```{r}
 is.na(dataset)
 
 ```
-# to find the total null values in the dataset
+
+### to find the total null values in the dataset
 
 ```{r}
 sum(is.na(dataset))
+```
+
+```{r}
 print(dataset)
 ```
-###Detect Outlier #Outlier: Find value with largest difference from the mean #???????logical if set to TRUE, gives vector of logical values, and possible outlier position is marked by TRUE
-```{r}
-summary(dataset)
-```
+
+### Detect Outlier
 
 ```{r}
 summary(dataset$age)
@@ -61,7 +66,11 @@ summary(dataset$sit.ups.counts)
 ```{r}
 summary(dataset$broad.jump_cm)
 ```
-##Boxplot of age
+
+### Boxplot:
+
+#### Boxplot of age
+
 ```{r}
 boxplot.stats(dataset$age)$out
 
@@ -78,7 +87,8 @@ mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 
 ```
 
-##Boxplot of height_cm
+#### Boxplot of height_cm
+
 ```{r}
 boxplot.stats(dataset$height_cm)$out
 
@@ -94,7 +104,7 @@ boxplot(dataset$height_cm ,
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
 
-##boxplot of weight_kg
+#### boxplot of weight_kg
 
 ```{r}
 boxplot.stats(dataset$weight_kg)$out
@@ -111,7 +121,8 @@ boxplot(dataset$weight_kg ,
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
 
-##boxplot of body.fat\_.
+#### boxplot of body.fat\_.
+
 ```{r}
 boxplot.stats(dataset$body.fat_.)$out
 
@@ -127,7 +138,8 @@ boxplot(dataset$weight_kg ,
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
 
-#boxplot of diastolic
+#### boxplot of diastolic
+
 ```{r}
 boxplot.stats(dataset$diastolic)$out
 
@@ -142,7 +154,9 @@ boxplot(dataset$diastolic ,
         main= "Boxplot of diastolic")
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
-#boxplot of systolic
+
+#### boxplot of systolic
+
 ```{r}
 boxplot.stats(dataset$systolic)$out
 
@@ -157,7 +171,9 @@ boxplot(dataset$systolic ,
         main= "Boxplot of systolic")
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
-#boxplot of gripForce
+
+#### boxplot of gripForce
+
 ```{r}
 boxplot.stats(dataset$gripForce)$out
 
@@ -172,7 +188,9 @@ boxplot(dataset$gripForce ,
         main= "Boxplot of gripForce")
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
-##boxplot of sit.and.bend.forward_cm
+
+#### boxplot of sit.and.bend.forward_cm
+
 ```{r}
 boxplot.stats(dataset$sit.and.bend.forward_cm)$out
 
@@ -187,7 +205,9 @@ boxplot(dataset$sit.and.bend.forward_cm ,
         main= "Boxplot of sit.and.bend.forward_cm")
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
-##boxplot of sit.ups.counts
+
+#### boxplot of sit.ups.counts
+
 ```{r}
 boxplot.stats(dataset$sit.ups.counts)$out
 
@@ -202,7 +222,9 @@ boxplot(dataset$sit.ups.counts ,
         main= "Boxplot of sit.ups.counts")
 mtext(paste("Outliers: ", paste(out, collapse = ", ")))
 ```
-#boxplot of broad.jump_cm
+
+#### boxplot of broad.jump_cm
+
 ```{r}
 boxplot.stats(dataset$broad.jump_cm)$out
 
