@@ -1,0 +1,579 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+---
+
+### Goal :
+
+The primary objective of this project is to emphasize the significance
+of body performance in enhancing physical health and promoting exercise
+awareness among individuals. This will be accomplished by analyzing and
+extracting valuable insights from body performance datasets, monitoring
+the progression of human age, and subsequently improving the overall
+awareness of its importance.
+
+#### Classification gaol :-
+
+we employ a classification approach to categorize individuals into distinct levels of fitness based on various data attributes, including body measurements such as weight, body fat percentage, and health indicators, as well as activity levels. Furthermore, we aim to predict performance outcomes by leveraging this collected data.
+
+### Data Source :
+
+It from Kaggle website , The link(
+<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
+the source data.
+
+### General Information about Body performance dataset :
+
+Our dataset is called "Body performance" , The dataset provide the grade
+of performance and some data such as gender and age along with body
+measurements and other performance tests , It has 13394 row and each of
+them have 11 attributes.
+
+Table 1 : Data dictionary showing description of all Attributes
+
+| name                    | description                                                                                           | data type | possible value |
+|-----------------|---------------------|-----------------|-----------------|
+| Age                     | The person's age in years                                                                             | numerical | 21-64          |
+| Gender                  | The person's gender                                                                                   | binary    | F,M            |
+| Height_cm               | The person's Height in cm                                                                             | numerical | 125-194        |
+| weight_kg               | The person's weight in Kg                                                                             | numerical | 26.3-138       |
+| body fat\_%             | the amount of essential fat .                                                                         | numerical | 3%-78.4%       |
+| diastolic               | measures pressure the blood vessels when the heart is at rest                                         | numerical | 0-156          |
+| systolic                | measures pressure in the arteries when the heart beats in minutes                                     | numerical | 0-201          |
+| gripForce               | fingers flexibility tests                                                                             | numerical | 0-70.5         |
+| sit and bend forward_cm | measures flexibility in sitting and bending forward in centimeters.                                   | numerical | -25-213        |
+| sit-ups counts_cm       | measures the strength and endurance of the abdominals and hip-flexor muscles in centimeter.           | numerical | 0-80           |
+| broad jump_cm           | It is a method of measuring how far a person can jump from a standing position to a landing position. | numerical | 0-303          |
+|class| body performance score| numerical | A,B,C,D
+
+### Importing the dataset:
+```{r}
+##dataset<- read.csv("bodyPerformance.csv")
+dataset<-bodyPerformance
+View(dataset)
+str(dataset)
+```
+
+------------------------------------------------------------------------
+
+
+### performance dataset before preprocessing:
+
+
+```{r}
+print(dataset)
+```
+
+
+
+```{r}
+#Number of rows
+nrow(dataset)
+#Number of column
+ncol(dataset)
+```
+
+
+------------------------------------------------------------------------
+
+### Understanding the dataset using graph representations:
+
+#### Scatter plot of height and weight:-
+
+Observation:
+
+ This scatter plot helps us determine whether height and
+weight are correlated to each other or not. The plot shows a strong
+positive correlation between the two attributes, indicating a
+proportional relationship.
+
+```{r}
+dataset<-bodyPerformance
+plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement", 
+     xlab = "height", ylab = "weight",
+     xlim = c(100,200), ylim = c(20,150))
+```
+
+------------------------------------------------------------------------
+#### Histogram of body fat :-
+
+Observation:
+
+  he histogram represents the frequency distribution of body
+fat values. We observe that the majority of values lie within the range
+of 10-30. However, the histogram also reveals the presence of outliers
+in the dataset .
+
+```{r}
+hist(dataset$body.fat_.)
+```
+
+------------------------------------------------------------------------
+
+#### Scatter plot for age and diastoic :-
+Observation :
+
+  This scatter plot helps us determine the correlation between Age and
+diastolic. The plot shows no correlation between the two attributes,
+indicating no proportional relationship
+
+```{r}
+plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales", 
+     xlab = "age", ylab = "diastolic",
+     xlim = c(20,64), ylim = c(0,200))
+```
+
+------------------------------------------------------------------------
+
+#### Scatter plot for Gender and class :
+
+first we endcode the gender F to be 0 and M to 1 ,and then encode class A=1 (best),B=2 ,C=3,D=4 then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male    
+
+
+```{r}
+ #encoding Class: 
+#dtaset<- bodyPerformance
+dataset$class = factor(dataset$class,levels =
+c("A","B", "C","D"), labels = c(1, 2, 3,4))
+```
+
+```{r}
+ #encoding Gender:
+dataset$gender = factor(dataset$gender,levels =
+                         c("F","M"), labels = c(0,1))
+```
+
+```{r}
+plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
+     xlab = "gender", ylab = "class",
+     xlim = c(0,1), ylim = c(0,4))
+    
+```
+
+------------------------------------------------------------------------
+### Statistical Measures:
+
+```{r}
+sum(duplicated(dataset))
+```
+
+```{r}
+ summary(dataset$age)
+```
+
+```{r}
+summary(dataset$height_cm)
+```
+
+```{r}
+ summary(dataset$weight_kg)
+```
+
+```{r}
+ summary(dataset$body.fat_.)
+```
+
+```{r}
+ summary(dataset$diastolic)
+```
+
+```{r}
+ summary(dataset$systolic)
+```
+
+```{r}
+ summary(dataset$gripForce)
+```
+
+```{r}
+ summary(dataset$sit.and.bend.forward_cm)
+```
+
+```{r}
+summary(dataset$sit.ups.counts)
+```
+
+```{r}
+ summary(dataset$broad.jump_cm)
+```
+
+------------------------------------------------------------------------
+## Data Preprocessing:
+
+### Check duplicated rows:
+ We check if there are any duplicated rows to decrease dataset volume. Hence enhancing data quality which leads to better model performance and speed.
+
+witch there's no duplicated rows as showing:
+```{r}
+sum(duplicated(dataset))
+```
+
+we found 1 row that’s duplicate that need to be deleted.
+
+```{r}
+#Remove duplicated rows 
+dataset <- dataset[!duplicated (dataset), ]
+```
+
+
+```{r}
+#To make sure that the deletion was successful 
+sum(duplicated(dataset))
+```
+### Check nulls value:
+
+Null values can cause issues when performing data analysis or building machine learning models, as they can lead to inaccurate results or errors, where we found then 0 null in our dataset. So, no need to delete any.
+
+```{r}
+#to find the total null values in the dataset
+sum(is.na(dataset))
+
+```
+
+------------------------------------------------------------------------
+
+## Detect Outlier and Remove them:
+ We checked our dataset to see if there were any outlier values, and we found a couple. Statistical studies and modeling can be significantly impacted by the presence of outliers. Outliers can skew results and impair the validity and reliability of inferences made from the research since they are data points that differ dramatically from the majority of the data. Therefore, in order to prevent them from harming our outcomes, we must erase them before we begin our task.
+
+An outlier detection approach was used on the dataset to solve this problem. The detection approach used makes use of the Outliers package's Outlier() function. This method revealed the outliers among the data points.
+
+```{r}
+#install outliers package:
+ library(outliers)
+
+```
+
+------------------------------------------------------------------------
+
+#### boxplot to detect outliers:
+
+ From The person’s age in years boxplot and summary we notice that there are no outliers showing on the boxplot , Also, we observe that the mean is less than the median, indicating a down skew (negatively skewed) in the distribution. This suggests that the age distribution is stretched towards the lower values, with more individuals falling in the younger age range.
+
+```{r}
+# age boxplot :
+boxplot(dataset$age , 
+        ylab= "The person’s age in years boxplot", 
+        main= "Boxplot of age")
+```
+
+------------------------------------------------------------------------
+
+
+ The summary and box plot values for The person’s height in cm indicate a dataset ranging from 125.0 to 193.8. the median at 169.2, and the mean is 168.6. Comparing the mean and median, we observe that they are relatively close in value. Also, there is some outliers that we will handle it by deleting them in preprocessing steps.
+```{r}
+#Hight boxplot :
+boxplot(dataset$height_cm , 
+        ylab= "The person’s height in cm", 
+        main= "Boxplot of height_cm")
+
+```
+
+------------------------------------------------------------------------
+
+
+The summary and box plot values for The person’s weight in Kg indicate a dataset ranging from  26.30 to 138.10. The mean weight is 67.45. Comparing the mean and median, we observe that they are relatively close in value, and that due also the maximum outliers.
+```{r}
+
+#Weight boxplot;
+boxplot(dataset$weight_kg , 
+        ylab= "The person’s weight in Kg", 
+        main= "Boxplot of weight")
+
+```
+
+------------------------------------------------------------------------
+
+The boxplot of the person's body fat (the amount of essential fat .)  shows how the values in the dataset have been evenly distributed around the median value of 22.80, and, there some outliers that we will handle them.
+```{r}
+#body fat boxplot : 
+boxplot(dataset$body.fat_.,
+        ylab= "the person's body fat" ,
+        main= "Boxplot of body fat_%")
+
+
+```
+
+------------------------------------------------------------------------
+
+The boxplot of the person's diastolic (measures pressure the blood vessels when the heart is at rest) shows how the values in the dataset have been evenly distributed around the median value of 79.0, and, there some outliers that we will handle them
+```{r}
+#diastolic box plot :
+boxplot(dataset$diastolic,
+        ylab= "the person's diastolic ",
+        main= "Boxplot of diastolic")
+
+```
+
+------------------------------------------------------------------------
+
+The boxplot of the person's systolic (measures pressure in the arteries when the heart beats in minutes) shows how the values in the dataset have been evenly distributed around the median value of 130.0, and, there some outliers that we will handle them
+```{r}
+#systolic box plot:
+boxplot(dataset$systolic,
+        ylab= "The person's systolic " ,
+        main= "Boxplot of systolic")
+
+```
+
+------------------------------------------------------------------------
+
+The boxplot of gripForce (fingers flexibility tests) shows how the values in the dataset have been evenly distributed around the median value of 37.90, and, there some outliers that we will handle them
+
+```{r}
+#gripForce box plot:
+boxplot(dataset$gripForc,
+        ylab= "the person's gripForce " ,
+        main= "Boxplot of gripForc")
+
+```
+
+------------------------------------------------------------------------
+ the test that's measures flexibility in sitting and bending forward in centimeters” boxplot illustrates a slight down skew (negatively skewed) in the distribution, where there are more extreme values on the lower end(outliers) that we will handle it in preprocessing step by deleting them.
+
+```{r}
+#sit and bend forward_cm box plot: 
+boxplot(dataset$sit.and.bend.forward_cm,
+        ylab= "sit and bend forward_cm" ,
+        main= "Boxplot of sit and bend forward_cm")
+```
+
+------------------------------------------------------------------------
+
+The boxplot of the "Test that measures the strength and endurance of the abdominals and hip-fle" shows how the values in the dataset have been evenly distributed around the median value of 41, and, there's no outliers showing on boxplot.
+```{r}
+#sit-ups counts_cm box plot:
+boxplot(dataset$sit.ups.counts,
+        ylab= "sit-ups" ,
+        main= "Boxplot of sit-ups")
+```
+
+------------------------------------------------------------------------
+
+The boxplot of the "method of measuring how far a person can jump from a standing position to a landing position" shows how the values in the dataset have been evenly distributed around the median value of 193, and, there some minimum outliers that we will handle them in preprocessing step by deleting them.
+
+```{r}
+#broad jump_cm box plot:
+boxplot(dataset$broad.jump_cm,
+        ylab= "broad jump_cm " ,
+        main= "Boxplot of broad jump_cm ")
+```
+
+
+
+
+------------------------------------------------------------------------
+
+
+### Detect outlirs:
+
+We noticed that "Age" has an Outlier that it's not showing on the boxplot, where its an Outlier within the range. that's mean those values are negatively affects on the dataset even though it is within range. So, we delete them
+```{r}
+#Detect outlir for 'age': 
+outAge = outlier(dataset$age, logical =TRUE)
+
+#number of outliers:
+
+sum(outAge)
+Find_outlier = which(outAge ==TRUE, arr.ind = TRUE)
+outAge
+Find_outlier
+
+#Delete age outliers:
+dataset= dataset[-Find_outlier,]
+
+```
+
+------------------------------------------------------------------------
+
+
+```{r}
+#Detect outlir for 'height_cm': 
+outH = outlier(dataset$height_cm, logical =TRUE)
+#number of outliers:
+sum(outH)
+Find_outlier = which(outH ==TRUE, arr.ind = TRUE)
+outH
+Find_outlier
+
+#Delete height_cm outliers:
+dataset= dataset[-Find_outlier,]
+
+```
+
+------------------------------------------------------------------------
+
+
+```{r}
+#Detect outlir for 'weight_kg': 
+outW= outlier(dataset$weight_kg, logical =TRUE)
+#number of outliers:
+sum(outW)
+Find_outlier = which(outW ==TRUE, arr.ind = TRUE)
+outW
+Find_outlier
+
+#Delete weight_kg outliers:
+dataset= dataset[-Find_outlier,]
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#Detect outlir for 'body.fat\_.': 
+
+outefat = outlier(dataset$body.fat_., logical =TRUE)
+#number of outliers:
+sum(outefat)
+Find_outlier = which(outefat ==TRUE, arr.ind = TRUE)
+outefat
+Find_outlier
+
+#Delete body.fat outliers:
+dataset= dataset[-Find_outlier,]
+
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#Detect outlir for 'systolic': 
+outesys = outlier(dataset$systolic, logical =TRUE)
+#number of outliers:
+sum(outesys)
+Find_outlier = which(outesys ==TRUE, arr.ind = TRUE)
+outesys
+Find_outlier
+
+#Delete systolic outliers:
+dataset= dataset[-Find_outlier,]
+
+
+```
+
+------------------------------------------------------------------------
+
+
+ As we saw in boxplot there was only one outlier. However, here we detected 3 values, where 2 are within the range but we will take it as an outliers sinces those values may have a negatively affects on the dataset specifically on "class" attribute.
+```{r}
+#Detect outlir for 'gripForce': 
+outegrip = outlier(dataset$gripForce, logical =TRUE)
+#number of outliers:
+sum(outegrip)
+Find_outlier = which(outegrip ==TRUE, arr.ind = TRUE)
+outegrip
+Find_outlier
+
+#Delete gripForce  outliers:
+dataset= dataset[-Find_outlier,]
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#Detect outlir for 'sit.and.bend.forward_cm': 
+outesit = outlier(dataset$sit.and.bend.forward_cm, logical =TRUE)
+#number of outliers:
+sum(outesit)
+Find_outlier = which(outesit ==TRUE, arr.ind = TRUE)
+outesit
+Find_outlier
+
+#Delete sit.and.bend.forward_cm outliers:
+dataset= dataset[-Find_outlier,]
+```
+
+------------------------------------------------------------------------
+
+
+we notic some outliers within the range and we will deleting them as an outliers since it's effects other attributes negatively.
+```{r}
+#Detect outlir for 'sit.up.count': 
+outesitup = outlier(dataset$sit.ups.counts, logical =TRUE)
+#number of outliers:
+sum(outesitup)
+Find_outlier = which(outesitup ==TRUE, arr.ind = TRUE)
+outesitup
+Find_outlier
+
+#Delete age outliers:
+dataset= dataset[-Find_outlier,]
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#Detect outlir for 'broad.jump_cm': 
+
+Outjump = outlier(dataset$broad.jump_cm, logical =TRUE)
+sum(Outjump)
+Find_outlier = which(Outjump ==TRUE, arr.ind = TRUE)
+Outjump
+Find_outlier
+
+dataset= dataset[-Find_outlier,]
+
+```
+
+------------------------------------------------------------------------
+
+### Check rows and columns after deletion the outliers:
+
+To make sure that the deletion was successful, we searched for the number of rows.
+
+```{r}
+#check after deleting
+#Number of rows and column
+nrow(dataset)
+ncol(dataset)
+
+```
+
+We noticed a decrease in the number of rows, which means that deletion the outliers was successful.
+
+------------------------------------------------------------------------
+
+### Normalizetion:
+
+ In order to ensure comparability across individuals and eliminate biases resulting from differences in measurement units or scales, we have decided to normalize the following attributes: height (in centimeters), weight (in kilograms), body fat percentage, diastolic, systolic, grip force, sit and bend forward distance (in centimeters), sit-ups count, and broad jump distance (in centimeters).
+ 
+```{r}
+View(dataset)
+dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
+
+```
+
+
+------------------------------------------------------------------------
+
+### Discretization :
+
+We transformed the continuous vales of the age into intervals by dividing the values to be fall on one of three possible interval labels with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by discretisation the values well be meaningful and simpler to classify or perform other methods that can help us later in our model.
+
+```{r}
+# Define bins for discretization
+dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
+```
+
+
+---------------------------------
+
+
+### Feature Selection :
+
+Based on the dataset and the graphs we did earlier, there are several justifications for not performing feature selection:
+
+#### 1. Dimensionality: 
+The number of attributes (12) is not excessively high, and it is within a manageable range for modeling and analysis.
+
+#### 2.Correlation Assessment: 
+just because some graphs indicate a lack of correlation between certain attributes, it doesn't imply that those attributes hold no value or provide no assistance in enhancing individual body performance. It is important to recognize the interplay between these attributes and their impact on body performance. Consequently, removing any of these attributes may result in loss of valuable information.
+
+#### 3. Interpretability: 
+By considering all the attributes, you can gain a deeper understanding of the relationships between different variables, and allows for a more comprehensive analysis providing more meaningful insights.
+
+While feature selection can be beneficial in certain situations, in the case of analyzing body performance for individuals, it is important to consider all attributes without performing feature selection.
