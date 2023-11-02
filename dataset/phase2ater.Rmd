@@ -589,3 +589,6 @@ just because some graphs indicate a lack of correlation between certain attribut
 By considering all the attributes, you can gain a deeper understanding of the relationships between different variables, and allows for a more comprehensive analysis providing more meaningful insights.
 
 While feature selection can be beneficial in certain situations, in the case of analyzing body performance for individuals, it is important to consider all attributes without performing feature selection.
+
+----------------------------------------------
+##Phase 2:
