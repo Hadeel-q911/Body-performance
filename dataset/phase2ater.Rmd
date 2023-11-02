@@ -90,7 +90,6 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
      xlim = c(100,200), ylim = c(20,150))
 ```
 
-
 ------------------------------------------------------------------------
 #### Histogram of body fat :-
 
@@ -120,6 +119,7 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
      xlim = c(20,64), ylim = c(0,200))
 ```
 
+
 ------------------------------------------------------------------------
 
 #### Scatter plot for Gender and class :
@@ -134,11 +134,13 @@ dataset$class = factor(dataset$class,levels =
 c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
 
+
 ```{r}
  #encoding Gender:
 dataset$gender = factor(dataset$gender,levels =
                          c("F","M"), labels = c(0,1))
 ```
+
 
 ```{r}
 plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
@@ -154,45 +156,56 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
 sum(duplicated(dataset))
 ```
 
+
 ```{r}
  summary(dataset$age)
 ```
+
 
 ```{r}
 summary(dataset$height_cm)
 ```
 
+
 ```{r}
  summary(dataset$weight_kg)
 ```
+
 
 ```{r}
  summary(dataset$body.fat_.)
 ```
 
+
 ```{r}
  summary(dataset$diastolic)
 ```
+
 
 ```{r}
  summary(dataset$systolic)
 ```
 
+
 ```{r}
  summary(dataset$gripForce)
 ```
+
 
 ```{r}
  summary(dataset$sit.and.bend.forward_cm)
 ```
 
+
 ```{r}
 summary(dataset$sit.ups.counts)
 ```
 
+
 ```{r}
  summary(dataset$broad.jump_cm)
 ```
+
 
 ------------------------------------------------------------------------
 ## Data Preprocessing:
@@ -206,6 +219,7 @@ sum(duplicated(dataset))
 ```
 
 we found 1 row that’s duplicate that need to be deleted.
+
 
 ```{r}
 #Remove duplicated rows 
@@ -239,6 +253,9 @@ An outlier detection approach was used on the dataset to solve this problem. The
  library(outliers)
 
 ```
+
+# Class boxplot: (ERROR????????????)
+
 
 ------------------------------------------------------------------------
 
