@@ -45,8 +45,7 @@ Table 1 : Data dictionary showing description of all Attributes
 
 ### Importing the dataset:
 ```{r}
-##dataset<- read.csv("bodyPerformance.csv")
-dataset<-bodyPerformance
+dataset<- read.csv("bodyPerformance.csv")
 View(dataset)
 str(dataset)
 ```
@@ -85,11 +84,12 @@ positive correlation between the two attributes, indicating a
 proportional relationship.
 
 ```{r}
-dataset<-bodyPerformance
+dataset<- read.csv("bodyPerformance.csv")
 plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement", 
      xlab = "height", ylab = "weight",
      xlim = c(100,200), ylim = c(20,150))
 ```
+
 
 ------------------------------------------------------------------------
 #### Histogram of body fat :-
