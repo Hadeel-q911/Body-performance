@@ -1,12 +1,9 @@
 ---
-title: "R Notebook"
+title: "Body performance"
 output: html_notebook
 ---
 
----
-
 ### Goal :
-
 The primary objective of this project is to emphasize the significance
 of body performance in enhancing physical health and promoting exercise
 awareness among individuals. This will be accomplished by analyzing and
@@ -14,12 +11,10 @@ extracting valuable insights from body performance datasets, monitoring
 the progression of human age, and subsequently improving the overall
 awareness of its importance.
 
-#### Classification gaol :-
-
+#### Classification gaol :
 we employ a classification approach to categorize individuals into distinct levels of fitness based on various data attributes, including body measurements such as weight, body fat percentage, and health indicators, as well as activity levels. Furthermore, we aim to predict performance outcomes by leveraging this collected data.
 
 ### Data Source :
-
 It from Kaggle website , The link(
 <https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
 the source data.
