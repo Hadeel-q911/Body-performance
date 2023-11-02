@@ -592,3 +592,30 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 ##Phase 2:
+
+1. Problem:
+
+-------------------
+2.Data Mining task:
+
+-------------------
+3. Data:
+
+-------------------
+4. Data preprocessing:
+
+-------------------
+5. Data Mining Technique
+
+-------------------
+6. Evaluation and Comparison
+
+-------------------
+7.Findings
+
+-------------------
+8.Code
+
+-------------------
+9.References
+
