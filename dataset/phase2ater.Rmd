@@ -626,6 +626,6 @@ While feature selection can be beneficial in certain situations, in the case of 
 ####5.2 Clustering:
 
 
-
 ----------------------------------------------
+###6. Evaluation and Comparison:
 
