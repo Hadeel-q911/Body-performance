@@ -11,15 +11,29 @@ extracting valuable insights from body performance datasets, monitoring
 the progression of human age, and subsequently improving the overall
 awareness of its importance.
 
+---------------------
+###1. Problem:
+
+
+---------------------
+###2. Data Mining task:
+??
+
 #### Classification gaol :
 we employ a classification approach to categorize individuals into distinct levels of fitness based on various data attributes, including body measurements such as weight, body fat percentage, and health indicators, as well as activity levels. Furthermore, we aim to predict performance outcomes by leveraging this collected data.
 
-### Data Source :
-It from Kaggle website , The link(
-<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
+#### Clustering gaol :
+Our primary goal in utilizing clustering on our dataset is to identify inherent patterns or groupings within the data. By applying clustering algorithms, we aim to partition the dataset into distinct clusters based on similarities or shared characteristics among the data points. This enables us to gain insights into the underlying structure of the data, discover relationships between data points, and potentially uncover valuable knowledge or trends that may be hidden within the dataset.
+
+---------------------
+
+###3. Data:
+
+#### 3.1: Data Source :
+It from Kaggle website , The link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
 the source data.
 
-### General Information about Body performance dataset :
+### 3.2: General Information about Body performance dataset :
 
 Our dataset is called "Body performance" , The dataset provide the grade
 of performance and some data such as gender and age along with body
@@ -43,7 +57,9 @@ Table 1 : Data dictionary showing description of all Attributes
 | broad jump_cm           | It is a method of measuring how far a person can jump from a standing position to a landing position. | numerical | 0-303          |
 |class| body performance score| numerical | A,B,C,D
 
-### Importing the dataset:
+----------------
+
+### 3.3: Importing the dataset:
 ```{r}
 dataset<- read.csv("bodyPerformance.csv")
 View(dataset)
@@ -51,7 +67,6 @@ str(dataset)
 ```
 
 ------------------------------------------------------------------------
-
 
 ### performance dataset before preprocessing:
 
@@ -69,12 +84,53 @@ nrow(dataset)
 ncol(dataset)
 ```
 
-
 ------------------------------------------------------------------------
 
 ### Understanding the dataset using graph representations:
 
-#### Scatter plot of height and weight:-
+###Encoding: 
+In order to represent the nominal attributes (gender) and (class) in graphs, we had to encode them as they cannot be directly displayed in their original form.
+```{r}
+ #encoding Class: 
+dataset$class = factor(dataset$class,levels =
+c("A","B", "C","D"), labels = c(1, 2, 3,4))
+```
+
+
+```{r}
+ #encoding Gender:
+dataset$gender = factor(dataset$gender,levels =
+                         c("F","M"), labels = c(0,1))
+```
+
+
+------------------------------------------------------------------------
+### Class boxplot:
+After encoding the attribute (class) We employ a Boxplot graph on our class label (class) to ascertain whether our dataset is balanced or not.
+```{r}
+boxplot(dataset$class, 
+        ylab= "The person’s age in years boxplot", 
+        main= "Boxplot of age")
+```
+Since the median is positioned in the middle of the box plot, it indicates that our dataset is balanced, and there is no need to perform any sampling.
+
+
+------------------------------------------------------------------------
+#### Scatter plot for Gender and class :
+
+first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
+
+
+
+```{r}
+plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
+     xlab = "gender", ylab = "class",
+     xlim = c(0,1), ylim = c(0,4))
+```
+
+------------------------------------------------------------------------
+
+#### Scatter plot of height and weight:
 
 Observation:
 
@@ -91,7 +147,7 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 ```
 
 ------------------------------------------------------------------------
-#### Histogram of body fat :-
+#### Histogram of body fat :
 
 Observation:
 
@@ -106,7 +162,7 @@ hist(dataset$body.fat_.)
 
 ------------------------------------------------------------------------
 
-#### Scatter plot for age and diastoic :-
+#### Scatter plot for age and diastoic :
 Observation :
 
   This scatter plot helps us determine the correlation between Age and
@@ -119,35 +175,6 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
      xlim = c(20,64), ylim = c(0,200))
 ```
 
-
-------------------------------------------------------------------------
-
-#### Scatter plot for Gender and class :
-
-first we endcode the gender F to be 0 and M to 1 ,and then encode class A=1 (best),B=2 ,C=3,D=4 then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male    
-
-
-```{r}
- #encoding Class: 
-#dtaset<- bodyPerformance
-dataset$class = factor(dataset$class,levels =
-c("A","B", "C","D"), labels = c(1, 2, 3,4))
-```
-
-
-```{r}
- #encoding Gender:
-dataset$gender = factor(dataset$gender,levels =
-                         c("F","M"), labels = c(0,1))
-```
-
-
-```{r}
-plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
-     xlab = "gender", ylab = "class",
-     xlim = c(0,1), ylim = c(0,4))
-    
-```
 
 ------------------------------------------------------------------------
 ### Statistical Measures:
@@ -231,8 +258,8 @@ dataset <- dataset[!duplicated (dataset), ]
 #To make sure that the deletion was successful 
 sum(duplicated(dataset))
 ```
-### Check nulls value:
 
+### Check nulls value:
 Null values can cause issues when performing data analysis or building machine learning models, as they can lead to inaccurate results or errors, where we found then 0 null in our dataset. So, no need to delete any.
 
 ```{r}
@@ -253,8 +280,6 @@ An outlier detection approach was used on the dataset to solve this problem. The
  library(outliers)
 
 ```
-
-# Class boxplot: (ERROR????????????)
 
 
 ------------------------------------------------------------------------
@@ -591,31 +616,4 @@ By considering all the attributes, you can gain a deeper understanding of the re
 While feature selection can be beneficial in certain situations, in the case of analyzing body performance for individuals, it is important to consider all attributes without performing feature selection.
 
 ----------------------------------------------
-##Phase 2:
-
-1. Problem: 
-razannnnnnnnnnnnnn
--------------------
-2.Data Mining task:
-
--------------------
-3. Data:
-
--------------------
-4. Data preprocessing:
-
--------------------
-5. Data Mining Technique
-
--------------------
-6. Evaluation and Comparison
-
--------------------
-7.Findings
-
--------------------
-8.Code
-
--------------------
-9.References
 
