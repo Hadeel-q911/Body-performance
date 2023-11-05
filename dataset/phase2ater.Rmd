@@ -623,8 +623,48 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 
-####5.2 Clustering:
+####5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
+  1. prepreocessing 
+Data types should be transformed into numeric types before clustering.
 
+```{r}
+dataset <- scale(dataset)
+View(dataset)
+```
+
+
+  3. run k-means clustering to find 4 clusters
+#ليه حطوا 8953 بالذات؟  
+
+```{r}
+set.seed(8953) 
+kmeans.result <- kmeans(dataset, 4)
+# print the clusterng result
+kmeans.result
+```
+
+
+  4- visualize clustering
+  
+first we need to install the necessary packages
+```{r}
+install.packages("factoextra")
+library(factoextra)
+```
+
+
+```{r}
+fviz_cluster(kmeans.result, data = dataset)
+```
+
+
+plot cluster points(Color code)
+#?????????? مدري
+```{r}
+plot(dataset[, c("Murder","Assault")], col = (kmeans.result$cluster) )
+# this command add Points(center) to a Plot 
+points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=2) 
+```
 
 ----------------------------------------------
 ###6. Evaluation and Comparison:
