@@ -627,10 +627,14 @@ While feature selection can be beneficial in certain situations, in the case of 
 #From Project Description:   
 -Apply K-means clustering to your dataset using at least three different sizes of K.
 You have to justify your choice for size K
+
 -then compare and discuss the results using different evaluation methods and metrics
 (Silhouette coefficient, total within-cluster sum of square, BCubed precision and recall). 
+
 -Use visual
 representation and try your best to interpret the results and to understand the algorithms performance.
+
+-you have to try at least three different sizes of K and report the Silhouette coefficient, the total within-cluster sum of squares, BCubed precision and recall. 
 
 -------------
 
