@@ -122,7 +122,7 @@ Since the median is positioned in the middle of the box plot, it indicates that 
 
 ------------------------------------------------------------------------
 
-#### Scatter plot for Gender and class :
+#### 1- Scatter plot for Gender and class :
 
 first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
 
@@ -135,7 +135,7 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
 
 ------------------------------------------------------------------------
 
-#### Scatter plot of height and weight:
+#### 2- Scatter plot of height and weight:
 
 Observation:
 
@@ -153,7 +153,7 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 
 ------------------------------------------------------------------------
 
-#### Histogram of body fat :
+####3- Histogram of body fat :
 
 Observation:
 
@@ -172,7 +172,7 @@ hist(dataset$body.fat_.)
 
 ------------------------------------------------------------------------
 
-#### Scatter plot for age and diastoic :
+#### 4- Scatter plot for age and diastoic :
 Observation :
 
   This scatter plot helps us determine the correlation between Age and
@@ -383,6 +383,7 @@ boxplot(dataset$sit.and.bend.forward_cm,
         main= "Boxplot of sit and bend forward_cm")
 ```
 
+
 ------------------------------------------------------------------------
 
 The boxplot of the "Test that measures the strength and endurance of the abdominals and hip-fle" shows how the values in the dataset have been evenly distributed around the median value of 41, and, there's no outliers showing on boxplot.
@@ -393,6 +394,7 @@ boxplot(dataset$sit.ups.counts,
         ylab= "sit-ups" ,
         main= "Boxplot of sit-ups")
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -428,6 +430,7 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -573,18 +576,6 @@ We noticed a decrease in the number of rows, which means that deletion the outli
 
 ------------------------------------------------------------------------
 
-### Normalizetion:
-
- In order to ensure comparability across individuals and eliminate biases resulting from differences in measurement units or scales, we have decided to normalize the following attributes: height (in centimeters), weight (in kilograms), body fat percentage, diastolic, systolic, grip force, sit and bend forward distance (in centimeters), sit-ups count, and broad jump distance (in centimeters).
- 
-```{r}
-View(dataset)
-dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
-```
-
-
-------------------------------------------------------------------------
-
 ### Discretization :
 
 We transformed the continuous vales of the age into intervals by dividing the values to be fall on one of three possible interval labels with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by discretisation the values well be meaningful and simpler to classify or perform other methods that can help us later in our model.
@@ -592,6 +583,17 @@ We transformed the continuous vales of the age into intervals by dividing the va
 ```{r}
 # Define bins for discretization
 dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
+```
+
+------------------------------------------------------------------------
+
+### Normalizetion:
+
+ In order to ensure comparability across individuals and eliminate biases resulting from differences in measurement units or scales, we have decided to normalize the following attributes: height (in centimeters), weight (in kilograms), body fat percentage, diastolic, systolic, grip force, sit and bend forward distance (in centimeters), sit-ups count, and broad jump distance (in centimeters).
+ 
+```{r}
+View(dataset)
+dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 ```
 
 
@@ -637,10 +639,14 @@ While feature selection can be beneficial in certain situations, in the case of 
 #From Project Description:   
 -Apply K-means clustering to your dataset using at least three different sizes of K.
 You have to justify your choice for size K
+
 -then compare and discuss the results using different evaluation methods and metrics
 (Silhouette coefficient, total within-cluster sum of square, BCubed precision and recall). 
+
 -Use visual
 representation and try your best to interpret the results and to understand the algorithms performance.
+
+-you have to try at least three different sizes of K and report the Silhouette coefficient, the total within-cluster sum of squares, BCubed precision and recall. 
 
 -------------
 
@@ -659,13 +665,23 @@ representation and try your best to interpret the results and to understand the 
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
 
-checking data types:
+1st we check data types:
 ```{r}
 str(dataset)
 ```
 
+----------------------------------------------
 
-Converts the factors attribute to numeric type
+then converts the factors attribute to numeric type
+
+```{r}
+# Convert factor attribute to numeric
+dataset$age <- as.numeric(dataset$age)
+
+# Verify the conversion
+str(dataset$age)
+```
+
 
 ```{r}
 # Convert factor attribute to numeric
@@ -675,32 +691,38 @@ dataset$gender <- as.numeric(as.character(dataset$gender))
 str(dataset$gender)
 ```
 
+
 ```{r}
 # Convert factor attribute to numeric
-dataset$class <- as.numeric(as.character(dataset$class))
+dataset$class <- as.numeric(dataset$class)
 
 # Verify the conversion
 str(dataset$class)
 ```
 
 
-  3. run k-means clustering to find 4 clusters
-#ليه حطوا 8953 بالذات؟ اتوقع لازم
-
-```{r}
-#age, gender, class: must be numeric HOW??
-set.seed(8953) 
-kmeans.result <- kmeans(dataset, 4)
+```{r بينحذف}
+str(dataset)
 ```
 
-print the clusterng result
+
+
+----------------------------------------------
+
+  3. run k-means clustering to find 4 clusters
 
 ```{r}
+set.seed(8953)
+kmeans.result <- kmeans(USArrests, 4)
+# print the clusterng result
 kmeans.result
 ```
 
 
+----------------------------------------------
+
   4- visualize clustering
+  
 first we need to install the necessary packages
 
 ```{r}
@@ -714,10 +736,20 @@ fviz_cluster(kmeans.result, data = dataset)
 ```
 
 
+----------------------------------------------
+
 plot cluster points(Color code)
 
 ```{r}
+<<<<<<< HEAD
 plot(dataset[, c("age","gender")], col = (kmeans.result$cluster) ) #نغير حسب اسماء الكولوم عندنا
+=======
+plot(dataset[, c("gender","class")], col = (kmeans.result$cluster) ) 
+```
+
+
+```{r}
+>>>>>>> 1e434c8b935e75603d14ae6af0f9c9cbab11b659
 # this command add Points(center) to a Plot 
 
 # Perform k-means clustering
