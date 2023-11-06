@@ -12,11 +12,11 @@ the progression of human age, and subsequently improving the overall
 awareness of its importance.
 
 ---------------------
-###1. Problem:
+### 1. Problem:
 
 
 ---------------------
-###2. Data Mining task:
+### 2. Data Mining task:
 ??
 
 #### Classification gaol :
@@ -27,7 +27,7 @@ Our primary goal in utilizing clustering on our dataset is to identify inherent 
 
 ---------------------
 
-###3. Data:
+### 3. Data:
 
 #### 3.1: Data Source :
 It from Kaggle website , The link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
@@ -42,7 +42,7 @@ them have 11 attributes.
 
 Table 1 : Data dictionary showing description of all Attributes
 
-| name                    | description                                                                                           | data type | possible value |
+|name|description|data type|possible value|
 |-----------------|---------------------|-----------------|-----------------|
 | Age                     | The person's age in years                                                                             | numerical | 21-64          |
 | Gender                  | The person's gender                                                                                   | binary    | F,M            |
@@ -68,13 +68,12 @@ str(dataset)
 
 ------------------------------------------------------------------------
 
-### performance dataset before preprocessing:
+### 3.4: performance dataset before preprocessing:
 
 
 ```{r}
 print(dataset)
 ```
-
 
 
 ```{r}
@@ -88,12 +87,12 @@ ncol(dataset)
 
 ### Understanding the dataset using graph representations:
 
-###Encoding: 
+### Encoding: 
 In order to represent the nominal attributes (gender) and (class) in graphs, we had to encode them as they cannot be directly displayed in their original form.
-```{r}
+```{r}  
  #encoding Class: 
 dataset$class = factor(dataset$class,levels =
-c("A","B", "C","D"), labels = c(1, 2, 3,4))
+                        c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
 
 
@@ -105,13 +104,15 @@ dataset$gender = factor(dataset$gender,levels =
 
 
 ------------------------------------------------------------------------
-### Class boxplot:
+###check if the dataset is balanced or imbalanced (Class boxplot) :
+
 After encoding the attribute (class) We employ a Boxplot graph on our class label (class) to ascertain whether our dataset is balanced or not.
 ```{r}
 boxplot(dataset$class, 
         ylab= "The person’s age in years boxplot", 
         main= "Boxplot of age")
 ```
+
 Since the median is positioned in the middle of the box plot, it indicates that our dataset is balanced, and there is no need to perform any sampling.
 
 
@@ -119,8 +120,6 @@ Since the median is positioned in the middle of the box plot, it indicates that 
 #### Scatter plot for Gender and class :
 
 first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
-
-
 
 ```{r}
 plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
@@ -178,14 +177,6 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
 
 ------------------------------------------------------------------------
 ### Statistical Measures:
-
-```{r}
-sum(duplicated(dataset))
-```
-```{r}
-sum(is.null(dataset))
-```
-
 
 ```{r}
  summary(dataset$age)
@@ -329,8 +320,6 @@ The boxplot of the person's body fat (the amount of essential fat .)  shows how 
 boxplot(dataset$body.fat_.,
         ylab= "the person's body fat" ,
         main= "Boxplot of body fat_%")
-
-
 ```
 
 ------------------------------------------------------------------------
@@ -341,7 +330,6 @@ The boxplot of the person's diastolic (measures pressure the blood vessels when 
 boxplot(dataset$diastolic,
         ylab= "the person's diastolic ",
         main= "Boxplot of diastolic")
-
 ```
 
 ------------------------------------------------------------------------
@@ -352,7 +340,6 @@ The boxplot of the person's systolic (measures pressure in the arteries when the
 boxplot(dataset$systolic,
         ylab= "The person's systolic " ,
         main= "Boxplot of systolic")
-
 ```
 
 ------------------------------------------------------------------------
@@ -400,7 +387,6 @@ boxplot(dataset$broad.jump_cm,
 
 
 
-
 ------------------------------------------------------------------------
 
 
@@ -437,7 +423,6 @@ Find_outlier
 
 #Delete height_cm outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -470,8 +455,6 @@ Find_outlier
 
 #Delete body.fat outliers:
 dataset= dataset[-Find_outlier,]
-
-
 ```
 
 ------------------------------------------------------------------------
@@ -487,8 +470,6 @@ Find_outlier
 
 #Delete systolic outliers:
 dataset= dataset[-Find_outlier,]
-
-
 ```
 
 ------------------------------------------------------------------------
@@ -506,7 +487,6 @@ Find_outlier
 
 #Delete gripForce  outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -539,7 +519,6 @@ Find_outlier
 
 #Delete age outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -554,7 +533,6 @@ Outjump
 Find_outlier
 
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -568,7 +546,6 @@ To make sure that the deletion was successful, we searched for the number of row
 #Number of rows and column
 nrow(dataset)
 ncol(dataset)
-
 ```
 
 We noticed a decrease in the number of rows, which means that deletion the outliers was successful.
@@ -582,7 +559,6 @@ We noticed a decrease in the number of rows, which means that deletion the outli
 ```{r}
 View(dataset)
 dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
-
 ```
 
 
@@ -625,7 +601,8 @@ While feature selection can be beneficial in certain situations, in the case of 
 ----------------------------------------------
 
 ####5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
-From Project Description:
+
+#From Project Description:هذ الكلام لنا بعدين بنعدله 
 -Apply K-means clustering to your dataset using at least three different sizes of K.
 You have to justify your choice for size K
 -then compare and discuss the results using different evaluation methods and metrics
@@ -687,17 +664,6 @@ points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=
 
 
 #Do we need k-means clustering 2 ??
-
-#install.packages("fpc")
-library(fpc)
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
-kmeansruns.result <- kmeansruns(USArrests)  
-kmeansruns.result #4 mean cuz we have 4dimension
-fviz_cluster(kmeansruns.result, data = USArrests)
-
-
 
 ----------------------------------------------
 ###6. Evaluation and Comparison:
