@@ -617,17 +617,26 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 ### 5- Data Mining Task:
-****************description****************
+****************description اتوقع مكانها غلظ ****************
 
 ####5.1 Classification: 
 
 ----------------------------------------------
 
 ####5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
+From Project Description:
+-Apply K-means clustering to your dataset using at least three different sizes of K.
+You have to justify your choice for size K
+-then compare and discuss the results using different evaluation methods and metrics
+(Silhouette coefficient, total within-cluster sum of square, BCubed precision and recall). 
+-Use visual
+representation and try your best to interpret the results and to understand the algorithms performance.
+
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
 
 ```{r}
+#do we need it??
 dataset <- scale(dataset)
 View(dataset)
 ```
@@ -638,13 +647,16 @@ View(dataset)
 
 ```{r}
 set.seed(8953) 
-kmeans.result <- kmeans(dataset, 4)
-# print the clusterng result
+kmeans.result <- kmeans(dataset, 4) #ما ضبط مدري ليه
+```
+
+print the clusterng result
+```{r}
 kmeans.result
 ```
 
-
   4- visualize clustering
+  
   
 first we need to install the necessary packages
 ```{r}
@@ -659,12 +671,26 @@ fviz_cluster(kmeans.result, data = dataset)
 
 
 plot cluster points(Color code)
-#?????????? مدري
+
 ```{r}
-plot(dataset[, c("Murder","Assault")], col = (kmeans.result$cluster) )
+plot(dataset[, c("Murder","Assault")], col = (kmeans.result$cluster) ) #نغير حسب اسماء الكولوم عندنا
 # this command add Points(center) to a Plot 
 points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=2) 
 ```
+
+
+#Do we need k-means clustering 2 ??
+
+#install.packages("fpc")
+library(fpc)
+#kmeansruns() : It calls  kmeans() to perform  k-means clustering
+#It initializes the k-means algorithm several times with random points from the data set as means.
+#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+kmeansruns.result <- kmeansruns(USArrests)  
+kmeansruns.result #4 mean cuz we have 4dimension
+fviz_cluster(kmeansruns.result, data = USArrests)
+
+
 
 ----------------------------------------------
 ###6. Evaluation and Comparison:
