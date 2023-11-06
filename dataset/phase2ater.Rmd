@@ -616,12 +616,11 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 
-<<<<<<< HEAD
 1. Problem: 
 
 -------------------
 2.Data Mining task:
-=======
+
 ### 5- Data Mining Task:
 ****************description اتوقع مكانها غلظ ****************
 >>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
@@ -652,13 +651,6 @@ representation and try your best to interpret the results and to understand the 
 -----------------------------------------------------------------------------------------
 
 ### Clustering:
-
-#Apply K-means clustering to your dataset using at least three different sizes of K.
-
-```{r}
-
-```
-
 
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
