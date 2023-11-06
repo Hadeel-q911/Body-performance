@@ -380,6 +380,7 @@ boxplot(dataset$sit.and.bend.forward_cm,
         main= "Boxplot of sit and bend forward_cm")
 ```
 
+
 ------------------------------------------------------------------------
 
 The boxplot of the "Test that measures the strength and endurance of the abdominals and hip-fle" shows how the values in the dataset have been evenly distributed around the median value of 41, and, there's no outliers showing on boxplot.
@@ -390,6 +391,7 @@ boxplot(dataset$sit.ups.counts,
         ylab= "sit-ups" ,
         main= "Boxplot of sit-ups")
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -425,6 +427,7 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -570,18 +573,6 @@ We noticed a decrease in the number of rows, which means that deletion the outli
 
 ------------------------------------------------------------------------
 
-### Normalizetion:
-
- In order to ensure comparability across individuals and eliminate biases resulting from differences in measurement units or scales, we have decided to normalize the following attributes: height (in centimeters), weight (in kilograms), body fat percentage, diastolic, systolic, grip force, sit and bend forward distance (in centimeters), sit-ups count, and broad jump distance (in centimeters).
- 
-```{r}
-View(dataset)
-dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
-```
-
-
-------------------------------------------------------------------------
-
 ### Discretization :
 
 We transformed the continuous vales of the age into intervals by dividing the values to be fall on one of three possible interval labels with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by discretisation the values well be meaningful and simpler to classify or perform other methods that can help us later in our model.
@@ -589,6 +580,17 @@ We transformed the continuous vales of the age into intervals by dividing the va
 ```{r}
 # Define bins for discretization
 dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
+```
+
+------------------------------------------------------------------------
+
+### Normalizetion:
+
+ In order to ensure comparability across individuals and eliminate biases resulting from differences in measurement units or scales, we have decided to normalize the following attributes: height (in centimeters), weight (in kilograms), body fat percentage, diastolic, systolic, grip force, sit and bend forward distance (in centimeters), sit-ups count, and broad jump distance (in centimeters).
+ 
+```{r}
+View(dataset)
+dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 ```
 
 
@@ -661,7 +663,7 @@ str(dataset$age)
 
 ```{r}
 # Convert factor attribute to numeric
-dataset$gender <- as.numeric(dataset$gender)
+dataset$gender <- as.numeric(as.character(dataset$gender))
 
 # Verify the conversion
 str(dataset$gender)
@@ -670,7 +672,7 @@ str(dataset$gender)
 
 ```{r}
 # Convert factor attribute to numeric
-dataset$class <- as.numeric(as.character(dataset$class))
+dataset$class <- as.numeric(dataset$class)
 
 # Verify the conversion
 str(dataset$class)
@@ -688,15 +690,9 @@ str(dataset)
   3. run k-means clustering to find 4 clusters
 
 ```{r}
-set.seed(8953) 
-kmeans.result <- kmeans(dataset, 4)
-```
-
-----------------------------------------------
-
-  print the clusterng result:
-
-```{r}
+set.seed(8953)
+kmeans.result <- kmeans(USArrests, 4)
+# print the clusterng result
 kmeans.result
 ```
 
@@ -716,6 +712,7 @@ library(factoextra)
 ```{r}
 fviz_cluster(kmeans.result, data = dataset)
 ```
+
 
 ----------------------------------------------
 
