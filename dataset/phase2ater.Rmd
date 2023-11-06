@@ -646,6 +646,7 @@ Data types should be transformed into numeric types before clustering.
 str(dataset)
 ```
 
+----------------------------------------------
 
 then converts the factors attribute to numeric type
 
@@ -657,6 +658,8 @@ dataset$gender <- as.numeric(as.character(dataset$gender))
 str(dataset$gender)
 ```
 
+----------------------------------------------
+
 ```{r}
 # Convert factor attribute to numeric
 dataset$class <- as.numeric(as.character(dataset$class))
@@ -665,6 +668,7 @@ dataset$class <- as.numeric(as.character(dataset$class))
 str(dataset$class)
 ```
 
+----------------------------------------------
 
   3. run k-means clustering to find 4 clusters
 
@@ -673,12 +677,15 @@ set.seed(8953)
 kmeans.result <- kmeans(dataset, 4)
 ```
 
+----------------------------------------------
+
   print the clusterng result:
 
 ```{r}
 kmeans.result
 ```
 
+----------------------------------------------
 
   4- visualize clustering
   
@@ -694,6 +701,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
+----------------------------------------------
 
 plot cluster points(Color code)
 
