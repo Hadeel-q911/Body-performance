@@ -182,6 +182,9 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
 ```{r}
 sum(duplicated(dataset))
 ```
+```{r}
+sum(is.null(dataset))
+```
 
 
 ```{r}
@@ -265,7 +268,6 @@ Null values can cause issues when performing data analysis or building machine l
 ```{r}
 #to find the total null values in the dataset
 sum(is.na(dataset))
-
 ```
 
 ------------------------------------------------------------------------
@@ -278,7 +280,6 @@ An outlier detection approach was used on the dataset to solve this problem. The
 ```{r}
 #install outliers package:
  library(outliers)
-
 ```
 
 
@@ -635,10 +636,15 @@ representation and try your best to interpret the results and to understand the 
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
 
+checking data types:
 ```{r}
-#do we need it??
-dataset <- scale(dataset)
-View(dataset)
+str(dataset)
+```
+
+Converts the factors column to numeric type
+```{r}
+age <- factor(age)
+age <- as.numeric(age)
 ```
 
 
@@ -646,8 +652,9 @@ View(dataset)
 #ليه حطوا 8953 بالذات؟  
 
 ```{r}
+#age, gender, class: must be numeric HOW??
 set.seed(8953) 
-kmeans.result <- kmeans(dataset, 4) #ما ضبط مدري ليه
+kmeans.result <- kmeans(dataset, 4)
 ```
 
 print the clusterng result
@@ -655,10 +662,10 @@ print the clusterng result
 kmeans.result
 ```
 
+
   4- visualize clustering
-  
-  
 first we need to install the necessary packages
+
 ```{r}
 install.packages("factoextra")
 library(factoextra)
