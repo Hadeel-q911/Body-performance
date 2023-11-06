@@ -122,7 +122,7 @@ Since the median is positioned in the middle of the box plot, it indicates that 
 
 ------------------------------------------------------------------------
 
-#### Scatter plot for Gender and class :
+#### 1- Scatter plot for Gender and class :
 
 first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
 
@@ -135,7 +135,7 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
 
 ------------------------------------------------------------------------
 
-#### Scatter plot of height and weight:
+#### 2- Scatter plot of height and weight:
 
 Observation:
 
@@ -153,7 +153,7 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 
 ------------------------------------------------------------------------
 
-#### Histogram of body fat :
+####3- Histogram of body fat :
 
 Observation:
 
@@ -169,7 +169,7 @@ hist(dataset$body.fat_.)
 
 ------------------------------------------------------------------------
 
-#### Scatter plot for age and diastoic :
+#### 4- Scatter plot for age and diastoic :
 Observation :
 
   This scatter plot helps us determine the correlation between Age and
@@ -652,13 +652,21 @@ then converts the factors attribute to numeric type
 
 ```{r}
 # Convert factor attribute to numeric
-dataset$gender <- as.numeric(as.character(dataset$gender))
+dataset$age <- as.numeric(dataset$age)
+
+# Verify the conversion
+str(dataset$age)
+```
+
+
+```{r}
+# Convert factor attribute to numeric
+dataset$gender <- as.numeric(dataset$gender)
 
 # Verify the conversion
 str(dataset$gender)
 ```
 
-----------------------------------------------
 
 ```{r}
 # Convert factor attribute to numeric
@@ -667,6 +675,13 @@ dataset$class <- as.numeric(as.character(dataset$class))
 # Verify the conversion
 str(dataset$class)
 ```
+
+
+```{r بينحذف}
+str(dataset)
+```
+
+
 
 ----------------------------------------------
 
@@ -707,7 +722,11 @@ fviz_cluster(kmeans.result, data = dataset)
 plot cluster points(Color code)
 
 ```{r}
-plot(dataset[, c("Murder","Assault")], col = (kmeans.result$cluster) ) #??نغير حسب اسماء الكولوم عندنا
+plot(dataset[, c("gender","class")], col = (kmeans.result$cluster) ) 
+```
+
+
+```{r}
 # this command add Points(center) to a Plot 
 points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=2) 
 ```
