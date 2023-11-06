@@ -652,6 +652,7 @@ dataset$gender <- as.numeric(as.character(dataset$gender))
 # Verify the conversion
 str(dataset$gender)
 ```
+
 ```{r}
 # Convert factor attribute to numeric
 dataset$class <- as.numeric(as.character(dataset$class))
@@ -662,7 +663,7 @@ str(dataset$class)
 
 
   3. run k-means clustering to find 4 clusters
-#ليه حطوا 8953 بالذات؟  
+#ليه حطوا 8953 بالذات؟ اتوقع لازم
 
 ```{r}
 #age, gender, class: must be numeric HOW??
