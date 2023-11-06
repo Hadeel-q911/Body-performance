@@ -152,7 +152,7 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 
 ------------------------------------------------------------------------
 
-####3- Histogram of body fat :
+#### 3- Histogram of body fat :
 
 Observation:
 
@@ -163,9 +163,6 @@ in the dataset .
 
 ```{r}
 hist(dataset$body.fat_.)
-```
-```{r}
-
 ```
 
 
@@ -650,20 +647,19 @@ representation and try your best to interpret the results and to understand the 
 
 -you have to try at least three different sizes of K and report the Silhouette coefficient, the total within-cluster sum of squares, BCubed precision and recall. 
 
--------------
 
-<<<<<<< HEAD
--------------------
 9.References
 -----------------------------------------------------------------------------------------
 
-###clustering:
+### Clustering:
 
-```{r}
 #Apply K-means clustering to your dataset using at least three different sizes of K.
 
+```{r}
+
 ```
-=======
+
+
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
 
@@ -734,7 +730,7 @@ fviz_cluster(kmeans.result, data = dataset)
 
 
 ```{r}
-plot(data[, c("age","smoking_status")], col = (kmeans.result$cluster) )
+plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 ```
 
 
