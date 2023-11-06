@@ -461,6 +461,7 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
+
 ------------------------------------------------------------------------
 
 ```{r}
@@ -477,7 +478,9 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
+
 ------------------------------------------------------------------------
+
 
 ```{r}
 #Detect outlir for 'systolic': 
@@ -510,7 +513,9 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
+
 ------------------------------------------------------------------------
+
 
 ```{r}
 #Detect outlir for 'sit.and.bend.forward_cm': 
@@ -623,7 +628,6 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ### 5- Data Mining Task:
 ****************description اتوقع مكانها غلظ ****************
->>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
 
 #### 5.1 Classification: 
 
