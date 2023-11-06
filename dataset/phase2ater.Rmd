@@ -685,6 +685,7 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
+
 ----------------------------------------------
 
   4- visualize clustering
