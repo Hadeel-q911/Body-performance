@@ -12,10 +12,12 @@ the progression of human age, and subsequently improving the overall
 awareness of its importance.
 
 ---------------------
+
 ### 1. Problem:
 
 
 ---------------------
+
 ### 2. Data Mining task:
 ??
 
@@ -104,9 +106,11 @@ dataset$gender = factor(dataset$gender,levels =
 
 
 ------------------------------------------------------------------------
-###check if the dataset is balanced or imbalanced (Class boxplot) :
+
+### check if the dataset is balanced or imbalanced (Class boxplot) :
 
 After encoding the attribute (class) We employ a Boxplot graph on our class label (class) to ascertain whether our dataset is balanced or not.
+
 ```{r}
 boxplot(dataset$class, 
         ylab= "The person’s age in years boxplot", 
@@ -117,6 +121,7 @@ Since the median is positioned in the middle of the box plot, it indicates that 
 
 
 ------------------------------------------------------------------------
+
 #### Scatter plot for Gender and class :
 
 first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
@@ -126,6 +131,7 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
      xlab = "gender", ylab = "class",
      xlim = c(0,1), ylim = c(0,4))
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -146,6 +152,7 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 ```
 
 ------------------------------------------------------------------------
+
 #### Histogram of body fat :
 
 Observation:
@@ -158,6 +165,7 @@ in the dataset .
 ```{r}
 hist(dataset$body.fat_.)
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -176,6 +184,7 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
 
 
 ------------------------------------------------------------------------
+
 ### Statistical Measures:
 
 ```{r}
@@ -229,12 +238,14 @@ summary(dataset$sit.ups.counts)
 
 
 ------------------------------------------------------------------------
+
 ## Data Preprocessing:
 
 ### Check duplicated rows:
  We check if there are any duplicated rows to decrease dataset volume. Hence enhancing data quality which leads to better model performance and speed.
 
 witch there's no duplicated rows as showing:
+
 ```{r}
 sum(duplicated(dataset))
 ```
@@ -291,6 +302,7 @@ boxplot(dataset$age ,
 
 
  The summary and box plot values for The person’s height in cm indicate a dataset ranging from 125.0 to 193.8. the median at 169.2, and the mean is 168.6. Comparing the mean and median, we observe that they are relatively close in value. Also, there is some outliers that we will handle it by deleting them in preprocessing steps.
+ 
 ```{r}
 #Hight boxplot :
 boxplot(dataset$height_cm , 
@@ -303,6 +315,7 @@ boxplot(dataset$height_cm ,
 
 
 The summary and box plot values for The person’s weight in Kg indicate a dataset ranging from  26.30 to 138.10. The mean weight is 67.45. Comparing the mean and median, we observe that they are relatively close in value, and that due also the maximum outliers.
+
 ```{r}
 
 #Weight boxplot;
@@ -315,6 +328,7 @@ boxplot(dataset$weight_kg ,
 ------------------------------------------------------------------------
 
 The boxplot of the person's body fat (the amount of essential fat .)  shows how the values in the dataset have been evenly distributed around the median value of 22.80, and, there some outliers that we will handle them.
+
 ```{r}
 #body fat boxplot : 
 boxplot(dataset$body.fat_.,
@@ -334,7 +348,8 @@ boxplot(dataset$diastolic,
 
 ------------------------------------------------------------------------
 
-The boxplot of the person's systolic (measures pressure in the arteries when the heart beats in minutes) shows how the values in the dataset have been evenly distributed around the median value of 130.0, and, there some outliers that we will handle them
+The boxplot of the person's systolic (measures pressure in the arteries when the heart beats in minutes) shows how the values in the dataset have been evenly distributed around the median value of 130.0, and, there some outliers that we will handle them.
+
 ```{r}
 #systolic box plot:
 boxplot(dataset$systolic,
@@ -355,6 +370,7 @@ boxplot(dataset$gripForc,
 ```
 
 ------------------------------------------------------------------------
+
  the test that's measures flexibility in sitting and bending forward in centimeters” boxplot illustrates a slight down skew (negatively skewed) in the distribution, where there are more extreme values on the lower end(outliers) that we will handle it in preprocessing step by deleting them.
 
 ```{r}
@@ -367,6 +383,7 @@ boxplot(dataset$sit.and.bend.forward_cm,
 ------------------------------------------------------------------------
 
 The boxplot of the "Test that measures the strength and endurance of the abdominals and hip-fle" shows how the values in the dataset have been evenly distributed around the median value of 41, and, there's no outliers showing on boxplot.
+
 ```{r}
 #sit-ups counts_cm box plot:
 boxplot(dataset$sit.ups.counts,
@@ -476,6 +493,7 @@ dataset= dataset[-Find_outlier,]
 
 
  As we saw in boxplot there was only one outlier. However, here we detected 3 values, where 2 are within the range but we will take it as an outliers sinces those values may have a negatively affects on the dataset specifically on "class" attribute.
+ 
 ```{r}
 #Detect outlir for 'gripForce': 
 outegrip = outlier(dataset$gripForce, logical =TRUE)
@@ -593,22 +611,28 @@ By considering all the attributes, you can gain a deeper understanding of the re
 While feature selection can be beneficial in certain situations, in the case of analyzing body performance for individuals, it is important to consider all attributes without performing feature selection.
 
 ----------------------------------------------
+
 ### 5- Data Mining Task:
 ****************description اتوقع مكانها غلظ ****************
 
-####5.1 Classification: 
+#### 5.1 Classification: 
 
 ----------------------------------------------
 
 ####5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
 
-#From Project Description:هذ الكلام لنا بعدين بنعدله 
+--------------------- 
+
+#هذ الكلام لنا بعدين بنحذفه
+#From Project Description:   
 -Apply K-means clustering to your dataset using at least three different sizes of K.
 You have to justify your choice for size K
 -then compare and discuss the results using different evaluation methods and metrics
 (Silhouette coefficient, total within-cluster sum of square, BCubed precision and recall). 
 -Use visual
 representation and try your best to interpret the results and to understand the algorithms performance.
+
+-------------
 
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
@@ -618,10 +642,22 @@ checking data types:
 str(dataset)
 ```
 
-Converts the factors column to numeric type
+
+Converts the factors attribute to numeric type
+
 ```{r}
-age <- factor(age)
-age <- as.numeric(age)
+# Convert factor attribute to numeric
+dataset$gender <- as.numeric(as.character(dataset$gender))
+
+# Verify the conversion
+str(dataset$gender)
+```
+```{r}
+# Convert factor attribute to numeric
+dataset$class <- as.numeric(as.character(dataset$class))
+
+# Verify the conversion
+str(dataset$class)
 ```
 
 
@@ -635,6 +671,7 @@ kmeans.result <- kmeans(dataset, 4)
 ```
 
 print the clusterng result
+
 ```{r}
 kmeans.result
 ```
@@ -666,5 +703,6 @@ points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=
 #Do we need k-means clustering 2 ??
 
 ----------------------------------------------
+
 ###6. Evaluation and Comparison:
 
