@@ -164,6 +164,9 @@ in the dataset .
 ```{r}
 hist(dataset$body.fat_.)
 ```
+```{r}
+
+```
 
 
 ------------------------------------------------------------------------
@@ -616,8 +619,15 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 
+<<<<<<< HEAD
+1. Problem: 
+
+-------------------
+2.Data Mining task:
+=======
 ### 5- Data Mining Task:
 ****************description اتوقع مكانها غلظ ****************
+>>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
 
 #### 5.1 Classification: 
 
@@ -642,6 +652,18 @@ representation and try your best to interpret the results and to understand the 
 
 -------------
 
+<<<<<<< HEAD
+-------------------
+9.References
+-----------------------------------------------------------------------------------------
+
+###clustering:
+
+```{r}
+#Apply K-means clustering to your dataset using at least three different sizes of K.
+
+```
+=======
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
 
@@ -721,13 +743,18 @@ plot(data[, c("age","smoking_status")], col = (kmeans.result$cluster) )
 plot cluster points(Color code)
 
 ```{r}
-plot(dataset[, c("gender","class")], col = (kmeans.result$cluster) ) 
+plot(dataset[, c("age","gender")], col = (kmeans.result$cluster) ) #نغير حسب اسماء الكولوم عندنا
 ```
 
 
 ```{r}
 # this command add Points(center) to a Plot 
-points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=2) 
+
+# Perform k-means clustering
+kmeans_result <- kmeans(data, centers = 4)
+
+plot(data[, c("age","gender")], col = kmeans_result$cluster)
+points(kmeans.result$centers[, c("age","gender")],  col = 1:4, pch = 8, cex=2) 
 ```
 
 
@@ -736,4 +763,5 @@ points(kmeans.result$centers[, c("Murder","Assault")],  col = 1:4, pch = 8, cex=
 ----------------------------------------------
 
 ### 6. Evaluation and Comparison:
+
 
