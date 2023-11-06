@@ -103,6 +103,9 @@ in the dataset .
 ```{r}
 hist(dataset$body.fat_.)
 ```
+```{r}
+
+```
 
 ------------------------------------------------------------------------
 
@@ -594,7 +597,7 @@ While feature selection can be beneficial in certain situations, in the case of 
 ##Phase 2:
 
 1. Problem: 
-razannnnnnnnnnnnnn
+
 -------------------
 2.Data Mining task:
 
@@ -618,4 +621,12 @@ razannnnnnnnnnnnnn
 
 -------------------
 9.References
+-----------------------------------------------------------------------------------------
+
+###clustering:
+
+```{r}
+#Apply K-means clustering to your dataset using at least three different sizes of K.
+
+```
 
