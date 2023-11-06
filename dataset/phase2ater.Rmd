@@ -11,15 +11,31 @@ extracting valuable insights from body performance datasets, monitoring
 the progression of human age, and subsequently improving the overall
 awareness of its importance.
 
+---------------------
+
+### 1. Problem:
+
+
+---------------------
+
+### 2. Data Mining task:
+??
+
 #### Classification gaol :
 we employ a classification approach to categorize individuals into distinct levels of fitness based on various data attributes, including body measurements such as weight, body fat percentage, and health indicators, as well as activity levels. Furthermore, we aim to predict performance outcomes by leveraging this collected data.
 
-### Data Source :
-It from Kaggle website , The link(
-<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
+#### Clustering gaol :
+Our primary goal in utilizing clustering on our dataset is to identify inherent patterns or groupings within the data. By applying clustering algorithms, we aim to partition the dataset into distinct clusters based on similarities or shared characteristics among the data points. This enables us to gain insights into the underlying structure of the data, discover relationships between data points, and potentially uncover valuable knowledge or trends that may be hidden within the dataset.
+
+---------------------
+
+### 3. Data:
+
+#### 3.1: Data Source :
+It from Kaggle website , The link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
 the source data.
 
-### General Information about Body performance dataset :
+### 3.2: General Information about Body performance dataset :
 
 Our dataset is called "Body performance" , The dataset provide the grade
 of performance and some data such as gender and age along with body
@@ -28,7 +44,7 @@ them have 11 attributes.
 
 Table 1 : Data dictionary showing description of all Attributes
 
-| name                    | description                                                                                           | data type | possible value |
+|name|description|data type|possible value|
 |-----------------|---------------------|-----------------|-----------------|
 | Age                     | The person's age in years                                                                             | numerical | 21-64          |
 | Gender                  | The person's gender                                                                                   | binary    | F,M            |
@@ -43,7 +59,9 @@ Table 1 : Data dictionary showing description of all Attributes
 | broad jump_cm           | It is a method of measuring how far a person can jump from a standing position to a landing position. | numerical | 0-303          |
 |class| body performance score| numerical | A,B,C,D
 
-### Importing the dataset:
+----------------
+
+### 3.3: Importing the dataset:
 ```{r}
 dataset<- read.csv("bodyPerformance.csv")
 View(dataset)
@@ -52,14 +70,12 @@ str(dataset)
 
 ------------------------------------------------------------------------
 
-
-### performance dataset before preprocessing:
+### 3.4: performance dataset before preprocessing:
 
 
 ```{r}
 print(dataset)
 ```
-
 
 
 ```{r}
@@ -69,12 +85,57 @@ nrow(dataset)
 ncol(dataset)
 ```
 
-
 ------------------------------------------------------------------------
 
 ### Understanding the dataset using graph representations:
 
-#### Scatter plot of height and weight:-
+### Encoding: 
+In order to represent the nominal attributes (gender) and (class) in graphs, we had to encode them as they cannot be directly displayed in their original form.
+```{r}  
+ #encoding Class: 
+dataset$class = factor(dataset$class,levels =
+                        c("A","B", "C","D"), labels = c(1, 2, 3,4))
+```
+
+
+```{r}
+ #encoding Gender:
+dataset$gender = factor(dataset$gender,levels =
+                         c("F","M"), labels = c(0,1))
+```
+
+
+------------------------------------------------------------------------
+
+### check if the dataset is balanced or imbalanced (Class boxplot) :
+
+After encoding the attribute (class) We employ a Boxplot graph on our class label (class) to ascertain whether our dataset is balanced or not.
+
+```{r}
+boxplot(dataset$class, 
+        ylab= "The person’s age in years boxplot", 
+        main= "Boxplot of age")
+```
+
+Since the median is positioned in the middle of the box plot, it indicates that our dataset is balanced, and there is no need to perform any sampling.
+
+
+------------------------------------------------------------------------
+
+#### Scatter plot for Gender and class :
+
+first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
+
+```{r}
+plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
+     xlab = "gender", ylab = "class",
+     xlim = c(0,1), ylim = c(0,4))
+```
+
+
+------------------------------------------------------------------------
+
+#### Scatter plot of height and weight:
 
 Observation:
 
@@ -91,7 +152,8 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 ```
 
 ------------------------------------------------------------------------
-#### Histogram of body fat :-
+
+#### Histogram of body fat :
 
 Observation:
 
@@ -107,9 +169,10 @@ hist(dataset$body.fat_.)
 
 ```
 
+
 ------------------------------------------------------------------------
 
-#### Scatter plot for age and diastoic :-
+#### Scatter plot for age and diastoic :
 Observation :
 
   This scatter plot helps us determine the correlation between Age and
@@ -125,40 +188,7 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
 
 ------------------------------------------------------------------------
 
-#### Scatter plot for Gender and class :
-
-first we endcode the gender F to be 0 and M to 1 ,and then encode class A=1 (best),B=2 ,C=3,D=4 then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male    
-
-
-```{r}
- #encoding Class: 
-#dtaset<- bodyPerformance
-dataset$class = factor(dataset$class,levels =
-c("A","B", "C","D"), labels = c(1, 2, 3,4))
-```
-
-
-```{r}
- #encoding Gender:
-dataset$gender = factor(dataset$gender,levels =
-                         c("F","M"), labels = c(0,1))
-```
-
-
-```{r}
-plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
-     xlab = "gender", ylab = "class",
-     xlim = c(0,1), ylim = c(0,4))
-    
-```
-
-------------------------------------------------------------------------
 ### Statistical Measures:
-
-```{r}
-sum(duplicated(dataset))
-```
-
 
 ```{r}
  summary(dataset$age)
@@ -211,12 +241,14 @@ summary(dataset$sit.ups.counts)
 
 
 ------------------------------------------------------------------------
+
 ## Data Preprocessing:
 
 ### Check duplicated rows:
  We check if there are any duplicated rows to decrease dataset volume. Hence enhancing data quality which leads to better model performance and speed.
 
 witch there's no duplicated rows as showing:
+
 ```{r}
 sum(duplicated(dataset))
 ```
@@ -234,14 +266,13 @@ dataset <- dataset[!duplicated (dataset), ]
 #To make sure that the deletion was successful 
 sum(duplicated(dataset))
 ```
-### Check nulls value:
 
+### Check nulls value:
 Null values can cause issues when performing data analysis or building machine learning models, as they can lead to inaccurate results or errors, where we found then 0 null in our dataset. So, no need to delete any.
 
 ```{r}
 #to find the total null values in the dataset
 sum(is.na(dataset))
-
 ```
 
 ------------------------------------------------------------------------
@@ -254,10 +285,7 @@ An outlier detection approach was used on the dataset to solve this problem. The
 ```{r}
 #install outliers package:
  library(outliers)
-
 ```
-
-# Class boxplot: (ERROR????????????)
 
 
 ------------------------------------------------------------------------
@@ -277,6 +305,7 @@ boxplot(dataset$age ,
 
 
  The summary and box plot values for The person’s height in cm indicate a dataset ranging from 125.0 to 193.8. the median at 169.2, and the mean is 168.6. Comparing the mean and median, we observe that they are relatively close in value. Also, there is some outliers that we will handle it by deleting them in preprocessing steps.
+ 
 ```{r}
 #Hight boxplot :
 boxplot(dataset$height_cm , 
@@ -289,6 +318,7 @@ boxplot(dataset$height_cm ,
 
 
 The summary and box plot values for The person’s weight in Kg indicate a dataset ranging from  26.30 to 138.10. The mean weight is 67.45. Comparing the mean and median, we observe that they are relatively close in value, and that due also the maximum outliers.
+
 ```{r}
 
 #Weight boxplot;
@@ -301,13 +331,12 @@ boxplot(dataset$weight_kg ,
 ------------------------------------------------------------------------
 
 The boxplot of the person's body fat (the amount of essential fat .)  shows how the values in the dataset have been evenly distributed around the median value of 22.80, and, there some outliers that we will handle them.
+
 ```{r}
 #body fat boxplot : 
 boxplot(dataset$body.fat_.,
         ylab= "the person's body fat" ,
         main= "Boxplot of body fat_%")
-
-
 ```
 
 ------------------------------------------------------------------------
@@ -318,18 +347,17 @@ The boxplot of the person's diastolic (measures pressure the blood vessels when 
 boxplot(dataset$diastolic,
         ylab= "the person's diastolic ",
         main= "Boxplot of diastolic")
-
 ```
 
 ------------------------------------------------------------------------
 
-The boxplot of the person's systolic (measures pressure in the arteries when the heart beats in minutes) shows how the values in the dataset have been evenly distributed around the median value of 130.0, and, there some outliers that we will handle them
+The boxplot of the person's systolic (measures pressure in the arteries when the heart beats in minutes) shows how the values in the dataset have been evenly distributed around the median value of 130.0, and, there some outliers that we will handle them.
+
 ```{r}
 #systolic box plot:
 boxplot(dataset$systolic,
         ylab= "The person's systolic " ,
         main= "Boxplot of systolic")
-
 ```
 
 ------------------------------------------------------------------------
@@ -345,6 +373,7 @@ boxplot(dataset$gripForc,
 ```
 
 ------------------------------------------------------------------------
+
  the test that's measures flexibility in sitting and bending forward in centimeters” boxplot illustrates a slight down skew (negatively skewed) in the distribution, where there are more extreme values on the lower end(outliers) that we will handle it in preprocessing step by deleting them.
 
 ```{r}
@@ -357,6 +386,7 @@ boxplot(dataset$sit.and.bend.forward_cm,
 ------------------------------------------------------------------------
 
 The boxplot of the "Test that measures the strength and endurance of the abdominals and hip-fle" shows how the values in the dataset have been evenly distributed around the median value of 41, and, there's no outliers showing on boxplot.
+
 ```{r}
 #sit-ups counts_cm box plot:
 boxplot(dataset$sit.ups.counts,
@@ -374,7 +404,6 @@ boxplot(dataset$broad.jump_cm,
         ylab= "broad jump_cm " ,
         main= "Boxplot of broad jump_cm ")
 ```
-
 
 
 
@@ -414,7 +443,6 @@ Find_outlier
 
 #Delete height_cm outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -447,8 +475,6 @@ Find_outlier
 
 #Delete body.fat outliers:
 dataset= dataset[-Find_outlier,]
-
-
 ```
 
 ------------------------------------------------------------------------
@@ -464,14 +490,13 @@ Find_outlier
 
 #Delete systolic outliers:
 dataset= dataset[-Find_outlier,]
-
-
 ```
 
 ------------------------------------------------------------------------
 
 
  As we saw in boxplot there was only one outlier. However, here we detected 3 values, where 2 are within the range but we will take it as an outliers sinces those values may have a negatively affects on the dataset specifically on "class" attribute.
+ 
 ```{r}
 #Detect outlir for 'gripForce': 
 outegrip = outlier(dataset$gripForce, logical =TRUE)
@@ -483,7 +508,6 @@ Find_outlier
 
 #Delete gripForce  outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -516,7 +540,6 @@ Find_outlier
 
 #Delete age outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -531,7 +554,6 @@ Outjump
 Find_outlier
 
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -545,7 +567,6 @@ To make sure that the deletion was successful, we searched for the number of row
 #Number of rows and column
 nrow(dataset)
 ncol(dataset)
-
 ```
 
 We noticed a decrease in the number of rows, which means that deletion the outliers was successful.
@@ -559,7 +580,6 @@ We noticed a decrease in the number of rows, which means that deletion the outli
 ```{r}
 View(dataset)
 dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
-
 ```
 
 
@@ -594,31 +614,37 @@ By considering all the attributes, you can gain a deeper understanding of the re
 While feature selection can be beneficial in certain situations, in the case of analyzing body performance for individuals, it is important to consider all attributes without performing feature selection.
 
 ----------------------------------------------
-##Phase 2:
 
+<<<<<<< HEAD
 1. Problem: 
 
 -------------------
 2.Data Mining task:
+=======
+### 5- Data Mining Task:
+****************description اتوقع مكانها غلظ ****************
+>>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
 
--------------------
-3. Data:
+#### 5.1 Classification: 
 
--------------------
-4. Data preprocessing:
+----------------------------------------------
 
--------------------
-5. Data Mining Technique
+####5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
 
--------------------
-6. Evaluation and Comparison
+--------------------- 
 
--------------------
-7.Findings
+#هذ الكلام لنا بعدين بنحذفه
+#From Project Description:   
+-Apply K-means clustering to your dataset using at least three different sizes of K.
+You have to justify your choice for size K
+-then compare and discuss the results using different evaluation methods and metrics
+(Silhouette coefficient, total within-cluster sum of square, BCubed precision and recall). 
+-Use visual
+representation and try your best to interpret the results and to understand the algorithms performance.
 
--------------------
-8.Code
+-------------
 
+<<<<<<< HEAD
 -------------------
 9.References
 -----------------------------------------------------------------------------------------
@@ -629,4 +655,83 @@ While feature selection can be beneficial in certain situations, in the case of 
 #Apply K-means clustering to your dataset using at least three different sizes of K.
 
 ```
+=======
+  1. prepreocessing 
+Data types should be transformed into numeric types before clustering.
+
+checking data types:
+```{r}
+str(dataset)
+```
+
+
+Converts the factors attribute to numeric type
+
+```{r}
+# Convert factor attribute to numeric
+dataset$gender <- as.numeric(as.character(dataset$gender))
+
+# Verify the conversion
+str(dataset$gender)
+```
+
+```{r}
+# Convert factor attribute to numeric
+dataset$class <- as.numeric(as.character(dataset$class))
+
+# Verify the conversion
+str(dataset$class)
+```
+
+
+  3. run k-means clustering to find 4 clusters
+#ليه حطوا 8953 بالذات؟ اتوقع لازم
+
+```{r}
+#age, gender, class: must be numeric HOW??
+set.seed(8953) 
+kmeans.result <- kmeans(dataset, 4)
+```
+
+print the clusterng result
+
+```{r}
+kmeans.result
+```
+
+
+  4- visualize clustering
+first we need to install the necessary packages
+
+```{r}
+install.packages("factoextra")
+library(factoextra)
+```
+
+
+```{r}
+fviz_cluster(kmeans.result, data = dataset)
+```
+
+
+plot cluster points(Color code)
+
+```{r}
+plot(dataset[, c("age","gender")], col = (kmeans.result$cluster) ) #نغير حسب اسماء الكولوم عندنا
+# this command add Points(center) to a Plot 
+
+# Perform k-means clustering
+kmeans_result <- kmeans(data, centers = 4)
+
+plot(data[, c("age","gender")], col = kmeans_result$cluster)
+points(kmeans.result$centers[, c("age","gender")],  col = 1:4, pch = 8, cex=2) 
+```
+
+
+#Do we need k-means clustering 2 ??
+
+----------------------------------------------
+
+###6. Evaluation and Comparison:
+>>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
 
