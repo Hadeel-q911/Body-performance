@@ -897,6 +897,7 @@ fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
 
+
 #### k-means clustering 2 
 
 #kmeansruns() : It calls  kmeans() to perform  k-means clustering
@@ -975,5 +976,15 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 ----------------------------------------------
 
 ### 6. Evaluation and Comparison:
+
+
+#determine and visualize optimal number of clusters:
+```{r}
+
+library(factoextra)
+fviz_nbclust(data, kmeans, method="wss")
+fviz_nbclust(data, kmeans, method="silhouette")
+fviz_nbclust(data, kmeans, method="gap_start")
+```
 
 
