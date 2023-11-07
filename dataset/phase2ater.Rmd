@@ -68,6 +68,7 @@ View(dataset)
 str(dataset)
 ```
 
+
 ------------------------------------------------------------------------
 
 ### 3.4: performance dataset before preprocessing:
@@ -669,6 +670,7 @@ str(dataset)
 then converts the factors attribute to numeric type
 
 ```{r}
+#!!!!!!!!!!!!!!!!!!!! don't run it
 # Convert factor attribute to numeric
 dataset$age <- as.numeric(dataset$age)
 
@@ -710,6 +712,10 @@ str(dataset)
 #set a seed for random number generation  to make the results reproducible, evert day will give me the same number(same srandom)
 set.seed(8953)
 kmeans.result <- kmeans(dataset, 4)
+```
+
+
+```{r}
 # print the clusterng result
 kmeans.result
 ```
@@ -722,46 +728,23 @@ kmeans.result
 first we need to install the necessary packages
 
 ```{r}
+#install.packages("factoextra")
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
+#fviz_cluster(kmeans.result, data = dataset)
+
 
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
+# this command add Points(center) to a Plot 
+points(kmeans.result$centers[, c("age","class")],  col = 1:12, pch = 8, cex=2) 
 ```
 
 
 ----------------------------------------------
-????????????????
 
-```{r}
-# this command add Points(center) to a Plot 
-points(kmeans.result$centers[, c("age","gender")],  col = 1:12, pch = 8, cex=2) 
-```
-```{r}
-
-```
-
-
-<<<<<<< HEAD
-#Do we need k-means clustering 2 ??
-```{r}
-install.packages("fpc")
-library(fpc)
-kmeansruns.result<-kmeansruns(dataset) 
-kmeansruns.result
-```
-#determine and visualize optimal number of clusters:
-```{r}
-library(factoextra)
-fviz_nbclust(data, kmeans, method="wss")
-fviz_nbclust(data, kmeans, method="silhouette")
-fviz_nbclust(data, kmeans, method="gap_start")
-```
-
-
-=======
 #### k-means clustering 2 
 
 #kmeansruns() : It calls  kmeans() to perform  k-means clustering
@@ -786,10 +769,13 @@ fviz_cluster(kmeansruns.result, data = dataset)
 #--------------------------------k-mediods clustering with PAM------------------------------
 
 #install.packages("cluster")
-library(cluster)
+3library(cluster)
 
 ```{r}
 library(cluster)
+sil <- silhouette(km$cluster, dist(dataset))
+rownames(sil) <- rownames(dataset)
+fviz_silhouette(sil)
 ```
 
 
@@ -833,7 +819,6 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 # Character specifying frame type. Possible values are 'convex', 'confidence' etc
 ```
 
->>>>>>> f29151d629f22304b45de88ba08733a8fffb7fe0
 
 ----------------------------------------------
 
