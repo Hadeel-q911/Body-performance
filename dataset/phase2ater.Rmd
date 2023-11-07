@@ -839,6 +839,20 @@ str(dataset)
 
 ----------------------------------------------
 
+To determine k number: 
+
+```{r}
+#average silhouette for each clusters 
+library(cluster)
+
+#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
+avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
+
+#k-means clustering with estimating k and initializations
+fviz_silhouette(avg_sil)
+```
+  
+
   3. run k-means clustering to find 4 clusters
 
 ```{r}
@@ -886,6 +900,17 @@ points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex
 ```
 
 
+```{r}
+#performance k-means clustering
+kmeans.result <- kmeans(dataset, 4)
+
+# creat the initial plot
+plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
+
+# this command add Points(center) to a Plot (عشان حطينا 10)
+points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
+```
+
 
 determine and visualize optimal number of clusters: 
 
@@ -926,7 +951,7 @@ fviz_cluster(kmeansruns.result, data = dataset)
 #install.packages("cluster")
 
 ```{r}
-#avr??
+#avr????????????
 library(cluster) 
 #sil <- silhouette(km$cluster, dist(dataset))
 #rownames(sil) <- rownames(dataset)
@@ -949,16 +974,19 @@ plot(pam.result)
 
 ```{r}
 set.seed(2835)
+
 # draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
 idx <- sample(1:dim(dataset)[1], 40)
 daraset <- dataset[idx, ]
+
+## hiercrchical clustering
+library(factoextra) 
+hc.cut <- hcut(dataset, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
+
 ```
 
 
 ```{r}
-## hiercrchical clustering
-library(factoextra) 
-hc.cut <- hcut(dataset, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
 # Visualize dendrogram
 fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
 ```
@@ -971,12 +999,26 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 ```
 
 
+
 ----------------------------------------------
 
 ### 6. Evaluation and Comparison:
 
 
 #determine and visualize optimal number of clusters:
+
+
+```{r}
+#average silhouette for each clusters 
+library(cluster)
+
+#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
+avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
+
+#k-means clustering with estimating k and initializations
+fviz_silhouette(avg_sil)
+```
+
 
 ```{r}
 
