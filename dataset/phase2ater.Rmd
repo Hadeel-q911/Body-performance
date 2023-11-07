@@ -804,7 +804,7 @@ str(dataset)
 then converts the factors attribute to numeric type
 
 ```{r}
-#!!!!!!!!!!!!!!!!!!!! don't run it
+#!!!!!!!!!!!!!!!!!!!! don't run it نحط هنا او عند الفيتشر سلكشين انكودينق له
 # Convert factor attribute to numeric
 #dataset$age <- as.numeric(dataset$age)
 
@@ -839,8 +839,6 @@ str(dataset)
 ----------------------------------------------
 
   3. run k-means clustering to find 4 clusters
-!!!!!!!!!!!!!!!!!
-
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible, evert day will give me the same number(same srandom)
@@ -925,7 +923,8 @@ fviz_cluster(kmeansruns.result, data = dataset)
 3library(cluster)
 
 ```{r}
-library(cluster)
+#avr??
+library(cluster) 
 sil <- silhouette(km$cluster, dist(dataset))
 rownames(sil) <- rownames(dataset)
 fviz_silhouette(sil)
@@ -979,6 +978,7 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 
 
 #determine and visualize optimal number of clusters:
+
 ```{r}
 
 library(factoextra)
