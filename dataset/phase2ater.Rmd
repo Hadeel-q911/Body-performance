@@ -873,12 +873,6 @@ points(kmeans.result$centers[, c("age","gender")],  col = 1:12, pch = 8, cex=2)
 
 <<<<<<< HEAD
 ```
-#determine and visualize optimal number of clusters:
-```{r}
-library(factoextra)
-fviz_nbclust(data, kmeans, method="wss")
-fviz_nbclust(data, kmeans, method="silhouette")
-fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
 
@@ -959,5 +953,15 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 ----------------------------------------------
 
 ### 6. Evaluation and Comparison:
+
+
+#determine and visualize optimal number of clusters:
+```{r}
+
+library(factoextra)
+fviz_nbclust(data, kmeans, method="wss")
+fviz_nbclust(data, kmeans, method="silhouette")
+fviz_nbclust(data, kmeans, method="gap_start")
+```
 
 
