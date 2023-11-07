@@ -838,18 +838,17 @@ str(dataset)
 
 
 ----------------------------------------------
+
 #_____________________________________________
   loop for K number:
 1- k-means
 2-k-mediods
-3-Hierarchical
+3-Hierarchical (silhouette plot of pam مفروض يطلع لنا )
 4- Validation
 
 note: #الافرج (الفالديشين عموما) مقروض اول خطوه بالبروجكت عشان نعرف كم كلستر نستخدم, لكن كيف ما فهمت هل الخطوات الي انا كاتبتها صح؟
-
 #_____________________________________________
 
-To determine k number: 
 
   3. run k-means clustering to find 4 clusters
 
