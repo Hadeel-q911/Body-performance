@@ -62,6 +62,7 @@ Table 1 : Data dictionary showing description of all Attributes
 ----------------
 
 ### 3.3: Importing the dataset:
+
 ```{r}
 dataset<- read.csv("bodyPerformance.csv")
 View(dataset)
@@ -605,7 +606,6 @@ dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 
 ---------------------------------
 
-
 ### Feature Selection :
 
 ##Chi-square for contingency data:
@@ -799,6 +799,7 @@ Data types should be transformed into numeric types before clustering.
 str(dataset)
 ```
 
+
 ----------------------------------------------
 
 then converts the factors attribute to numeric type
@@ -853,8 +854,6 @@ kmeans.result
 ```
 
 
-----------------------------------------------
-
   4- visualize clustering
   
 first we need to install the necessary packages
@@ -871,21 +870,24 @@ fviz_cluster(kmeans.result, data = dataset)
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
-points(kmeans.result$centers[, c("age","class")],  col = 1:12, pch = 8, cex=10) 
+points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=2) 
 ```
 
 
-```{r}
-# plot cluster points
-plot(USArrests[, c("UrbanPop","Rape")], col = (kmeans.result$cluster) )
+```{r خل نجرب مع اتربيوت ثانيه}
+#performance k-means clustering
+kmeans.result <- kmeans(dataset, 4)
+
+# creat the initial plot
+plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
+
 # this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("UrbanPop","Rape")],  col = 1:4, pch = 8, cex=10)  
+points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
 
-----------------------------------------------
 
-determine and visualize optimal number of clusters:
+determine and visualize optimal number of clusters: 
 
 ```{r}
 library(factoextra)
@@ -896,7 +898,7 @@ fviz_nbclust(data, kmeans, method="gap_start")
 
 
 
-#### k-means clustering 2 
+#---------------------------k-means clustering 2---------------------------------------
 
 #kmeansruns() : It calls  kmeans() to perform  k-means clustering
 #It initializes the k-means algorithm several times with random points from the data set as means.
@@ -933,7 +935,7 @@ fviz_silhouette(sil)
 
 ```{r}
 # group into 4 clusters
-pam.result <- pam(USArrests, 4)
+pam.result <- pam(dataset, 4)
 plot(pam.result)
 #if some got -1 -> not on correct cluster
 #if 0-> overlap 
