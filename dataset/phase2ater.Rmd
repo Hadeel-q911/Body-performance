@@ -841,18 +841,6 @@ str(dataset)
 
 To determine k number: 
 
-```{r}
-#average silhouette for each clusters 
-library(cluster)
-
-#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
-
-#k-means clustering with estimating k and initializations
-fviz_silhouette(avg_sil)
-```
-  
-
   3. run k-means clustering to find 4 clusters
 
 ```{r}
@@ -867,7 +855,6 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
-
   4- visualize clustering
   
 first we need to install the necessary packages
@@ -877,6 +864,45 @@ first we need to install the necessary packages
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
+
+
+  - choosing k using average silhouette
+Silhouette analysis
+
+Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
+
+    Values close to 1 suggest that the observation is well matched to the assigned cluster
+    Values close to 0 suggest that the observation is borderline matched between two clusters
+    Values close to -1 suggest that the observations may be assigned to the wrong cluster
+
+In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
+
+    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k = 3?
+  
+  
+```{r}
+#average silhouette for each clusters 
+library(cluster)
+
+#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
+avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
+
+#k-means clustering with estimating k and initializations
+fviz_silhouette(avg_sil)
+```
+  
+
+```{r}
+#install.packages("cluster")
+library(cluster)
+# group into 4 clusters
+pam.result <- pam(dataset, 4)
+plot(pam.result)
+#if  -1 -> not on correct cluster
+#if 0-> overlap 
+```
+
+
 
 #fviz_cluster(kmeans.result, data = dataset)
 
