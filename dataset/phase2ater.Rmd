@@ -705,7 +705,7 @@ library(corrplot)
 library(dplyr)
 library(caret)
 
-#(نسوي انكودينق افضل)
+#(نسوي انكودينق افضل او نلغي الديسكرايتيزيشن ويصير هذا ماله داعي لان اوردي نيومريك)
 # Convert factor attribute to numeric
 #dataset$age <- as.numeric(dataset$age)
 # Verify the conversion
@@ -768,28 +768,14 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 
-####5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
+#### 5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
 
 --------------------- 
-
-#هذ الكلام لنا بعدين بنحذفه
-#From Project Description:   
--Apply K-means clustering to your dataset using at least three different sizes of K.
-You have to justify your choice for size K
-
--then compare and discuss the results using different evaluation methods and metrics
-(Silhouette coefficient, total within-cluster sum of square, BCubed precision and recall). 
-
--Use visual
-representation and try your best to interpret the results and to understand the algorithms performance.
-
--you have to try at least three different sizes of K and report the Silhouette coefficient, the total within-cluster sum of squares, BCubed precision and recall. 
 
 
 9.References
 -----------------------------------------------------------------------------------------
 
-### Clustering:
 
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
@@ -830,7 +816,9 @@ dataset$class <- as.numeric(dataset$class)
 # Verify the conversion
 str(dataset$class)
 ```
-
+#SOS
+OR بدال ال2 تشنك الي فوق نستخدم هذا :
+dataset <- scale(dataset)
 
 ```{r بينحذف}
 str(dataset)
@@ -838,6 +826,9 @@ str(dataset)
 
 
 ----------------------------------------------
+
+#__________
+#هذا الكلام لنا بعدين بنحذفه
 
 #_____________________________________________
   loop for K number:
@@ -850,11 +841,34 @@ note: #الافرج (الفالديشين عموما) مقروض اول خطوه
 #_____________________________________________
 
 
+
+#From Project Description:   
+-Apply K-means clustering to your dataset using at least three different sizes of K.
+You have to justify your choice for size K (we tried k=4, k= ,k=)
+
+-then compare and discuss the results using different evaluation methods and metrics
+(Silhouette coefficient(we use it) , 
+total within-cluster sum of square(did we?), 
+BCubed precision and recall (did we?). 
+
+-Use visual
+representation and try your best to interpret the results and to understand the algorithms performance.
+
+-you have to try at least three different sizes of K and report the 
+Silhouette coefficient,
+the total within-cluster sum of squares,
+BCubed precision and recall. 
+#__________
+
+### cluster k=4
   3. run k-means clustering to find 4 clusters
+# 1 ؟هل مفروض نسميه مودل
+#(model_km4)
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible, evert day will give me the same number(same srandom)
 set.seed(8953)
+
 kmeans.result <- kmeans(dataset, 4)
 ```
 
@@ -882,7 +896,7 @@ fviz_cluster(kmeans.result, data = dataset)
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
-points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=2) 
+points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
 
 
@@ -910,6 +924,71 @@ points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, ce
 ```
 
 
+
+#--------------------k-means clustering 2 ???????---------------------------
+  
+#kmeansruns() : It calls  kmeans() to perform  k-means clustering
+#It initializes the k-means algorithm several times with random points from the data set as means.
+#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+
+```{r}
+#install.packages("fpc")
+library(fpc)
+kmeansruns.result <- kmeansruns(dataset)  
+kmeansruns.result #4 mean cuz we have 4dimension
+fviz_cluster(kmeansruns.result, data = dataset)
+```
+
+
+```{r  مو مفروض تطلع رسمه ثانيه}
+#install.packages("cluster")
+library(cluster)
+
+# group into 4 clusters
+pam.result <- pam(dataset, 4)
+
+plot(pam.result)
+
+#if some got -1 -> not on correct cluster
+#if 0-> overlap 
+```
+
+
+#----------------------------Hierarchical Clustering---------------------------------
+
+##----Hierarchical Clustering of the USArrest Data-----##
+
+```{r}
+set.seed(2835)
+
+# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
+idx <- sample(1:dim(dataset)[1], 40)
+dataset <- dataset[idx, ]
+```
+
+
+
+```{r}
+## hiercrchical clustering
+library(factoextra) 
+hc.cut <- hcut(dataset, k = 4, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
+```
+
+
+```{r}
+#ليه حط الطول؟
+# Visualize dendrogram
+fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
+```
+
+
+```{r}
+# Visualize cluster
+fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
+```
+
+
+#average silhouette for each clusters 
   - choosing k using average silhouette
 Silhouette analysis
 
@@ -921,9 +1000,11 @@ Silhouette analysis allows you to calculate how similar each observations is wit
 
 In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
 
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k = ?
+    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
   
-  
+تفسيرنا
+
+
 ```{r}
 #average silhouette for each clusters 
 library(cluster)
@@ -935,21 +1016,52 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
   
+  
+```{r}
+# 1-  define function to compute average silhouette for k clusters using silhouette()
+silhouette_score <- function(k){ 
+km <- kmeans(dataset, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
+ss <- silhouette(km$cluster, dist(dataset))
+sil<- mean(ss[, 3])
+return(sil)
+}
+```
+
 
 ```{r}
-#install.packages("cluster")
-library(cluster)
-# group into 4 clusters
-pam.result <- pam(dataset, 4)
-plot(pam.result)
-#if some got -1 -> not on correct cluster
-#if 0-> overlap 
+##  k cluster range from 2 to 10
+k <- 2:10
+##  call  function fore k value
+avg_sil <- sapply(k, silhouette_score)  ##Apply a Function over a List or Vector
+plot(k, type='b', avg_sil, xlab='Number of clusters', ylab='Average Silhouette Scores', frame=FALSE)
+
+```
+
+#### 2- silhouette method
+
+```{r}
+#install.packages("NbClust")
+library(NbClust)
+#a)fviz_nbclust() with silhouette method using library(factoextra) 
+fviz_nbclust(dataset, kmeans, method = "silhouette")+
+  labs(subtitle = "Silhouette method")
+#b) NbClust validation
+fres.nbclust <- NbClust(dataset, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
+```
+
+#### 3- Elbow method
+
+```{r}
+#fviz_nbclust() with within cluster sums of squares (wss) method
+library(factoextra) 
+fviz_nbclust(dataset, kmeans, method = "wss") +
+  geom_vline(xintercept = 4, linetype = 2)+
+  labs(subtitle = "Elbow method")
 ```
 
 
 
-
-determine and visualize optimal number of clusters: 
+#determine and visualize optimal number of clusters: 
 
 ```{r}
 library(factoextra)
@@ -959,6 +1071,7 @@ fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
 
+#__________________________________________k=2________________________________________________________________
 
 #---------------------------k-means clustering 2---------------------------------------
 
@@ -985,18 +1098,6 @@ fviz_cluster(kmeansruns.result, data = dataset)
 
 #--------------------------------k-mediods clustering with PAM------------------------------
 
-#install.packages("cluster")
-Silhouette analysis
-
-Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
-
-    Values close to 1 suggest that the observation is well matched to the assigned cluster
-    Values close to 0 suggest that the observation is borderline matched between two clusters
-    Values close to -1 suggest that the observations may be assigned to the wrong cluster
-
-In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
-
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k = 3?
 
 ```{r}
 #avr????????????
@@ -1006,14 +1107,6 @@ library(cluster)
 #fviz_silhouette(sil)
 ```
 
-
-```{r}
-# group into 4 clusters
-pam.result <- pam(dataset, 4)
-plot(pam.result)
-#if some got -1 -> not on correct cluster
-#if 0-> overlap 
-```
 
 #-----------------------Hierarchical Clustering-------------------------------
 
@@ -1053,19 +1146,6 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 ### 6. Evaluation and Comparison:
 
 
-#determine and visualize optimal number of clusters:
-
-
-```{r}
-#average silhouette for each clusters 
-library(cluster)
-
-#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
-
-#k-means clustering with estimating k and initializations
-fviz_silhouette(avg_sil)
-```
 
 
 ```{r}
@@ -1077,13 +1157,22 @@ fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
 
+
+# visualize clusters using original variables
+clusters <- kmeans(data, centers = 3, iter.max = 100, nstart = 100)
+Stroke <- data |> mutate(cluster = clusters$cluster)
+stroke |> ggplot(aes(x = Rating, y = Price, col = as.factor(cluster))) + geom_point()
+
+     
+
 ```{r}
 fviz_nbclust(USArrests, kmeans, method = "wss") +
 geom_vline(xintercept= 4, linetype= 2)+
 labs(subtitle = "Elbow method")
 ```
 
-```
+
+
 ```{r}
 fviz_nbclust(USArrests, kmeans, method = "silhouette")+
 labs(subtitle = "Silhouette method")
