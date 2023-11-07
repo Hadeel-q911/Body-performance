@@ -585,8 +585,9 @@ We noticed a decrease in the number of rows, which means that deletion the outli
 We transformed the continuous vales of the age into intervals by dividing the values to be fall on one of three possible interval labels with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by discretisation the values well be meaningful and simpler to classify or perform other methods that can help us later in our model.
 
 ```{r}
+#ه encoding للان بنحذه او بنسوي له
 # Define bins for discretization
-dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
+#dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
 ```
 
 
@@ -606,6 +607,139 @@ dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 
 
 ### Feature Selection :
+
+##Chi-square for contingency data:
+
+```{r}
+#gender attribute
+contingency_table <- table(dataset$gender, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#age attribute
+contingency_table <- table(dataset$age, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#height_cm attribute
+contingency_table <- table(dataset$height_cm, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#weight_kg attribute
+contingency_table <- table(dataset$weight_kg, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#body.fat_.  attribute
+contingency_table <- table(dataset$body.fat_., dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#diastolic  attribute
+contingency_table <- table(dataset$diastolic, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#systolic attribute
+contingency_table <- table(dataset$systolic, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#gripForce attribute
+contingency_table <- table(dataset$gripForce, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#sit.and.bend.forward_cm attribute
+contingency_table <- table(dataset$sit.and.bend.forward_cm, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#sit.ups.counts attribute
+contingency_table <- table(dataset$sit.ups.counts, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+```{r}
+#broad.jump_cm attribute
+contingency_table <- table(dataset$broad.jump_cm, dataset$class)
+chi_square_result <- chisq.test(contingency_table)
+print(chi_square_result)
+```
+
+
+
+```{r}
+# Load required libraries
+library(corrplot)
+library(dplyr)
+library(caret)
+
+#(نسوي انكودينق افضل)
+# Convert factor attribute to numeric
+#dataset$age <- as.numeric(dataset$age)
+# Verify the conversion
+#str(dataset$age)
+
+# Convert factor attribute to numeric
+dataset$gender <- as.numeric(as.character(dataset$gender))
+
+# Verify the conversion
+str(dataset$gender)
+# Calculate the correlation matrix for numeric attributes
+correlation_matrix <- cor(dataset[, 1:10])
+
+# Display the correlation matrix
+corrplot(correlation_matrix, method = "color")
+
+# Find highly correlated attributes
+highly_correlated <- findCorrelation(correlation_matrix, cutoff = 0.7)
+
+# List the names of highly correlated attributes
+highly_correlated_names <- names(dataset[, 1:10][, highly_correlated])
+
+# Remove the highly correlated attributes from the dataset
+reduced_dataset <-dataset %>%
+  select(-one_of(highly_correlated_names))
+
+# Verify the reduced dataset
+head(reduced_dataset)
+
+
+ncol(dataset)
+nrow(dataset)
+
+```
 
 Based on the dataset and the graphs we did earlier, there are several justifications for not performing feature selection:
 
@@ -672,10 +806,10 @@ then converts the factors attribute to numeric type
 ```{r}
 #!!!!!!!!!!!!!!!!!!!! don't run it
 # Convert factor attribute to numeric
-dataset$age <- as.numeric(dataset$age)
+#dataset$age <- as.numeric(dataset$age)
 
 # Verify the conversion
-str(dataset$age)
+#str(dataset$age)
 ```
 
 
@@ -739,11 +873,29 @@ fviz_cluster(kmeans.result, data = dataset)
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
-points(kmeans.result$centers[, c("age","class")],  col = 1:12, pch = 8, cex=2) 
+points(kmeans.result$centers[, c("age","class")],  col = 1:12, pch = 8, cex=10) 
+```
+
+
+```{r}
+# plot cluster points
+plot(USArrests[, c("UrbanPop","Rape")], col = (kmeans.result$cluster) )
+# this command add Points(center) to a Plot (عشان حطينا 10)
+points(kmeans.result$centers[, c("UrbanPop","Rape")],  col = 1:4, pch = 8, cex=10)  
 ```
 
 
 ----------------------------------------------
+
+determine and visualize optimal number of clusters:
+
+```{r}
+library(factoextra)
+fviz_nbclust(data, kmeans, method="wss")
+fviz_nbclust(data, kmeans, method="silhouette")
+fviz_nbclust(data, kmeans, method="gap_start")
+```
+
 
 #### k-means clustering 2 
 
