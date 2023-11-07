@@ -904,10 +904,12 @@ fviz_nbclust(data, kmeans, method="gap_start")
 #It initializes the k-means algorithm several times with random points from the data set as means.
 #It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
 
+
 ```{r}
 #install.packages("fpc")
 library(fpc)
 ```
+
 
 ```{r}
 kmeansruns.result <- kmeansruns(dataset)  
@@ -922,14 +924,13 @@ fviz_cluster(kmeansruns.result, data = dataset)
 #--------------------------------k-mediods clustering with PAM------------------------------
 
 #install.packages("cluster")
-3library(cluster)
 
 ```{r}
 #avr??
 library(cluster) 
-sil <- silhouette(km$cluster, dist(dataset))
-rownames(sil) <- rownames(dataset)
-fviz_silhouette(sil)
+#sil <- silhouette(km$cluster, dist(dataset))
+#rownames(sil) <- rownames(dataset)
+#fviz_silhouette(sil)
 ```
 
 
@@ -950,18 +951,14 @@ plot(pam.result)
 set.seed(2835)
 # draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
 idx <- sample(1:dim(dataset)[1], 40)
-daraset2 <- dataset[idx, ]
+daraset <- dataset[idx, ]
 ```
 
 
 ```{r}
 ## hiercrchical clustering
 library(factoextra) 
-hc.cut <- hcut(dataset2, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
-```
-
-
-```{r}
+hc.cut <- hcut(dataset, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
 # Visualize dendrogram
 fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
 ```
