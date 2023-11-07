@@ -877,7 +877,7 @@ Silhouette analysis allows you to calculate how similar each observations is wit
 
 In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
 
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k = 3?
+    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k = ?
   
   
 ```{r}
@@ -995,12 +995,6 @@ library(cluster)
 #fviz_silhouette(sil)
 ```
 
-##K=2
-```{r}
-# group into 2 clusters
-pam.result <- pam(dataset, 2)
-plot(pam.result)
-```
 
 ```{r}
 # group into 4 clusters
@@ -1071,51 +1065,11 @@ fviz_nbclust(data, kmeans, method="silhouette")
 fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
-```{r}
-set.seed(123)
-
-# function to compute total within-cluster sum of square 
-wss <- function(k) {
-  kmeans(df, k, nstart = 10 )$tot.withinss
-}
-
-# Compute and plot wss for k = 1 to k = 11
-k.values <- 1:11
-
-# extract wss for 2-11 clusters
-wss_values <- dataset(k.values, wss)
-
-plot(k.values, wss_values,
-       type="b", pch = 19, frame = FALSE, 
-       xlab="Number of clusters K",
-       ylab="Total within-clusters sum of squares")
-```
-
 
 ```{r}
 fviz_nbclust(USArrests, kmeans, method = "wss") +
 geom_vline(xintercept= 4, linetype= 2)+
 labs(subtitle = "Elbow method")
-```
-
-```{r}
-function to compute average silhouette for k clusters
-avg_sil <- function(k) {
-  km.res <- kmeans(df, centers = k, nstart = 25)
-  ss <- silhouette(km.res$cluster, dist(df))
-  mean(ss[, 3])
-}
-
-# Compute and plot wss for k = 2 to k = 15
-k.values <- 2:15
-
-# extract avg silhouette for 2-15 clusters
-avg_sil_values <- map_dbl(k.values, avg_sil)
-
-plot(k.values, avg_sil_values,
-       type = "b", pch = 19, frame = FALSE, 
-       xlab = "Number of clusters K",
-       ylab = "Average Silhouettes")
 ```
 
 ```
