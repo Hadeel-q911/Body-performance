@@ -145,7 +145,6 @@ positive correlation between the two attributes, indicating a
 proportional relationship.
 
 ```{r}
-dataset<- read.csv("bodyPerformance.csv")
 plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement", 
      xlab = "height", ylab = "weight",
      xlim = c(100,200), ylim = c(20,150))
@@ -153,7 +152,7 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 
 ------------------------------------------------------------------------
 
-####3- Histogram of body fat :
+#### 3- Histogram of body fat :
 
 Observation:
 
@@ -164,9 +163,6 @@ in the dataset .
 
 ```{r}
 hist(dataset$body.fat_.)
-```
-```{r}
-
 ```
 
 
@@ -342,6 +338,7 @@ boxplot(dataset$body.fat_.,
 ------------------------------------------------------------------------
 
 The boxplot of the person's diastolic (measures pressure the blood vessels when the heart is at rest) shows how the values in the dataset have been evenly distributed around the median value of 79.0, and, there some outliers that we will handle them
+
 ```{r}
 #diastolic box plot :
 boxplot(dataset$diastolic,
@@ -464,6 +461,7 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
+
 ------------------------------------------------------------------------
 
 ```{r}
@@ -480,7 +478,9 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
+
 ------------------------------------------------------------------------
+
 
 ```{r}
 #Detect outlir for 'systolic': 
@@ -513,7 +513,9 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
+
 ------------------------------------------------------------------------
+
 
 ```{r}
 #Detect outlir for 'sit.and.bend.forward_cm': 
@@ -532,6 +534,7 @@ dataset= dataset[-Find_outlier,]
 
 
 we notic some outliers within the range and we will deleting them as an outliers since it's effects other attributes negatively.
+
 ```{r}
 #Detect outlir for 'sit.up.count': 
 outesitup = outlier(dataset$sit.ups.counts, logical =TRUE)
@@ -585,6 +588,7 @@ We transformed the continuous vales of the age into intervals by dividing the va
 dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
 ```
 
+
 ------------------------------------------------------------------------
 
 ### Normalizetion:
@@ -617,15 +621,13 @@ While feature selection can be beneficial in certain situations, in the case of 
 
 ----------------------------------------------
 
-<<<<<<< HEAD
 1. Problem: 
 
 -------------------
 2.Data Mining task:
-=======
+
 ### 5- Data Mining Task:
 ****************description اتوقع مكانها غلظ ****************
->>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
 
 #### 5.1 Classification: 
 
@@ -648,20 +650,12 @@ representation and try your best to interpret the results and to understand the 
 
 -you have to try at least three different sizes of K and report the Silhouette coefficient, the total within-cluster sum of squares, BCubed precision and recall. 
 
--------------
 
-<<<<<<< HEAD
--------------------
 9.References
 -----------------------------------------------------------------------------------------
 
-###clustering:
+### Clustering:
 
-```{r}
-#Apply K-means clustering to your dataset using at least three different sizes of K.
-
-```
-=======
   1. prepreocessing 
 Data types should be transformed into numeric types before clustering.
 
@@ -706,14 +700,16 @@ str(dataset)
 ```
 
 
-
 ----------------------------------------------
 
   3. run k-means clustering to find 4 clusters
+!!!!!!!!!!!!!!!!!
+
 
 ```{r}
+#set a seed for random number generation  to make the results reproducible, evert day will give me the same number(same srandom)
 set.seed(8953)
-kmeans.result <- kmeans(USArrests, 4)
+kmeans.result <- kmeans(dataset, 4)
 # print the clusterng result
 kmeans.result
 ```
@@ -726,43 +722,29 @@ kmeans.result
 first we need to install the necessary packages
 
 ```{r}
-install.packages("factoextra")
 library(factoextra)
-```
-
-
-```{r}
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
 
+```{r}
+plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
+```
+
+
 ----------------------------------------------
-
-plot cluster points(Color code)
-
-```{r}
-<<<<<<< HEAD
-plot(dataset[, c("age","gender")], col = (kmeans.result$cluster) ) #نغير حسب اسماء الكولوم عندنا
-=======
-plot(dataset[, c("gender","class")], col = (kmeans.result$cluster) ) 
-```
-
+????????????????
 
 ```{r}
->>>>>>> 1e434c8b935e75603d14ae6af0f9c9cbab11b659
 # this command add Points(center) to a Plot 
-
-# Perform k-means clustering
-kmeans_result <- kmeans(data, centers = 4)
-
-plot(data[, c("age","gender")], col = kmeans_result$cluster)
-points(kmeans.result$centers[, c("age","gender")],  col = 1:4, pch = 8, cex=2) 
+points(kmeans.result$centers[, c("age","gender")],  col = 1:12, pch = 8, cex=2) 
 ```
 ```{r}
 
 ```
 
 
+<<<<<<< HEAD
 #Do we need k-means clustering 2 ??
 ```{r}
 install.packages("fpc")
@@ -779,9 +761,82 @@ fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
 
+=======
+#### k-means clustering 2 
+
+#kmeansruns() : It calls  kmeans() to perform  k-means clustering
+#It initializes the k-means algorithm several times with random points from the data set as means.
+#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+
+```{r}
+#install.packages("fpc")
+library(fpc)
+```
+
+```{r}
+kmeansruns.result <- kmeansruns(dataset)  
+kmeansruns.result
+```
+
+
+```{r}
+fviz_cluster(kmeansruns.result, data = dataset)
+```
+
+#--------------------------------k-mediods clustering with PAM------------------------------
+
+#install.packages("cluster")
+library(cluster)
+
+```{r}
+library(cluster)
+```
+
+
+```{r}
+# group into 4 clusters
+pam.result <- pam(USArrests, 4)
+plot(pam.result)
+#if some got -1 -> not on correct cluster
+#if 0-> overlap 
+```
+
+#-----------------------Hierarchical Clustering-------------------------------
+
+##----Hierarchical Clustering of the USArrest Data-----##
+
+
+```{r}
+set.seed(2835)
+# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
+idx <- sample(1:dim(dataset)[1], 40)
+daraset2 <- dataset[idx, ]
+```
+
+
+```{r}
+## hiercrchical clustering
+library(factoextra) 
+hc.cut <- hcut(dataset2, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
+```
+
+
+```{r}
+# Visualize dendrogram
+fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
+```
+
+
+```{r}
+# Visualize cluster
+fviz_cluster(hc.cut, ellipse.type = "convex") 
+# Character specifying frame type. Possible values are 'convex', 'confidence' etc
+```
+
+>>>>>>> f29151d629f22304b45de88ba08733a8fffb7fe0
 
 ----------------------------------------------
 
-###6. Evaluation and Comparison:
->>>>>>> e82272d6434f636318c613bcb86c2db814f30c6b
+### 6. Evaluation and Comparison:
+
 
