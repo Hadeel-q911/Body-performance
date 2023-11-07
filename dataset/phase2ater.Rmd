@@ -949,6 +949,17 @@ fviz_cluster(kmeansruns.result, data = dataset)
 #--------------------------------k-mediods clustering with PAM------------------------------
 
 #install.packages("cluster")
+Silhouette analysis
+
+Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
+
+    Values close to 1 suggest that the observation is well matched to the assigned cluster
+    Values close to 0 suggest that the observation is borderline matched between two clusters
+    Values close to -1 suggest that the observations may be assigned to the wrong cluster
+
+In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
+
+    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k = 3?
 
 ```{r}
 #avr????????????
