@@ -118,6 +118,7 @@ dataset$class = factor(dataset$class,levels =
                         c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
 
+
 ```{r}
  #encoding Gender:
 dataset$gender = factor(dataset$gender,levels =
@@ -154,6 +155,7 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
      xlab = "gender", ylab = "class",
      xlim = c(0,1), ylim = c(0,4))
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -269,6 +271,7 @@ we found 1 row that's duplicate that need to be deleted.
 #Remove duplicated rows 
 dataset <- dataset[!duplicated (dataset), ]
 ```
+
 
 ```{r}
 #To make sure that the deletion was successful 
@@ -817,17 +820,17 @@ consider all attributes without performing feature selection.
 
 1.  Problem:
 
-|                                                                                                                         |
-|---------------------|
-| 2.Data Mining task:                                                                                                     |
-| \### 5- Data Mining Task: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*description اتوقع مكانها غلظ \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* |
-| \#### 5.1 Classification:                                                                                               |
 
-#### 5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
+2.Data Mining task:                                                                                                   
+5- Data Mining Task:
+description اتوقع مكانها غلظ 
+
+#### 5.1 Classification:                                                                                              
+## 9.References
 
 ------------------------------------------------------------------------
 
-## 9.References
+#### 5.2 Clustering:  
 
 1.  prepreocessing Data types should be transformed into numeric types
     before clustering.
@@ -874,21 +877,13 @@ column was convert successflly.
 
 ------------------------------------------------------------------------
 
-#\_\_\_\_\_\_\_\_\_\_ #هذا الكلام لنا بعدين بنحذفه
-
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ loop for K number:
-
-1- k-means
-
-2-k-mediods
-
-3-Hierarchical (silhouette plot of pam مفروض يطلع لنا ) 4- Validation
+#هذا الكلام لنا بعدين بنحذفه
 
 note: #الافرج (الفالديشين عموما) مقروض اول خطوه بالبروجكت عشان نعرف كم
 كلستر نستخدم, لكن كيف ما فهمت هل الخطوات الي انا كاتبتها صح؟
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+#______________
 
-#From Project Description:\
+#From Project Description:
 -Apply K-means clustering to your dataset using at least three different
 sizes of K. You have to justify your choice for size K (we tried k=4, k=
 ,k=)
@@ -940,19 +935,8 @@ plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
 
-```{r ?}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 2)
 
-# creat the initial plot
-plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-#--------------------k-means clustering 2
-???????---------------------------
+#--------------------k-means clustering 2 ???????---------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
@@ -965,13 +949,14 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result 
 ```
 
+
 ```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
-average silhouette for 2 clusters
+#### average silhouette for 2 clusters
 
-#average silhouette for each clusters - choosing k using average
+# average silhouette for each clusters - choosing k using average
 silhouette Silhouette analysis
 
 Silhouette analysis allows you to calculate how similar each
@@ -997,16 +982,12 @@ Pay close attention to the silhouette plot, does each observation clearly belong
 ```{r}
 library(cluster)
 avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-```
-
-```{r}
 fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
 ```
 
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_k=3\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#---------------------------k-means clustering
-3---------------------------------------
+
+#---------------------------k-means clustering 3---------------------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
@@ -1041,37 +1022,15 @@ plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
 
-```{r}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 3)
 
-# creat the initial plot
-plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-```{r}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 3)
-
-# creat the initial plot
-plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-#--------------------k-means clustering 2
-???????---------------------------
+#--------------------k-means clustering 2 ???????---------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
 the data set as means. #It estimates the number of clusters by Calinski
 Harabasz index or average silhouette width يقلل عدد الكلستر
 
-```{r}
+```{r ???????}
 #install.packages("fpc")
 library(fpc)
 kmeansruns.result <- kmeansruns(dataset)  
@@ -1079,55 +1038,7 @@ kmeansruns.result #4 mean cuz we have 4dimension
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
-```{r}
-#install.packages("cluster")
-library(cluster)
 
-# group into 4 clusters
-pam.result <- pam(dataset, 3)
-
-plot(pam.result)
-
-#if some got -1 -> not on correct cluster
-#if 0-> overlap 
-```
-
-```{r}
-#average silhouette for each clusters (2 clusters)
-library(cluster)
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
-```
-
-#----------------------------Hierarchical
-Clustering---------------------------------
-
-##----Hierarchical Clustering of the USArrest Data-----##
-
-```{r}
-set.seed(2835)
-
-# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
-idx <- sample(1:dim(dataset)[1], 40)
-dataset <- dataset[idx, ]
-```
-
-```{r}
-## hiercrchical clustering
-library(factoextra) 
-hc.cut <- hcut(dataset, k = 3, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
-```
-
-```{r}
-#ليه حط الطول؟
-# Visualize dendrogram
-fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
-```
-
-```{r}
-# Visualize cluster
-fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
-```
 
 #average silhouette for each clusters - choosing k using average
 silhouette Silhouette analysis
@@ -1165,20 +1076,9 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-```{r}
-# 1-  define function to compute average silhouette for k clusters using silhouette()
-silhouette_score <- function(k){ 
-km <- kmeans(dataset, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
-ss <- silhouette(km$cluster, dist(dataset))
-sil<- mean(ss[, 3])
-return(sil)
-}
-```
 
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_k=4\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#---------------------------k-means clustering
-4---------------------------------------
+#---------------------------k-means clustering 4---------------------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
@@ -1196,7 +1096,7 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
-#### visualize 4 clusters
+ visualize 4 clusters
 
 ```{r}
 # visualize clustering (4 clusters)
@@ -1224,19 +1124,8 @@ plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
-```{r}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 4)
 
-# creat the initial plot
-plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-#--------------------k-means clustering 2
-???????---------------------------
+#--------------------k-means clustering 2 ???????---------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
@@ -1248,60 +1137,16 @@ Harabasz index or average silhouette width يقلل عدد الكلستر
 library(fpc)
 kmeansruns.result <- kmeansruns(dataset)  
 kmeansruns.result #4 mean cuz we have 4dimension
+```
+
+
+
+```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
-```{r}
-#install.packages("cluster")
-library(cluster)
-
-# group into 4 clusters
-pam.result <- pam(dataset, 4)
-
-plot(pam.result)
-
-#if some got -1 -> not on correct cluster
-#if 0-> overlap 
-```
-
-```{r}
-#average silhouette for each clusters (4 clusters)
-library(cluster)
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
-```
-
-#----------------------------Hierarchical
-Clustering---------------------------------
-
-##----Hierarchical Clustering of the USArrest Data-----##
-
-```{r}
-set.seed(2835)
-
-# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
-idx <- sample(1:dim(dataset)[1], 40)
-dataset <- dataset[idx, ]
-```
-
-```{r}
-## hiercrchical clustering
-library(factoextra) 
-hc.cut <- hcut(dataset, k = 4, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
-```
-
-```{r}
-#ليه حط الطول؟
-# Visualize dendrogram
-fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
-```
-
-```{r}
-# Visualize cluster
-fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
-```
-
-#average silhouette for each clusters - choosing k using average
+--------------------
+#### average silhouette for each clusters - choosing k using average
 silhouette Silhouette analysis
 
 Silhouette analysis allows you to calculate how similar each
@@ -1337,7 +1182,8 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-```{r}
+
+```{r !!}
 # 1-  define function to compute average silhouette for k clusters using silhouette()
 silhouette_score <- function(k){ 
 km <- kmeans(dataset, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
@@ -1347,28 +1193,26 @@ return(sil)
 }
 ```
 
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_k=5\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#---------------------------k-means clustering
-5---------------------------------------
+#---------------------------k-means clustering 7---------------------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
 the data set as means. #It estimates the number of clusters by Calinski
 Harabasz index or average silhouette width يقلل عدد الكلستر
 
-#### K= 5 Clusters
+#### K= 7 Clusters
 
 ```{r}
 # run k-means clustering to find 4 clusters
 #set a seed for random number generation  to make the results reproducible
 set.seed(8953)
-kmeans.result <- kmeans(dataset, 5)
+kmeans.result <- kmeans(dataset, 7)
 # print the clusterng result
 kmeans.result
 ```
 
-#### visualize 4 clusters
+#### visualize 7 clusters
 
 ```{r}
 # visualize clustering (4 clusters)
@@ -1385,30 +1229,8 @@ plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
 
-```{r}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 5)
 
-# creat the initial plot
-plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-```{r}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 5)
-
-# creat the initial plot
-plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-#--------------------k-means clustering 2
-???????---------------------------
+#--------------------k-means clustering 2 ???????---------------------------
 
 #kmeansruns() : It calls kmeans() to perform k-means clustering #It
 initializes the k-means algorithm several times with random points from
@@ -1420,8 +1242,8 @@ Harabasz index or average silhouette width يقلل عدد الكلستر
 library(fpc)
 kmeansruns.result <- kmeansruns(dataset)  
 kmeansruns.result #4 mean cuz we have 4dimension
-fviz_cluster(kmeansruns.result, data = dataset)
 ```
+
 
 ```{r}
 #install.packages("cluster")
@@ -1436,42 +1258,6 @@ plot(pam.result)
 #if 0-> overlap 
 ```
 
-```{r}
-#average silhouette for each clusters (5 clusters)
-library(cluster)
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
-```
-
-#----------------------------Hierarchical
-Clustering---------------------------------
-
-##----Hierarchical Clustering of the USArrest Data-----##
-
-```{r}
-set.seed(2835)
-
-# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
-idx <- sample(1:dim(dataset)[1], 40)
-dataset <- dataset[idx, ]
-```
-
-```{r}
-## hiercrchical clustering
-library(factoextra) 
-hc.cut <- hcut(dataset, k = 5, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
-```
-
-```{r}
-#ليه حط الطول؟
-# Visualize dendrogram
-fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
-```
-
-```{r}
-# Visualize cluster
-fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
-```
 
 #average silhouette for each clusters - choosing k using average
 silhouette Silhouette analysis
@@ -1509,19 +1295,23 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
+
 ### Validation (Evaluation and Comparison) :
 
-### Within cluster sums of squares:
 
 #### 3- Elbow method
 
+### Within cluster sums of squares
+
 ```{r}
+# 3- Elbow method
 #fviz_nbclust() with within cluster sums of squares (wss) method
 library(factoextra) 
-fviz_nbclust(dataset, kmeas, method = "wss") +
+fviz_nbclust(dataset, kmeans, method = "wss") +
   geom_vline(xintercept = 4, linetype = 2)+
   labs(subtitle = "Elbow method")
 ```
+
 
 ```{r}
 # 1-  define function to compute average silhouette for k clusters using silhouette()
@@ -1532,6 +1322,7 @@ sil<- mean(ss[, 3])
 return(sil)
 }
 ```
+
 
 ```{r}
 # wws
@@ -1547,49 +1338,10 @@ wssplot <- function(data, nc = 15, seed = 1234) {
 }
 
 # Call the function with your dataset 'brain_stroke'
-result <- wssplot(brain_stroke)
+result <- wssplot(dataset)
 ```
 
 ### Average Silhouette
-
-```{r}
-#طريقة اليوتيوب
-library(factoextra)
-fviz_nbclust(brain_stroke, kmeans, method = "silhouette")
-```
-
-```{r}
-#طريقة السلايدز حقت اللاب
-# Define a function to compute average silhouette for k clusters using silhouette()
-library(cluster)
-silhouette_score <- function(k, data) {
-  km <- kmeans(data, centers = k, nstart = 25)
-  ss <- silhouette(km$cluster, dist(data))
-  sil <- mean(ss[, 3])
-  return(sil)
-}
-
-# Set the range of clusters (k values)
-k_range <- 2:10
-
-# Call the function for each k value and store the results in avg_sil
-avg_sil <- sapply(k_range, silhouette_score, data = brain_stroke)
-
-# Create a plot to visualize the Average Silhouette Scores
-plot(k_range, avg_sil, type = 'b', xlab = 'Number of clusters', ylab = 'Average Silhouette Scores', frame = FALSE)
-```
-
-```{r}
-#تكملة السلايدز حقت اللاب
-# 2- silhouette method
-install.packages("NbClust")
-library(NbClust)
-#a)fviz_nbclust() with silhouette method using library(factoextra) 
-fviz_nbclust(USArrests, kmeans, method = "silhouette")+
-  labs(subtitle = "Silhouette method")
-#b) NbClust validation
-fres.nbclust <- NbClust(brain_stroke, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
-```
 
 ```{r}
 ##  k cluster range from 2 to 10
@@ -1612,69 +1364,6 @@ fviz_nbclust(dataset, kmeans, method = "silhouette")+
 fres.nbclust <- NbClust(dataset, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
 ```
 
-#====================== Garbage:
-
-```{r}
-#install.packages("fpc")
-library(fpc)
-```
-
-```{r}
-set.seed(8953)
-
-kmeans.result2 <- kmeans(dataset, 2)
-```
-
-```{r}
-kmeansruns.result2 <- kmeansruns(dataset)  
-kmeansruns.result2
-```
-
-```{r}
-fviz_cluster(kmeansruns.result2, data = dataset)
-```
-
-#--------------------------------k-mediods clustering with
-PAM------------------------------
-
-```{r}
-#avr????????????
-library(cluster) 
-#sil <- silhouette(km$cluster, dist(dataset))
-#rownames(sil) <- rownames(dataset)
-#fviz_silhouette(sil)
-```
-
-#-----------------------Hierarchical
-Clustering-------------------------------
-
-##----Hierarchical Clustering of the USArrest Data-----##
-
-```{r}
-set.seed(2835)
-
-# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
-idx <- sample(1:dim(dataset)[1], 40)
-daraset <- dataset[idx, ]
-
-## hiercrchical clustering
-library(factoextra) 
-hc.cut <- hcut(dataset, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
-
-```
-
-```{r}
-# Visualize dendrogram
-fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
-```
-
-```{r}
-# Visualize cluster
-fviz_cluster(hc.cut, ellipse.type = "convex") 
-# Character specifying frame type. Possible values are 'convex', 'confidence' etc
-```
-
-#==========end garbage
 
 ------------------------------------------------------------------------
 
@@ -1687,11 +1376,6 @@ fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
 # visualize clusters using original variables
-
-clusters \<- kmeans(data, centers = 3, iter.max = 100, nstart = 100)
-Stroke \<- data \|\> mutate(cluster = clusters\$cluster) stroke \|\>
-ggplot(aes(x = Rating, y = Price, col = as.factor(cluster))) +
-geom_point()
 
 ```{r}
 fviz_nbclust(USArrests, kmeans, method = "wss") +
