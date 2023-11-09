@@ -1,9 +1,13 @@
 ---
 title: "Body performance"
 output: html_notebook
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ### Goal :
+
 The primary objective of this project is to emphasize the significance
 of body performance in enhancing physical health and promoting exercise
 awareness among individuals. This will be accomplished by analyzing and
@@ -11,29 +15,43 @@ extracting valuable insights from body performance datasets, monitoring
 the progression of human age, and subsequently improving the overall
 awareness of its importance.
 
----------------------
+------------------------------------------------------------------------
 
 ### 1. Problem:
 
-
----------------------
+------------------------------------------------------------------------
 
 ### 2. Data Mining task:
+
 ??
 
 #### Classification gaol :
-we employ a classification approach to categorize individuals into distinct levels of fitness based on various data attributes, including body measurements such as weight, body fat percentage, and health indicators, as well as activity levels. Furthermore, we aim to predict performance outcomes by leveraging this collected data.
+
+we employ a classification approach to categorize individuals into
+distinct levels of fitness based on various data attributes, including
+body measurements such as weight, body fat percentage, and health
+indicators, as well as activity levels. Furthermore, we aim to predict
+performance outcomes by leveraging this collected data.
 
 #### Clustering gaol :
-Our primary goal in utilizing clustering on our dataset is to identify inherent patterns or groupings within the data. By applying clustering algorithms, we aim to partition the dataset into distinct clusters based on similarities or shared characteristics among the data points. This enables us to gain insights into the underlying structure of the data, discover relationships between data points, and potentially uncover valuable knowledge or trends that may be hidden within the dataset.
 
----------------------
+Our primary goal in utilizing clustering on our dataset is to identify
+inherent patterns or groupings within the data. By applying clustering
+algorithms, we aim to partition the dataset into distinct clusters based
+on similarities or shared characteristics among the data points. This
+enables us to gain insights into the underlying structure of the data,
+discover relationships between data points, and potentially uncover
+valuable knowledge or trends that may be hidden within the dataset.
+
+------------------------------------------------------------------------
 
 ### 3. Data:
 
 #### 3.1: Data Source :
-It from Kaggle website , The link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>) show
-the source data.
+
+It from Kaggle website , The
+link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>)
+show the source data.
 
 ### 3.2: General Information about Body performance dataset :
 
@@ -44,8 +62,8 @@ them have 11 attributes.
 
 Table 1 : Data dictionary showing description of all Attributes
 
-|name|description|data type|possible value|
-|-----------------|---------------------|-----------------|-----------------|
+| name                    | description                                                                                           | data type | possible value |
+|------------------|--------------------|------------------|------------------|
 | Age                     | The person's age in years                                                                             | numerical | 21-64          |
 | Gender                  | The person's gender                                                                                   | binary    | F,M            |
 | Height_cm               | The person's Height in cm                                                                             | numerical | 125-194        |
@@ -57,9 +75,9 @@ Table 1 : Data dictionary showing description of all Attributes
 | sit and bend forward_cm | measures flexibility in sitting and bending forward in centimeters.                                   | numerical | -25-213        |
 | sit-ups counts_cm       | measures the strength and endurance of the abdominals and hip-flexor muscles in centimeter.           | numerical | 0-80           |
 | broad jump_cm           | It is a method of measuring how far a person can jump from a standing position to a landing position. | numerical | 0-303          |
-|class| body performance score| numerical | A,B,C,D
+| class                   | body performance score                                                                                | numerical | A,B,C,D        |
 
-----------------
+------------------------------------------------------------------------
 
 ### 3.3: Importing the dataset:
 
@@ -69,16 +87,13 @@ View(dataset)
 str(dataset)
 ```
 
-
 ------------------------------------------------------------------------
 
 ### 3.4: performance dataset before preprocessing:
 
-
 ```{r}
 print(dataset)
 ```
-
 
 ```{r}
 #Number of rows
@@ -91,14 +106,17 @@ ncol(dataset)
 
 ### Understanding the dataset using graph representations:
 
-### Encoding: 
-In order to represent the nominal attributes (gender) and (class) in graphs, we had to encode them as they cannot be directly displayed in their original form.
-```{r}  
+### Encoding:
+
+In order to represent the nominal attributes (gender) and (class) in
+graphs, we had to encode them as they cannot be directly displayed in
+their original form.
+
+```{r}
  #encoding Class: 
 dataset$class = factor(dataset$class,levels =
                         c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
-
 
 ```{r}
  #encoding Gender:
@@ -106,12 +124,12 @@ dataset$gender = factor(dataset$gender,levels =
                          c("F","M"), labels = c(0,1))
 ```
 
-
 ------------------------------------------------------------------------
 
 ### check if the dataset is balanced or imbalanced (Class boxplot) :
 
-After encoding the attribute (class) We employ a Boxplot graph on our class label (class) to ascertain whether our dataset is balanced or not.
+After encoding the attribute (class) We employ a Boxplot graph on our
+class label (class) to ascertain whether our dataset is balanced or not.
 
 ```{r}
 boxplot(dataset$class, 
@@ -119,14 +137,17 @@ boxplot(dataset$class,
         main= "Boxplot of age")
 ```
 
-Since the median is positioned in the middle of the box plot, it indicates that our dataset is balanced, and there is no need to perform any sampling.
-
+Since the median is positioned in the middle of the box plot, it
+indicates that our dataset is balanced, and there is no need to perform
+any sampling.
 
 ------------------------------------------------------------------------
 
 #### 1- Scatter plot for Gender and class :
 
-first we endcode the gender F to be 0 and M to 1, then we use the plot to determine the relationship between gender and class attributes , we notice that the female have higher performance then male.
+first we endcode the gender F to be 0 and M to 1, then we use the plot
+to determine the relationship between gender and class attributes , we
+notice that the female have higher performance then male.
 
 ```{r}
 plot(dataset$gender, dataset$class, main = " the performance between meal amd female", 
@@ -134,17 +155,16 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
      xlim = c(0,1), ylim = c(0,4))
 ```
 
-
 ------------------------------------------------------------------------
 
 #### 2- Scatter plot of height and weight:
 
 Observation:
 
- This scatter plot helps us determine whether height and
-weight are correlated to each other or not. The plot shows a strong
-positive correlation between the two attributes, indicating a
-proportional relationship.
+This scatter plot helps us determine whether height and weight are
+correlated to each other or not. The plot shows a strong positive
+correlation between the two attributes, indicating a proportional
+relationship.
 
 ```{r}
 plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement", 
@@ -158,22 +178,22 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 
 Observation:
 
-  he histogram represents the frequency distribution of body
-fat values. We observe that the majority of values lie within the range
-of 10-30. However, the histogram also reveals the presence of outliers
-in the dataset .
+he histogram represents the frequency distribution of body fat values.
+We observe that the majority of values lie within the range of 10-30.
+However, the histogram also reveals the presence of outliers in the
+dataset .
 
 ```{r}
 hist(dataset$body.fat_.)
 ```
 
-
 ------------------------------------------------------------------------
 
 #### 4- Scatter plot for age and diastoic :
+
 Observation :
 
-  This scatter plot helps us determine the correlation between Age and
+This scatter plot helps us determine the correlation between Age and
 diastolic. The plot shows no correlation between the two attributes,
 indicating no proportional relationship
 
@@ -183,7 +203,6 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
      xlim = c(20,64), ylim = c(0,200))
 ```
 
-
 ------------------------------------------------------------------------
 
 ### Statistical Measures:
@@ -192,58 +211,51 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
  summary(dataset$age)
 ```
 
-
 ```{r}
 summary(dataset$height_cm)
 ```
-
 
 ```{r}
  summary(dataset$weight_kg)
 ```
 
-
 ```{r}
  summary(dataset$body.fat_.)
 ```
-
 
 ```{r}
  summary(dataset$diastolic)
 ```
 
-
 ```{r}
  summary(dataset$systolic)
 ```
-
 
 ```{r}
  summary(dataset$gripForce)
 ```
 
-
 ```{r}
  summary(dataset$sit.and.bend.forward_cm)
 ```
-
 
 ```{r}
 summary(dataset$sit.ups.counts)
 ```
 
-
 ```{r}
  summary(dataset$broad.jump_cm)
 ```
-
 
 ------------------------------------------------------------------------
 
 ## Data Preprocessing:
 
 ### Check duplicated rows:
- We check if there are any duplicated rows to decrease dataset volume. Hence enhancing data quality which leads to better model performance and speed.
+
+We check if there are any duplicated rows to decrease dataset volume.
+Hence enhancing data quality which leads to better model performance and
+speed.
 
 witch there's no duplicated rows as showing:
 
@@ -251,14 +263,12 @@ witch there's no duplicated rows as showing:
 sum(duplicated(dataset))
 ```
 
-we found 1 row that’s duplicate that need to be deleted.
-
+we found 1 row that's duplicate that need to be deleted.
 
 ```{r}
 #Remove duplicated rows 
 dataset <- dataset[!duplicated (dataset), ]
 ```
-
 
 ```{r}
 #To make sure that the deletion was successful 
@@ -266,7 +276,11 @@ sum(duplicated(dataset))
 ```
 
 ### Check nulls value:
-Null values can cause issues when performing data analysis or building machine learning models, as they can lead to inaccurate results or errors, where we found then 0 null in our dataset. So, no need to delete any.
+
+Null values can cause issues when performing data analysis or building
+machine learning models, as they can lead to inaccurate results or
+errors, where we found then 0 null in our dataset. So, no need to delete
+any.
 
 ```{r}
 #to find the total null values in the dataset
@@ -276,21 +290,35 @@ sum(is.na(dataset))
 ------------------------------------------------------------------------
 
 ## Detect Outlier and Remove them:
- We checked our dataset to see if there were any outlier values, and we found a couple. Statistical studies and modeling can be significantly impacted by the presence of outliers. Outliers can skew results and impair the validity and reliability of inferences made from the research since they are data points that differ dramatically from the majority of the data. Therefore, in order to prevent them from harming our outcomes, we must erase them before we begin our task.
 
-An outlier detection approach was used on the dataset to solve this problem. The detection approach used makes use of the Outliers package's Outlier() function. This method revealed the outliers among the data points.
+We checked our dataset to see if there were any outlier values, and we
+found a couple. Statistical studies and modeling can be significantly
+impacted by the presence of outliers. Outliers can skew results and
+impair the validity and reliability of inferences made from the research
+since they are data points that differ dramatically from the majority of
+the data. Therefore, in order to prevent them from harming our outcomes,
+we must erase them before we begin our task.
+
+An outlier detection approach was used on the dataset to solve this
+problem. The detection approach used makes use of the Outliers package's
+Outlier() function. This method revealed the outliers among the data
+points.
 
 ```{r}
 #install outliers package:
  library(outliers)
 ```
 
-
 ------------------------------------------------------------------------
 
 #### boxplot to detect outliers:
 
- From The person’s age in years boxplot and summary we notice that there are no outliers showing on the boxplot , Also, we observe that the mean is less than the median, indicating a down skew (negatively skewed) in the distribution. This suggests that the age distribution is stretched towards the lower values, with more individuals falling in the younger age range.
+From The person's age in years boxplot and summary we notice that there
+are no outliers showing on the boxplot , Also, we observe that the mean
+is less than the median, indicating a down skew (negatively skewed) in
+the distribution. This suggests that the age distribution is stretched
+towards the lower values, with more individuals falling in the younger
+age range.
 
 ```{r}
 # age boxplot :
@@ -301,9 +329,12 @@ boxplot(dataset$age ,
 
 ------------------------------------------------------------------------
 
+The summary and box plot values for The person's height in cm indicate a
+dataset ranging from 125.0 to 193.8. the median at 169.2, and the mean
+is 168.6. Comparing the mean and median, we observe that they are
+relatively close in value. Also, there is some outliers that we will
+handle it by deleting them in preprocessing steps.
 
- The summary and box plot values for The person’s height in cm indicate a dataset ranging from 125.0 to 193.8. the median at 169.2, and the mean is 168.6. Comparing the mean and median, we observe that they are relatively close in value. Also, there is some outliers that we will handle it by deleting them in preprocessing steps.
- 
 ```{r}
 #Hight boxplot :
 boxplot(dataset$height_cm , 
@@ -314,8 +345,10 @@ boxplot(dataset$height_cm ,
 
 ------------------------------------------------------------------------
 
-
-The summary and box plot values for The person’s weight in Kg indicate a dataset ranging from  26.30 to 138.10. The mean weight is 67.45. Comparing the mean and median, we observe that they are relatively close in value, and that due also the maximum outliers.
+The summary and box plot values for The person's weight in Kg indicate a
+dataset ranging from 26.30 to 138.10. The mean weight is 67.45.
+Comparing the mean and median, we observe that they are relatively close
+in value, and that due also the maximum outliers.
 
 ```{r}
 
@@ -328,7 +361,10 @@ boxplot(dataset$weight_kg ,
 
 ------------------------------------------------------------------------
 
-The boxplot of the person's body fat (the amount of essential fat .)  shows how the values in the dataset have been evenly distributed around the median value of 22.80, and, there some outliers that we will handle them.
+The boxplot of the person's body fat (the amount of essential fat .)
+shows how the values in the dataset have been evenly distributed around
+the median value of 22.80, and, there some outliers that we will handle
+them.
 
 ```{r}
 #body fat boxplot : 
@@ -339,7 +375,10 @@ boxplot(dataset$body.fat_.,
 
 ------------------------------------------------------------------------
 
-The boxplot of the person's diastolic (measures pressure the blood vessels when the heart is at rest) shows how the values in the dataset have been evenly distributed around the median value of 79.0, and, there some outliers that we will handle them
+The boxplot of the person's diastolic (measures pressure the blood
+vessels when the heart is at rest) shows how the values in the dataset
+have been evenly distributed around the median value of 79.0, and, there
+some outliers that we will handle them
 
 ```{r}
 #diastolic box plot :
@@ -350,7 +389,10 @@ boxplot(dataset$diastolic,
 
 ------------------------------------------------------------------------
 
-The boxplot of the person's systolic (measures pressure in the arteries when the heart beats in minutes) shows how the values in the dataset have been evenly distributed around the median value of 130.0, and, there some outliers that we will handle them.
+The boxplot of the person's systolic (measures pressure in the arteries
+when the heart beats in minutes) shows how the values in the dataset
+have been evenly distributed around the median value of 130.0, and,
+there some outliers that we will handle them.
 
 ```{r}
 #systolic box plot:
@@ -361,7 +403,9 @@ boxplot(dataset$systolic,
 
 ------------------------------------------------------------------------
 
-The boxplot of gripForce (fingers flexibility tests) shows how the values in the dataset have been evenly distributed around the median value of 37.90, and, there some outliers that we will handle them
+The boxplot of gripForce (fingers flexibility tests) shows how the
+values in the dataset have been evenly distributed around the median
+value of 37.90, and, there some outliers that we will handle them
 
 ```{r}
 #gripForce box plot:
@@ -373,7 +417,11 @@ boxplot(dataset$gripForc,
 
 ------------------------------------------------------------------------
 
- the test that's measures flexibility in sitting and bending forward in centimeters” boxplot illustrates a slight down skew (negatively skewed) in the distribution, where there are more extreme values on the lower end(outliers) that we will handle it in preprocessing step by deleting them.
+the test that's measures flexibility in sitting and bending forward in
+centimeters" boxplot illustrates a slight down skew (negatively skewed)
+in the distribution, where there are more extreme values on the lower
+end(outliers) that we will handle it in preprocessing step by deleting
+them.
 
 ```{r}
 #sit and bend forward_cm box plot: 
@@ -382,10 +430,12 @@ boxplot(dataset$sit.and.bend.forward_cm,
         main= "Boxplot of sit and bend forward_cm")
 ```
 
-
 ------------------------------------------------------------------------
 
-The boxplot of the "Test that measures the strength and endurance of the abdominals and hip-fle" shows how the values in the dataset have been evenly distributed around the median value of 41, and, there's no outliers showing on boxplot.
+The boxplot of the "Test that measures the strength and endurance of the
+abdominals and hip-fle" shows how the values in the dataset have been
+evenly distributed around the median value of 41, and, there's no
+outliers showing on boxplot.
 
 ```{r}
 #sit-ups counts_cm box plot:
@@ -394,10 +444,13 @@ boxplot(dataset$sit.ups.counts,
         main= "Boxplot of sit-ups")
 ```
 
-
 ------------------------------------------------------------------------
 
-The boxplot of the "method of measuring how far a person can jump from a standing position to a landing position" shows how the values in the dataset have been evenly distributed around the median value of 193, and, there some minimum outliers that we will handle them in preprocessing step by deleting them.
+The boxplot of the "method of measuring how far a person can jump from a
+standing position to a landing position" shows how the values in the
+dataset have been evenly distributed around the median value of 193,
+and, there some minimum outliers that we will handle them in
+preprocessing step by deleting them.
 
 ```{r}
 #broad jump_cm box plot:
@@ -406,14 +459,14 @@ boxplot(dataset$broad.jump_cm,
         main= "Boxplot of broad jump_cm ")
 ```
 
-
-
 ------------------------------------------------------------------------
-
 
 ### Detect outlirs:
 
-We noticed that "Age" has an Outlier that it's not showing on the boxplot, where its an Outlier within the range. that's mean those values are negatively affects on the dataset even though it is within range. So, we delete them
+We noticed that "Age" has an Outlier that it's not showing on the
+boxplot, where its an Outlier within the range. that's mean those values
+are negatively affects on the dataset even though it is within range.
+So, we delete them
 
 ```{r}
 #Detect outlir for 'age': 
@@ -431,9 +484,7 @@ dataset= dataset[-Find_outlier,]
 
 ```
 
-
 ------------------------------------------------------------------------
-
 
 ```{r}
 #Detect outlir for 'height_cm': 
@@ -450,7 +501,6 @@ dataset= dataset[-Find_outlier,]
 
 ------------------------------------------------------------------------
 
-
 ```{r}
 #Detect outlir for 'weight_kg': 
 outW= outlier(dataset$weight_kg, logical =TRUE)
@@ -463,7 +513,6 @@ Find_outlier
 #Delete weight_kg outliers:
 dataset= dataset[-Find_outlier,]
 ```
-
 
 ------------------------------------------------------------------------
 
@@ -481,9 +530,7 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
-
 ------------------------------------------------------------------------
-
 
 ```{r}
 #Detect outlir for 'systolic': 
@@ -500,9 +547,11 @@ dataset= dataset[-Find_outlier,]
 
 ------------------------------------------------------------------------
 
+As we saw in boxplot there was only one outlier. However, here we
+detected 3 values, where 2 are within the range but we will take it as
+an outliers sinces those values may have a negatively affects on the
+dataset specifically on "class" attribute.
 
- As we saw in boxplot there was only one outlier. However, here we detected 3 values, where 2 are within the range but we will take it as an outliers sinces those values may have a negatively affects on the dataset specifically on "class" attribute.
- 
 ```{r}
 #Detect outlir for 'gripForce': 
 outegrip = outlier(dataset$gripForce, logical =TRUE)
@@ -516,9 +565,7 @@ Find_outlier
 dataset= dataset[-Find_outlier,]
 ```
 
-
 ------------------------------------------------------------------------
-
 
 ```{r}
 #Detect outlir for 'sit.and.bend.forward_cm': 
@@ -535,8 +582,8 @@ dataset= dataset[-Find_outlier,]
 
 ------------------------------------------------------------------------
 
-
-we notic some outliers within the range and we will deleting them as an outliers since it's effects other attributes negatively.
+we notic some outliers within the range and we will deleting them as an
+outliers since it's effects other attributes negatively.
 
 ```{r}
 #Detect outlir for 'sit.up.count': 
@@ -569,7 +616,8 @@ dataset= dataset[-Find_outlier,]
 
 ### Check rows and columns after deletion the outliers:
 
-To make sure that the deletion was successful, we searched for the number of rows.
+To make sure that the deletion was successful, we searched for the
+number of rows.
 
 ```{r}
 #check after deleting
@@ -578,13 +626,18 @@ nrow(dataset)
 ncol(dataset)
 ```
 
-We noticed a decrease in the number of rows, which means that deletion the outliers was successful.
+We noticed a decrease in the number of rows, which means that deletion
+the outliers was successful.
 
 ------------------------------------------------------------------------
 
 ### Discretization :
 
-We transformed the continuous vales of the age into intervals by dividing the values to be fall on one of three possible interval labels with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by discretisation the values well be meaningful and simpler to classify or perform other methods that can help us later in our model.
+We transformed the continuous vales of the age into intervals by
+dividing the values to be fall on one of three possible interval labels
+with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by
+discretisation the values well be meaningful and simpler to classify or
+perform other methods that can help us later in our model.
 
 ```{r}
 #ه encoding للان بنحذه او بنسوي له
@@ -592,20 +645,23 @@ We transformed the continuous vales of the age into intervals by dividing the va
 #dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
 ```
 
-
 ------------------------------------------------------------------------
 
 ### Normalizetion:
 
- In order to ensure comparability across individuals and eliminate biases resulting from differences in measurement units or scales, we have decided to normalize the following attributes: height (in centimeters), weight (in kilograms), body fat percentage, diastolic, systolic, grip force, sit and bend forward distance (in centimeters), sit-ups count, and broad jump distance (in centimeters).
- 
+In order to ensure comparability across individuals and eliminate biases
+resulting from differences in measurement units or scales, we have
+decided to normalize the following attributes: height (in centimeters),
+weight (in kilograms), body fat percentage, diastolic, systolic, grip
+force, sit and bend forward distance (in centimeters), sit-ups count,
+and broad jump distance (in centimeters).
+
 ```{r}
 View(dataset)
 dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 ```
 
-
----------------------------------
+------------------------------------------------------------------------
 
 ### Feature Selection :
 
@@ -618,14 +674,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #age attribute
 contingency_table <- table(dataset$age, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #height_cm attribute
@@ -634,14 +688,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #weight_kg attribute
 contingency_table <- table(dataset$weight_kg, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #body.fat_.  attribute
@@ -650,14 +702,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #diastolic  attribute
 contingency_table <- table(dataset$diastolic, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #systolic attribute
@@ -666,14 +716,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #gripForce attribute
 contingency_table <- table(dataset$gripForce, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #sit.and.bend.forward_cm attribute
@@ -682,7 +730,6 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #sit.ups.counts attribute
 contingency_table <- table(dataset$sit.ups.counts, dataset$class)
@@ -690,15 +737,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #broad.jump_cm attribute
 contingency_table <- table(dataset$broad.jump_cm, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
-
 
 ```{r}
 # Load required libraries
@@ -742,194 +786,161 @@ nrow(dataset)
 
 ```
 
-Based on the dataset and the graphs we did earlier, there are several justifications for not performing feature selection:
+Based on the dataset and the graphs we did earlier, there are several
+justifications for not performing feature selection:
 
-#### 1. Dimensionality: 
-The number of attributes (12) is not excessively high, and it is within a manageable range for modeling and analysis.
+#### 1. Dimensionality:
 
-#### 2.Correlation Assessment: 
-just because some graphs indicate a lack of correlation between certain attributes, it doesn't imply that those attributes hold no value or provide no assistance in enhancing individual body performance. It is important to recognize the interplay between these attributes and their impact on body performance. Consequently, removing any of these attributes may result in loss of valuable information.
+The number of attributes (12) is not excessively high, and it is within
+a manageable range for modeling and analysis.
 
-#### 3. Interpretability: 
-By considering all the attributes, you can gain a deeper understanding of the relationships between different variables, and allows for a more comprehensive analysis providing more meaningful insights.
+#### 2.Correlation Assessment:
 
-While feature selection can be beneficial in certain situations, in the case of analyzing body performance for individuals, it is important to consider all attributes without performing feature selection.
+just because some graphs indicate a lack of correlation between certain
+attributes, it doesn't imply that those attributes hold no value or
+provide no assistance in enhancing individual body performance. It is
+important to recognize the interplay between these attributes and their
+impact on body performance. Consequently, removing any of these
+attributes may result in loss of valuable information.
 
-----------------------------------------------
+#### 3. Interpretability:
 
-1. Problem: 
+By considering all the attributes, you can gain a deeper understanding
+of the relationships between different variables, and allows for a more
+comprehensive analysis providing more meaningful insights.
 
--------------------
-2.Data Mining task:
+While feature selection can be beneficial in certain situations, in the
+case of analyzing body performance for individuals, it is important to
+consider all attributes without performing feature selection.
 
-### 5- Data Mining Task:
-****************description اتوقع مكانها غلظ ****************
+------------------------------------------------------------------------
 
-#### 5.1 Classification: 
+1.  Problem:
 
-----------------------------------------------
+|                                                                                                                         |
+|---------------------|
+| 2.Data Mining task:                                                                                                     |
+| \### 5- Data Mining Task: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*description اتوقع مكانها غلظ \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* |
+| \#### 5.1 Classification:                                                                                               |
 
 #### 5.2 Clustering: حطيت نفس اكواد اللاب تحتاج تعديل كثير
 
---------------------- 
+------------------------------------------------------------------------
 
+## 9.References
 
-9.References
------------------------------------------------------------------------------------------
-
-
-  1. prepreocessing 
-Data types should be transformed into numeric types before clustering.
+1.  prepreocessing Data types should be transformed into numeric types
+    before clustering.
 
 1st we check data types:
+
 ```{r}
 str(dataset)
 ```
 
+------------------------------------------------------------------------
 
-----------------------------------------------
-
-then converts the factors attribute to numeric type
-
-```{r}
-#!!!!!!!!!!!!!!!!!!!! don't run it نحط هنا او عند الفيتشر سلكشين انكودينق له
-# Convert factor attribute to numeric
-#dataset$age <- as.numeric(dataset$age)
-
-# Verify the conversion
-#str(dataset$age)
-```
-
+Converts the factors attribute to numeric type:
 
 ```{r}
-# Convert factor attribute to numeric
+# Convert gender attribute to numeric
 dataset$gender <- as.numeric(as.character(dataset$gender))
 
 # Verify the conversion
 str(dataset$gender)
 ```
 
-
 ```{r}
-# Convert factor attribute to numeric
+# Convert class attribute to numeric
 dataset$class <- as.numeric(dataset$class)
 
 # Verify the conversion
 str(dataset$class)
 ```
- 
-#encoding Gender:
-#dataset$gender = factor(dataset$gender,levels =
-                         c("( 21, 35]","( 35, 49]", "( 49, 63]" ), labels = c(0,1,2))
 
-#SOS
-#OR بدال ال2 تشنك الي فوق نستخدم هذا :
-#dataset <- scale(dataset) ??
+#encoding Gender: #dataset$gender = factor(dataset$gender,levels = c("(
+21, 35]","( 35, 49]", "( 49, 63]" ), labels = c(0,1,2))
 
+#SOS #OR بدال ال2 تشنك الي فوق نستخدم هذا : #dataset \<- scale(dataset)
+??
 
-```{r بينحذف}
+Check the structure again
+
+```{r}
 str(dataset)
 ```
 
+column was convert successflly.
 
-----------------------------------------------
+------------------------------------------------------------------------
 
-#__________
-#هذا الكلام لنا بعدين بنحذفه
+#\_\_\_\_\_\_\_\_\_\_ #هذا الكلام لنا بعدين بنحذفه
 
-#_____________________________________________
-  loop for K number:
+#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ loop for K number:
+
 1- k-means
+
 2-k-mediods
-3-Hierarchical (silhouette plot of pam مفروض يطلع لنا )
-4- Validation
 
-note: #الافرج (الفالديشين عموما) مقروض اول خطوه بالبروجكت عشان نعرف كم كلستر نستخدم, لكن كيف ما فهمت هل الخطوات الي انا كاتبتها صح؟
-#_____________________________________________
+3-Hierarchical (silhouette plot of pam مفروض يطلع لنا ) 4- Validation
 
+note: #الافرج (الفالديشين عموما) مقروض اول خطوه بالبروجكت عشان نعرف كم
+كلستر نستخدم, لكن كيف ما فهمت هل الخطوات الي انا كاتبتها صح؟
+#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
+#From Project Description:\
+-Apply K-means clustering to your dataset using at least three different
+sizes of K. You have to justify your choice for size K (we tried k=4, k=
+,k=)
 
-#From Project Description:   
--Apply K-means clustering to your dataset using at least three different sizes of K.
-You have to justify your choice for size K (we tried k=4, k= ,k=)
+-then compare and discuss the results using different evaluation methods
+and metrics (Silhouette coefficient(we use it) , total within-cluster
+sum of square(did we?), BCubed precision and recall (did we?).
 
--then compare and discuss the results using different evaluation methods and metrics
-(Silhouette coefficient(we use it) , 
-total within-cluster sum of square(did we?), 
-BCubed precision and recall (did we?). 
+-Use visual representation and try your best to interpret the results
+and to understand the algorithms performance.
 
--Use visual
-representation and try your best to interpret the results and to understand the algorithms performance.
+-you have to try at least three different sizes of K and report the
+Silhouette coefficient, the total within-cluster sum of squares, BCubed
+precision and recall. #\_\_\_\_\_\_\_\_\_\_
 
--you have to try at least three different sizes of K and report the 
-Silhouette coefficient,
-the total within-cluster sum of squares,
-BCubed precision and recall. 
-#__________
+#determine and visualize optimal number of clusters:
 
-
-#determine and visualize optimal number of clusters: 
-
-```{r}
+```{r ??}
 library(factoextra)
 fviz_nbclust(data, kmeans, method="wss")
 fviz_nbclust(data, kmeans, method="silhouette")
 fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
+#### Cluster K= 2
 
-#__________________________________________k=2________________________________________________________________
-
-#---------------------------k-means clustering 2---------------------------------------
-
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
-
-#### K= 2 Clusters
+Calculate K-means for k=2:
 
 ```{r}
-# run k-means clustering to find 2 clusters
-#set a seed for random number generation  to make the results reproducible
+#set a seed for random number generation to make the results reproducible
 set.seed(8953)
 kmeans.result <- kmeans(dataset, 2)
 # print the clusterng result
 kmeans.result
 ```
 
-#### visualize 2 clusters
+visualize 2 clusters
 
 ```{r}
-# visualize clustering (2 clusters)
-#install.packages("factoextra")
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
+K-meaan plot
 
-#fviz_cluster(kmeans.result, data = dataset)
-
-
-```{r}
+```{r ??????????}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
 
-
-```{r}
-#performance k-means clustering
-kmeans.result <- kmeans(dataset, 2)
-
-# creat the initial plot
-plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
-
-# this command add Points(center) to a Plot (عشان حطينا 10)
-points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
-```
-
-
-```{r}
+```{r ?}
 #performance k-means clustering
 kmeans.result <- kmeans(dataset, 2)
 
@@ -940,125 +951,67 @@ plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
+#--------------------k-means clustering 2
+???????---------------------------
 
-#--------------------k-means clustering 2 ???????---------------------------
-  
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
-```{r}
-#install.packages("fpc")
+```{r ???}
 library(fpc)
 kmeansruns.result <- kmeansruns(dataset)  
-kmeansruns.result #4 mean cuz we have 4dimension
+kmeansruns.result 
+```
+
+```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
+average silhouette for 2 clusters
 
-```{r مب لازم يمكن}
-#install.packages("cluster")
-library(cluster)
+#average silhouette for each clusters - choosing k using average
+silhouette Silhouette analysis
 
-# group into 4 clusters
-pam.result <- pam(dataset, 2)
+Silhouette analysis allows you to calculate how similar each
+observations is with the cluster it is assigned relative to other
+clusters. This metric (silhouette width) ranges from -1 to 1 for each
+observation in your data and can be interpreted as follows:
 
-plot(pam.result)
-
-#if some got -1 -> not on correct cluster
-#if 0-> overlap 
+```         
+Values close to 1 suggest that the observation is well matched to the assigned cluster
+Values close to 0 suggest that the observation is borderline matched between two clusters
+Values close to -1 suggest that the observations may be assigned to the wrong cluster
 ```
 
+In this exercise you will leverage the pam() and the silhouette()
+functions from the cluster library to perform silhouette analysis to
+compare the results of models with a k of 2 and a k of 3. You'll
+continue working with the lineup dataset.
 
-```{r هل مكانه غلط؟}
-#average silhouette for each clusters (2 clusters)
+```         
+Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
+```
+
+```{r}
 library(cluster)
 avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
+```
+
+```{r}
 fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
 ```
 
+#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_k=3\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#----------------------------Hierarchical Clustering---------------------------------
+#---------------------------k-means clustering
+3---------------------------------------
 
-##----Hierarchical Clustering of the USArrest Data-----##
-
-
-```{r}
-set.seed(2835)
-
-# draw a sample of 40 records from the body performance data, so that the clustering plot will not be over crowded
-idx <- sample(1:dim(dataset)[1], 40)
-dataset <- dataset[idx, ]
-```
-
-
-```{r}
-## hiercrchical clustering
-library(factoextra) 
-hc.cut <- hcut(dataset, k = 2, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
-```
-
-
-```{r}
-#ليه حط الطول؟
-# Visualize dendrogram
-fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
-```
-
-
-```{r}
-# Visualize cluster
-fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
-```
-
-
-#average silhouette for each clusters 
-  - choosing k using average silhouette
-Silhouette analysis
-
-Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
-
-    Values close to 1 suggest that the observation is well matched to the assigned cluster
-    Values close to 0 suggest that the observation is borderline matched between two clusters
-    Values close to -1 suggest that the observations may be assigned to the wrong cluster
-
-In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
-
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-  
-تفسيرنا
-
-
-```{r}
-#average silhouette for each clusters 
-library(cluster)
-
-#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
-
-#k-means clustering with estimating k and initializations
-fviz_silhouette(avg_sil)
-```
-  
-  
-```{r وين نحطها؟}
-# 1-  define function to compute average silhouette for k clusters using silhouette()
-silhouette_score <- function(k){ 
-km <- kmeans(dataset, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
-ss <- silhouette(km$cluster, dist(dataset))
-sil<- mean(ss[, 3])
-return(sil)
-}
-```
-
-
-#__________________________________________k=3________________________________________________________________
-
-#---------------------------k-means clustering 3---------------------------------------
-
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
 #### K= 3 Clusters
 
@@ -1080,16 +1033,13 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-
 #fviz_cluster(kmeans.result, data = dataset)
-
 
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
-
 
 ```{r}
 #performance k-means clustering
@@ -1102,7 +1052,6 @@ plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
-
 ```{r}
 #performance k-means clustering
 kmeans.result <- kmeans(dataset, 3)
@@ -1114,12 +1063,13 @@ plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
+#--------------------k-means clustering 2
+???????---------------------------
 
-#--------------------k-means clustering 2 ???????---------------------------
-  
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
 ```{r}
 #install.packages("fpc")
@@ -1128,7 +1078,6 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result #4 mean cuz we have 4dimension
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
-
 
 ```{r}
 #install.packages("cluster")
@@ -1143,7 +1092,6 @@ plot(pam.result)
 #if 0-> overlap 
 ```
 
-
 ```{r}
 #average silhouette for each clusters (2 clusters)
 library(cluster)
@@ -1151,11 +1099,10 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity obje
 fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
 ```
 
-
-#----------------------------Hierarchical Clustering---------------------------------
+#----------------------------Hierarchical
+Clustering---------------------------------
 
 ##----Hierarchical Clustering of the USArrest Data-----##
-
 
 ```{r}
 set.seed(2835)
@@ -1165,13 +1112,11 @@ idx <- sample(1:dim(dataset)[1], 40)
 dataset <- dataset[idx, ]
 ```
 
-
 ```{r}
 ## hiercrchical clustering
 library(factoextra) 
 hc.cut <- hcut(dataset, k = 3, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
 ```
-
 
 ```{r}
 #ليه حط الطول؟
@@ -1179,29 +1124,35 @@ hc.cut <- hcut(dataset, k = 3, hc_method = "complete") # Computes Hierarchical C
 fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
 ```
 
-
 ```{r}
 # Visualize cluster
 fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
 ```
 
+#average silhouette for each clusters - choosing k using average
+silhouette Silhouette analysis
 
-#average silhouette for each clusters 
-  - choosing k using average silhouette
-Silhouette analysis
+Silhouette analysis allows you to calculate how similar each
+observations is with the cluster it is assigned relative to other
+clusters. This metric (silhouette width) ranges from -1 to 1 for each
+observation in your data and can be interpreted as follows:
 
-Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
+```         
+Values close to 1 suggest that the observation is well matched to the assigned cluster
+Values close to 0 suggest that the observation is borderline matched between two clusters
+Values close to -1 suggest that the observations may be assigned to the wrong cluster
+```
 
-    Values close to 1 suggest that the observation is well matched to the assigned cluster
-    Values close to 0 suggest that the observation is borderline matched between two clusters
-    Values close to -1 suggest that the observations may be assigned to the wrong cluster
+In this exercise you will leverage the pam() and the silhouette()
+functions from the cluster library to perform silhouette analysis to
+compare the results of models with a k of 2 and a k of 3. You'll
+continue working with the lineup dataset.
 
-In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
+```         
+Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
+```
 
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-  
 تفسيرنا
-
 
 ```{r}
 #average silhouette for each clusters 
@@ -1213,8 +1164,7 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 #k-means clustering with estimating k and initializations
 fviz_silhouette(avg_sil)
 ```
-  
-  
+
 ```{r}
 # 1-  define function to compute average silhouette for k clusters using silhouette()
 silhouette_score <- function(k){ 
@@ -1225,14 +1175,15 @@ return(sil)
 }
 ```
 
+#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_k=4\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#__________________________________________k=4________________________________________________________________
+#---------------------------k-means clustering
+4---------------------------------------
 
-#---------------------------k-means clustering 4---------------------------------------
-
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
 #### K= 2 Clusters
 
@@ -1254,16 +1205,13 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-
 #fviz_cluster(kmeans.result, data = dataset)
-
 
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
-
 
 ```{r}
 #performance k-means clustering
@@ -1276,7 +1224,6 @@ plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
-
 ```{r}
 #performance k-means clustering
 kmeans.result <- kmeans(dataset, 4)
@@ -1288,12 +1235,13 @@ plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
+#--------------------k-means clustering 2
+???????---------------------------
 
-#--------------------k-means clustering 2 ???????---------------------------
-  
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
 ```{r}
 #install.packages("fpc")
@@ -1302,7 +1250,6 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result #4 mean cuz we have 4dimension
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
-
 
 ```{r}
 #install.packages("cluster")
@@ -1317,7 +1264,6 @@ plot(pam.result)
 #if 0-> overlap 
 ```
 
-
 ```{r}
 #average silhouette for each clusters (4 clusters)
 library(cluster)
@@ -1325,11 +1271,10 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity obje
 fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
 ```
 
-
-#----------------------------Hierarchical Clustering---------------------------------
+#----------------------------Hierarchical
+Clustering---------------------------------
 
 ##----Hierarchical Clustering of the USArrest Data-----##
-
 
 ```{r}
 set.seed(2835)
@@ -1339,13 +1284,11 @@ idx <- sample(1:dim(dataset)[1], 40)
 dataset <- dataset[idx, ]
 ```
 
-
 ```{r}
 ## hiercrchical clustering
 library(factoextra) 
 hc.cut <- hcut(dataset, k = 4, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
 ```
-
 
 ```{r}
 #ليه حط الطول؟
@@ -1353,29 +1296,35 @@ hc.cut <- hcut(dataset, k = 4, hc_method = "complete") # Computes Hierarchical C
 fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
 ```
 
-
 ```{r}
 # Visualize cluster
 fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
 ```
 
+#average silhouette for each clusters - choosing k using average
+silhouette Silhouette analysis
 
-#average silhouette for each clusters 
-  - choosing k using average silhouette
-Silhouette analysis
+Silhouette analysis allows you to calculate how similar each
+observations is with the cluster it is assigned relative to other
+clusters. This metric (silhouette width) ranges from -1 to 1 for each
+observation in your data and can be interpreted as follows:
 
-Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
+```         
+Values close to 1 suggest that the observation is well matched to the assigned cluster
+Values close to 0 suggest that the observation is borderline matched between two clusters
+Values close to -1 suggest that the observations may be assigned to the wrong cluster
+```
 
-    Values close to 1 suggest that the observation is well matched to the assigned cluster
-    Values close to 0 suggest that the observation is borderline matched between two clusters
-    Values close to -1 suggest that the observations may be assigned to the wrong cluster
+In this exercise you will leverage the pam() and the silhouette()
+functions from the cluster library to perform silhouette analysis to
+compare the results of models with a k of 2 and a k of 3. You'll
+continue working with the lineup dataset.
 
-In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
+```         
+Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
+```
 
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-  
 تفسيرنا
-
 
 ```{r}
 #average silhouette for each clusters 
@@ -1387,8 +1336,7 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 #k-means clustering with estimating k and initializations
 fviz_silhouette(avg_sil)
 ```
-  
-  
+
 ```{r}
 # 1-  define function to compute average silhouette for k clusters using silhouette()
 silhouette_score <- function(k){ 
@@ -1399,14 +1347,15 @@ return(sil)
 }
 ```
 
+#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_k=5\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#__________________________________________k=5________________________________________________________________
+#---------------------------k-means clustering
+5---------------------------------------
 
-#---------------------------k-means clustering 5---------------------------------------
-
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
 #### K= 5 Clusters
 
@@ -1428,16 +1377,13 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-
 #fviz_cluster(kmeans.result, data = dataset)
-
 
 ```{r}
 plot(dataset[, c("age","class")], col = (kmeans.result$cluster) )
 # this command add Points(center) to a Plot 
 points(kmeans.result$centers[, c("age","class")],  col = 1:4, pch = 8, cex=10) 
 ```
-
 
 ```{r}
 #performance k-means clustering
@@ -1450,7 +1396,6 @@ plot(dataset[, c("weight_kg","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("weight_kg","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
-
 ```{r}
 #performance k-means clustering
 kmeans.result <- kmeans(dataset, 5)
@@ -1462,12 +1407,13 @@ plot(dataset[, c("body.fat_.","class")], col = (kmeans.result$cluster) )
 points(kmeans.result$centers[, c("body.fat_.","class")],  col = 1:4, pch = 8, cex=2)  
 ```
 
+#--------------------k-means clustering 2
+???????---------------------------
 
-#--------------------k-means clustering 2 ???????---------------------------
-  
-#kmeansruns() : It calls  kmeans() to perform  k-means clustering
-#It initializes the k-means algorithm several times with random points from the data set as means.
-#It estimates the number of clusters by Calinski Harabasz index or average silhouette width يقلل عدد الكلستر 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
 
 ```{r}
 #install.packages("fpc")
@@ -1476,7 +1422,6 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result #4 mean cuz we have 4dimension
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
-
 
 ```{r}
 #install.packages("cluster")
@@ -1491,7 +1436,6 @@ plot(pam.result)
 #if 0-> overlap 
 ```
 
-
 ```{r}
 #average silhouette for each clusters (5 clusters)
 library(cluster)
@@ -1499,11 +1443,10 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity obje
 fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
 ```
 
-
-#----------------------------Hierarchical Clustering---------------------------------
+#----------------------------Hierarchical
+Clustering---------------------------------
 
 ##----Hierarchical Clustering of the USArrest Data-----##
-
 
 ```{r}
 set.seed(2835)
@@ -1513,13 +1456,11 @@ idx <- sample(1:dim(dataset)[1], 40)
 dataset <- dataset[idx, ]
 ```
 
-
 ```{r}
 ## hiercrchical clustering
 library(factoextra) 
 hc.cut <- hcut(dataset, k = 5, hc_method = "complete") # Computes Hierarchical Clustering and Cut the Tree
 ```
-
 
 ```{r}
 #ليه حط الطول؟
@@ -1527,29 +1468,35 @@ hc.cut <- hcut(dataset, k = 5, hc_method = "complete") # Computes Hierarchical C
 fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
 ```
 
-
 ```{r}
 # Visualize cluster
 fviz_cluster(hc.cut, ellipse.type = "convex") # Character specifying frame type. Possible values are 'convex', 'confidence' etc
 ```
 
+#average silhouette for each clusters - choosing k using average
+silhouette Silhouette analysis
 
-#average silhouette for each clusters 
-  - choosing k using average silhouette
-Silhouette analysis
+Silhouette analysis allows you to calculate how similar each
+observations is with the cluster it is assigned relative to other
+clusters. This metric (silhouette width) ranges from -1 to 1 for each
+observation in your data and can be interpreted as follows:
 
-Silhouette analysis allows you to calculate how similar each observations is with the cluster it is assigned relative to other clusters. This metric (silhouette width) ranges from -1 to 1 for each observation in your data and can be interpreted as follows:
+```         
+Values close to 1 suggest that the observation is well matched to the assigned cluster
+Values close to 0 suggest that the observation is borderline matched between two clusters
+Values close to -1 suggest that the observations may be assigned to the wrong cluster
+```
 
-    Values close to 1 suggest that the observation is well matched to the assigned cluster
-    Values close to 0 suggest that the observation is borderline matched between two clusters
-    Values close to -1 suggest that the observations may be assigned to the wrong cluster
+In this exercise you will leverage the pam() and the silhouette()
+functions from the cluster library to perform silhouette analysis to
+compare the results of models with a k of 2 and a k of 3. You'll
+continue working with the lineup dataset.
 
-In this exercise you will leverage the pam() and the silhouette() functions from the cluster library to perform silhouette analysis to compare the results of models with a k of 2 and a k of 3. You’ll continue working with the lineup dataset.
+```         
+Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
+```
 
-    Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-  
 تفسيرنا
-
 
 ```{r}
 #average silhouette for each clusters 
@@ -1561,9 +1508,6 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 #k-means clustering with estimating k and initializations
 fviz_silhouette(avg_sil)
 ```
-  
-  
-
 
 ### Validation (Evaluation and Comparison) :
 
@@ -1579,7 +1523,6 @@ fviz_nbclust(dataset, kmeas, method = "wss") +
   labs(subtitle = "Elbow method")
 ```
 
-
 ```{r}
 # 1-  define function to compute average silhouette for k clusters using silhouette()
 silhouette_score <- function(k){ 
@@ -1589,8 +1532,6 @@ sil<- mean(ss[, 3])
 return(sil)
 }
 ```
-
-
 
 ```{r}
 # wws
@@ -1617,7 +1558,6 @@ library(factoextra)
 fviz_nbclust(brain_stroke, kmeans, method = "silhouette")
 ```
 
-
 ```{r}
 #طريقة السلايدز حقت اللاب
 # Define a function to compute average silhouette for k clusters using silhouette()
@@ -1639,7 +1579,6 @@ avg_sil <- sapply(k_range, silhouette_score, data = brain_stroke)
 plot(k_range, avg_sil, type = 'b', xlab = 'Number of clusters', ylab = 'Average Silhouette Scores', frame = FALSE)
 ```
 
-
 ```{r}
 #تكملة السلايدز حقت اللاب
 # 2- silhouette method
@@ -1651,7 +1590,6 @@ fviz_nbclust(USArrests, kmeans, method = "silhouette")+
 #b) NbClust validation
 fres.nbclust <- NbClust(brain_stroke, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
 ```
-
 
 ```{r}
 ##  k cluster range from 2 to 10
@@ -1674,13 +1612,12 @@ fviz_nbclust(dataset, kmeans, method = "silhouette")+
 fres.nbclust <- NbClust(dataset, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
 ```
 
-
 #====================== Garbage:
+
 ```{r}
 #install.packages("fpc")
 library(fpc)
 ```
-
 
 ```{r}
 set.seed(8953)
@@ -1688,20 +1625,17 @@ set.seed(8953)
 kmeans.result2 <- kmeans(dataset, 2)
 ```
 
-
-
 ```{r}
 kmeansruns.result2 <- kmeansruns(dataset)  
 kmeansruns.result2
 ```
 
-
 ```{r}
 fviz_cluster(kmeansruns.result2, data = dataset)
 ```
 
-#--------------------------------k-mediods clustering with PAM------------------------------
-
+#--------------------------------k-mediods clustering with
+PAM------------------------------
 
 ```{r}
 #avr????????????
@@ -1711,11 +1645,10 @@ library(cluster)
 #fviz_silhouette(sil)
 ```
 
-
-#-----------------------Hierarchical Clustering-------------------------------
+#-----------------------Hierarchical
+Clustering-------------------------------
 
 ##----Hierarchical Clustering of the USArrest Data-----##
-
 
 ```{r}
 set.seed(2835)
@@ -1730,12 +1663,10 @@ hc.cut <- hcut(dataset, k = 2, hc_method = "complete") # Computes Hierarchical C
 
 ```
 
-
 ```{r}
 # Visualize dendrogram
 fviz_dend(hc.cut,rect = TRUE)  #logical value specifying whether to add a rectangle around groups.
 ```
-
 
 ```{r}
 # Visualize cluster
@@ -1745,8 +1676,7 @@ fviz_cluster(hc.cut, ellipse.type = "convex")
 
 #==========end garbage
 
-----------------------------------------------
-
+------------------------------------------------------------------------
 
 ```{r}
 
@@ -1756,14 +1686,12 @@ fviz_nbclust(data, kmeans, method="silhouette")
 fviz_nbclust(data, kmeans, method="gap_start")
 ```
 
-
-
 # visualize clusters using original variables
-clusters <- kmeans(data, centers = 3, iter.max = 100, nstart = 100)
-Stroke <- data |> mutate(cluster = clusters$cluster)
-stroke |> ggplot(aes(x = Rating, y = Price, col = as.factor(cluster))) + geom_point()
 
-     
+clusters \<- kmeans(data, centers = 3, iter.max = 100, nstart = 100)
+Stroke \<- data \|\> mutate(cluster = clusters\$cluster) stroke \|\>
+ggplot(aes(x = Rating, y = Price, col = as.factor(cluster))) +
+geom_point()
 
 ```{r}
 fviz_nbclust(USArrests, kmeans, method = "wss") +
@@ -1771,10 +1699,7 @@ geom_vline(xintercept= 4, linetype= 2)+
 labs(subtitle = "Elbow method")
 ```
 
-
-
 ```{r}
 fviz_nbclust(USArrests, kmeans, method = "silhouette")+
 labs(subtitle = "Silhouette method")
 ```
-
