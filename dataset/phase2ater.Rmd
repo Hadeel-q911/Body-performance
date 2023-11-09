@@ -134,8 +134,8 @@ class label (class) to ascertain whether our dataset is balanced or not.
 
 ```{r}
 boxplot(dataset$class, 
-        ylab= "The person’s age in years boxplot", 
-        main= "Boxplot of age")
+        ylab= "The person’s class               in years boxplot", 
+        main= "Boxplot of class")
 ```
 
 Since the median is positioned in the middle of the box plot, it
@@ -832,14 +832,15 @@ description اتوقع مكانها غلظ
 
 #### 5.2 Clustering:  
 
-1.  prepreocessing Data types should be transformed into numeric types
-    before clustering.
-
-1st we check data types:
-
+  at first we need to removing class lable "Class" since clustering is unsupervised learning
+  
 ```{r}
+dataset <- dataset[,-which(names(dataset) == "class")] 
+
+#varify removing and data types
 str(dataset)
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -851,14 +852,6 @@ dataset$gender <- as.numeric(as.character(dataset$gender))
 
 # Verify the conversion
 str(dataset$gender)
-```
-
-```{r}
-# Convert class attribute to numeric
-dataset$class <- as.numeric(dataset$class)
-
-# Verify the conversion
-str(dataset$class)
 ```
 
 #encoding Gender: #dataset$gender = factor(dataset$gender,levels = c("(
@@ -897,16 +890,63 @@ and to understand the algorithms performance.
 
 -you have to try at least three different sizes of K and report the
 Silhouette coefficient, the total within-cluster sum of squares, BCubed
-precision and recall. #\_\_\_\_\_\_\_\_\_\_
+precision and recall.
+
 
 #determine and visualize optimal number of clusters:
 
+
 ```{r ??}
 library(factoextra)
-fviz_nbclust(data, kmeans, method="wss")
-fviz_nbclust(data, kmeans, method="silhouette")
-fviz_nbclust(data, kmeans, method="gap_start")
+library(fpc)
+library(cluster)
+library(NbClust)
 ```
+
+
+```{r}
+# 1-  define function to compute average silhouette for k clusters using silhouette()
+silhouette_score <- function(k){ 
+km <- kmeans(dataset, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
+ss <- silhouette(km$cluster, dist(dataset))
+sil<- mean(ss[, 3])
+return(sil)
+}
+##  k cluster range from 2 to 10
+k <- 2:10
+##  call  function fore k value
+avg_sil <- sapply(k, silhouette_score)  ##Apply a Function over a List or Vector
+plot(k, type='b', avg_sil, xlab='Number of clusters', ylab='Average Silhouette Scores', frame=FALSE)
+     
+#is aplay -> loop
+```
+
+
+```{r}
+# 2- silhouette method
+#install.packages("NbClust")
+library(NbClust)
+#a)fviz_nbclust() with silhouette method using library(factoextra) 
+fviz_nbclust(dataset, kmeans, method = "silhouette")+
+  labs(subtitle = "Silhouette method")
+#b) NbClust validation
+fres.nbclust <- NbClust(dataset, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
+
+#اكثر ميثود يتكرر عدد k 
+#او ابحث عن رقم ثاني 
+```
+
+
+
+```{r}
+# 3- Elbow method
+#fviz_nbclust() with within cluster sums of squares (wss) method
+library(factoextra) 
+fviz_nbclust(dataset, kmeans, method = "wss") +
+  geom_vline(xintercept = 4, linetype = 2)+
+  labs(subtitle = "Elbow method")
+```
+
 
 #### Cluster K= 2
 
@@ -1366,6 +1406,71 @@ fres.nbclust <- NbClust(dataset, distance="euclidean", min.nc = 2, max.nc = 10, 
 
 
 ------------------------------------------------------------------------
+
+#### Validation: 
+
+1-Silhouette coefficient
+2-total within-cluster sum of squares
+3-BCubed precision and recall
+
+#فهذا مقروض اول خطوه بالبروجكت عشان نعرف كم كلستر نستخدم
+
+```{r}
+ #average silhouette for each clusters 
+library(cluster)
+avg_sil <- silhouette(kmeans.result$cluster,dist(USArrests)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
+
+fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
+```
+
+
+# 1-  define function to compute average silhouette for k clusters using silhouette()
+
+```{r}
+silhouette_score <- function(k){ 
+km <- kmeans(USArrests, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
+ss <- silhouette(km$cluster, dist(USArrests))
+sil<- mean(ss[, 3])
+return(sil)
+}
+##  k cluster range from 2 to 10
+k <- 2:10
+##  call  function fore k value
+avg_sil <- sapply(k, silhouette_score)  ##Apply a Function over a List or Vector
+plot(k, type='b', avg_sil, xlab='Number of clusters', ylab='Average Silhouette Scores', frame=FALSE)
+     
+#is aplay -> loop
+```
+
+
+
+# 2- silhouette method
+
+```{r}
+#install.packages("NbClust")
+library(NbClust)
+#a)fviz_nbclust() with silhouette method using library(factoextra) 
+fviz_nbclust(USArrests, kmeans, method = "silhouette")+
+  labs(subtitle = "Silhouette method")
+#b) NbClust validation
+fres.nbclust <- NbClust(USArrests, distance="euclidean", min.nc = 2, max.nc = 10, method="kmeans", index="all")
+
+#اكثر ميثود يتكرر عدد k 
+#او ابحث عن رقم ثاني 
+```
+
+
+# 3- Elbow method
+```{r}
+#fviz_nbclust() with within cluster sums of squares (wss) method
+library(factoextra) 
+fviz_nbclust(USArrests, kmeans, method = "wss") +
+  geom_vline(xintercept = 4, linetype = 2)+
+  labs(subtitle = "Elbow method")
+```
+
+----------------
+
 
 ```{r}
 
