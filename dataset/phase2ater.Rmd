@@ -414,6 +414,7 @@ boxplot(dataset$broad.jump_cm,
 ### Detect outlirs:
 
 We noticed that "Age" has an Outlier that it's not showing on the boxplot, where its an Outlier within the range. that's mean those values are negatively affects on the dataset even though it is within range. So, we delete them
+
 ```{r}
 #Detect outlir for 'age': 
 outAge = outlier(dataset$age, logical =TRUE)
@@ -955,7 +956,7 @@ fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
 
-```{r}
+```{r مب لازم يمكن}
 #install.packages("cluster")
 library(cluster)
 
@@ -1573,7 +1574,7 @@ fviz_silhouette(avg_sil)
 ```{r}
 #fviz_nbclust() with within cluster sums of squares (wss) method
 library(factoextra) 
-fviz_nbclust(dataset, kmeans, method = "wss") +
+fviz_nbclust(dataset, kmeas, method = "wss") +
   geom_vline(xintercept = 4, linetype = 2)+
   labs(subtitle = "Elbow method")
 ```
