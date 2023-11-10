@@ -904,6 +904,23 @@ library(NbClust)
 ```
 
 
+#kmeansruns() : It calls kmeans() to perform k-means clustering #It
+initializes the k-means algorithm several times with random points from
+the data set as means. #It estimates the number of clusters by Calinski
+Harabasz index or average silhouette width يقلل عدد الكلستر
+
+```{r}
+library(fpc)
+kmeansruns.result <- kmeansruns(dataset)  
+kmeansruns.result 
+```
+
+
+```{r}
+fviz_cluster(kmeansruns.result, data = dataset)
+```
+
+
 ```{r}
 # 1-  define function to compute average silhouette for k clusters using silhouette()
 silhouette_score <- function(k){ 
@@ -926,7 +943,7 @@ plot(k, type='b', avg_sil, xlab='Number of clusters', ylab='Average Silhouette S
 # 2- silhouette method
 #install.packages("NbClust")
 library(NbClust)
-#a)fviz_nbclust() with silhouette method using library(factoextra) 
+library(factoextra) 
 fviz_nbclust(dataset, kmeans, method = "silhouette")+
   labs(subtitle = "Silhouette method")
 #b) NbClust validation
@@ -947,6 +964,7 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
   labs(subtitle = "Elbow method")
 ```
 
+#### try 3 diff
 
 #### Cluster K= 2
 
@@ -993,6 +1011,7 @@ kmeansruns.result
 ```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
+
 
 #### average silhouette for 2 clusters
 
