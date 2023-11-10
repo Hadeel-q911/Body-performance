@@ -836,6 +836,10 @@ consider all attributes without performing feature selection.
 
   at first we need to removing class lable "Class" since clustering is unsupervised learning
 
+
+dataset <- dataset[,-which(names(dataset) == "diastolic")] 
+str(dataset)
+
 ```{r}
 dataset <- dataset[,-which(names(dataset) == "class")] 
 
@@ -928,7 +932,6 @@ k <- 2:10
 avg_sil <- sapply(k, silhouette_score)  ##Apply a Function over a List or Vector
 plot(k, type='b', avg_sil, xlab='Number of clusters', ylab='Average Silhouette Scores', frame=FALSE)
      
-#is aplay -> loop
 ```
 
 
