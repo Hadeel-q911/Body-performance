@@ -23,7 +23,7 @@ awareness of its importance.
 
 ### 2. Data Mining task:
 
-??
+
 
 #### Classification gaol :
 
@@ -88,12 +88,14 @@ str(dataset)
 ```
 
 ------------------------------------------------------------------------
+### 4. Data Preptocessing: 
 
-### 3.4: performance dataset before preprocessing:
+### 4.1 performance dataset before preprocessing:
 
 ```{r}
 print(dataset)
 ```
+
 
 ```{r}
 #Number of rows
@@ -104,7 +106,7 @@ ncol(dataset)
 
 ------------------------------------------------------------------------
 
-### Understanding the dataset using graph representations:
+### 4.2 Understanding the dataset using graph representations:
 
 ### Encoding:
 
@@ -118,6 +120,7 @@ dataset$class = factor(dataset$class,levels =
                         c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
 
+
 ```{r}
  #encoding Gender:
 dataset$gender = factor(dataset$gender,levels =
@@ -126,7 +129,7 @@ dataset$gender = factor(dataset$gender,levels =
 
 ------------------------------------------------------------------------
 
-### check if the dataset is balanced or imbalanced (Class boxplot) :
+### 4.5 check if the dataset is balanced or imbalanced (Class boxplot) :
 
 After encoding the attribute (class) We employ a Boxplot graph on our
 class label (class) to ascertain whether our dataset is balanced or not.
@@ -205,7 +208,7 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
 
 ------------------------------------------------------------------------
 
-### Statistical Measures:
+### 4.3 Statistical Measures:
 
 ```{r}
  summary(dataset$age)
@@ -249,9 +252,7 @@ summary(dataset$sit.ups.counts)
 
 ------------------------------------------------------------------------
 
-## Data Preprocessing:
-
-### Check duplicated rows:
+### 4.4 Check duplicated rows:
 
 We check if there are any duplicated rows to decrease dataset volume.
 Hence enhancing data quality which leads to better model performance and
@@ -270,12 +271,13 @@ we found 1 row that's duplicate that need to be deleted.
 dataset <- dataset[!duplicated (dataset), ]
 ```
 
+
 ```{r}
 #To make sure that the deletion was successful 
 sum(duplicated(dataset))
 ```
 
-### Check nulls value:
+### 4.5 Check nulls value:
 
 Null values can cause issues when performing data analysis or building
 machine learning models, as they can lead to inaccurate results or
@@ -289,7 +291,7 @@ sum(is.na(dataset))
 
 ------------------------------------------------------------------------
 
-## Detect Outlier and Remove them:
+## 4.6  Detect Outlier and Remove them:
 
 We checked our dataset to see if there were any outlier values, and we
 found a couple. Statistical studies and modeling can be significantly
@@ -415,6 +417,7 @@ boxplot(dataset$gripForc,
 
 ```
 
+
 ------------------------------------------------------------------------
 
 the test that's measures flexibility in sitting and bending forward in
@@ -430,6 +433,7 @@ boxplot(dataset$sit.and.bend.forward_cm,
         main= "Boxplot of sit and bend forward_cm")
 ```
 
+
 ------------------------------------------------------------------------
 
 The boxplot of the "Test that measures the strength and endurance of the
@@ -443,6 +447,7 @@ boxplot(dataset$sit.ups.counts,
         ylab= "sit-ups" ,
         main= "Boxplot of sit-ups")
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -458,6 +463,7 @@ boxplot(dataset$broad.jump_cm,
         ylab= "broad jump_cm " ,
         main= "Boxplot of broad jump_cm ")
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -669,85 +675,6 @@ dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 
 ### Feature Selection :
 
-##Chi-square for contingency data:
-
-```{r يمكن نحذفه}
-#gender attribute
-contingency_table <- table(dataset$gender, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#age attribute
-contingency_table <- table(dataset$age, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#height_cm attribute
-contingency_table <- table(dataset$height_cm, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#weight_kg attribute
-contingency_table <- table(dataset$weight_kg, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#body.fat_.  attribute
-contingency_table <- table(dataset$body.fat_., dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#diastolic  attribute
-contingency_table <- table(dataset$diastolic, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#systolic attribute
-contingency_table <- table(dataset$systolic, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#gripForce attribute
-contingency_table <- table(dataset$gripForce, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#sit.and.bend.forward_cm attribute
-contingency_table <- table(dataset$sit.and.bend.forward_cm, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#sit.ups.counts attribute
-contingency_table <- table(dataset$sit.ups.counts, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#broad.jump_cm attribute
-contingency_table <- table(dataset$broad.jump_cm, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
 Based on the dataset and the graphs we did earlier, there are several
 justifications for not performing feature selection:
 
@@ -777,7 +704,633 @@ consider all attributes without performing feature selection.
 
 ------------------------------------------------------------------------
 
+### 5 Dara Mining Task:
+
+
 ### 5.1 Classification:
+### Classification:
+
+#### Classification packages:
+We install and call predifined packages in R language to help us in classification process. which shown below:
+
+```{r}
+library(party)
+library(partykit)
+library(RWeka)
+library(caret)
+library(rpart)
+library(rpart.plot)
+```
+
+
+-----------------------------------------------------------
+
+
+### Partitioning 70/30 
+  We partition the data the data into (70% training, 30% testing). This result in 9410 row in the training set and 3983 row in the testing set.
+
+```{r}
+set.seed(1234)
+ind=sample(2, nrow(dataset), replace=TRUE, prob=c(0.70 , 0.30))
+train_data=dataset[ind==1,]
+test_data=dataset[ind==2,]
+dim(train_data)
+dim(test_data)
+# Check class distribution in training set
+table(train_data$class)
+prop.table(table(train_data$class))
+# Check class distribution in testing set
+table(test_data$class)
+prop.table(table(test_data$class))
+```
+  
+  It appears that both training set and testing set are class balanced, with the counts for each class being approximately equal. This suggests that the distribution of instances across different classes in both the training and testing sets is relatively equal. Each class is represented proportionally, and there is no significant imbalance where a single class dominates the dataset. This balance in class representation is essential for training machine learning models, contributing to fair and unbiased predictions across all classes.
+
+-----------------------------------------------------------
+
+#####  Information Gain (ID3):
+
+```{r}
+features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
+target <- as.factor(dataset$class)
+dataset$class = as.factor(dataset$class)
+
+
+# Example of hyperparameter tuning
+model <- train(
+  x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,
+  method = "rpart",parms = list(split = "information"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3)
+)
+```
+
+The shown matrix based on training data.
+
+###### Tree based on information gain:
+
+```{r}
+# Load the necessary libraries
+library(rpart)
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="ID3 70/30", box.palette = "auto", nn = TRUE)
+```
+
+We applied two decision tree representations which are regular and simple tree.The result shows that Chest pain type (cp) had the highest information gain value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+The above matrix is based on applying our model on test data.
+
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy| 57.6%|
+|Error Rate|42.4%|
+|Sensitivity(Recall)|43.88%|
+|Specificity|60,5%|
+|Precision|60.5%%|
+
+
+
+-----------------------------------------------------------
+
+##### Gain ratio:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(
+  x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,
+  method = "rpart",parms = list(split = "gain_ratio"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3)
+)
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on Gain ratio:
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="c4.5 70/30", box.palette = "auto", nn = TRUE)
+
+```
+
+We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.86%|
+|Error Rate|42.14%|
+|Sensitivity(Recall)|41.42%|
+|Specificity|60.59%|
+|Precision|60.59%|
+
+-----------------------------------------------------------
+
+##### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+###### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 70/30")
+```
+
+We applied decision tree representation.The result shows that A blood disorder (thal) had the highest ΔGini (impurity reduction) value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.86%|
+|Error Rate|42.14%|
+|Sensitivity(Recall)|41.42%|
+|Specificity|60.59%|
+|Precision|60.59%|
+
+
+-----------------------------------------------------------
+
+### Partitioning 75/25 
+We partition the data the data into (75% training, 25% testing). This result in 10070 row in the training set and 3323 row in the testing set.
+
+```{r}
+set.seed(1234)
+ind=sample (2, nrow(dataset), replace=TRUE, prob=c(0.75 , 0.25))
+train_data=dataset[ind==1,]
+test_data=dataset[ind==2,]
+dim(train_data)
+dim(test_data)
+# Check class distribution in training set
+table(train_data$class)
+prop.table(table(train_data$class))
+# Check class distribution in testing set
+table(test_data$class)
+prop.table(table(test_data$class))
+```
+
+the class is balanced in the training set and testing set.
+
+-----------------------------------------------------------
+
+#####  Information Gain (ID3):
+
+```{r}
+features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
+target <- as.factor(dataset$class)
+dataset$class = as.factor(dataset$class)
+
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "information"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+The shown matrix based on training data.
+
+###### Tree based on information gain:
+
+```{r}
+# Load the necessary libraries
+library(rpart)
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="ID3 75/25", box.palette = "auto", nn = TRUE)
+```
+
+We applied two decision tree representations which are regular and simple tree.The result shows that Chest pain type (cp) had the highest information gain value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.8%|
+|Error Rate|42.20%|
+|Sensitivity(Recall)|43.86%|
+|Specificity|60.97%|
+|Precision| 60.97%|
+
+
+-----------------------------------------------------------
+
+##### Gain ratio:
+
+```{r}
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gain_ratio"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on Gain ratio:
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="c4.5 75/25", box.palette = "auto", nn = TRUE)
+```
+
+We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.58%|
+|Error Rate|42.41%|
+|Sensitivity(Recall)|40.20%|
+|Specificity|52.47%|
+|Precision|61.81%|
+
+
+-----------------------------------------------------------
+
+##### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+###### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 70/30")
+```
+
+
+We applied decision tree representation.The result shows that A blood disorder (thal) had the highest ΔGini (impurity reduction) value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.58|
+|Error Rate|42.41|
+|Sensitivity(Recall)|40.20|
+|Specificity|61.81|
+|Precision|61.81|
+
+
+-----------------------------------------------------------
+
+#### Partitioning  80/20
+We partition the data the data into (80% training, 20% testing). This result in 10708 row in the training set and 2685 row in the testing set.
+
+```{r}
+set.seed(1234)
+ind=sample (2, nrow(dataset), replace=TRUE, prob=c(0.80 , 0.20))
+train_data=dataset[ind==1,]
+test_data=dataset[ind==2,]
+dim(train_data)
+dim(test_data)
+
+# Check class distribution in training set
+table(train_data$class)
+prop.table(table(train_data$class))
+
+# Check class distribution in testing set
+table(test_data$class)
+prop.table(table(test_data$class))
+```
+
+
+-----------------------------------------------------------
+
+#####  Information Gain (ID3):
+
+```{r}
+features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
+target <- as.factor(dataset$class)
+dataset$class = as.factor(dataset$class)
+
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "information"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on information gain:
+
+```{r}
+# Load the necessary libraries
+library(rpart)
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, box.palette = "auto", nn = TRUE)
+```
+
+
+  We applied two decision tree representations which are regular and simple tree.The result shows that Chest pain type (cp) had the highest information gain value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.48%|
+|Error Rate|42,51%|
+|Sensitivity(Recall)|43.56%|
+|Specificity|61.18%|
+|Precision|61.18%|
+
+
+-----------------------------------------------------------
+
+##### Gain ratio:
+
+```{r}
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gain_ratio"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on Gain ratio:
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="c4.5 75/25", box.palette = "auto", nn = TRUE)
+```
+
+We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+####Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.37%|
+|Error Rate|42.63%|
+|Sensitivity(Recall)|43.32%|
+|Specificity|61.95%|
+|Precision|61.95%|
+
+-----------------------------------------------------------
+
+##### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+###### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 80/20")
+```
+
+We applied decision tree representation.The result shows that A blood disorder (thal) had the highest ΔGini (impurity reduction) value so it was represented in first level (root). 
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+print(results)
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+#### Schedule for classification Evaluation:
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|   |
+|Error Rate|  |
+|Sensitivity(Recall)|  |
+|Specificity|  |
+|Precision|  |
+
 
 ------------------------------------------------------------------------
 
@@ -785,14 +1338,14 @@ consider all attributes without performing feature selection.
 
 #### Remove Class lable:
 
-For unsupervised learning, At first we need to removing class label
-"Class".
+For unsupervised learning, At first we need to removing class label "Class".
 
 ```{r}
 #in case we need the old dataset (with class label)
-datasetBeforeClus <- dataset
+dataWithclass <-dataset 
 
-dataset <- dataset[,-which(names(dataset) == "class")] 
+#delete class label
+dataset <- dataset[, -which(names(dataset) == "class")
 
 #varify removing class
 str(dataset)
@@ -816,7 +1369,7 @@ different group.
 ```{r}
 dataset$age <- AgeBeforeDis
 
-#varify update
+#verify updating
 str(dataset)
 ```
 
@@ -827,7 +1380,7 @@ updating age was successful.
 
 #### check datatype:
 
-for Clustering task all data types should be numeric type.
+for Clustering task all data types should be numeric.
 
 ```{r}
 str(dataset)
@@ -848,43 +1401,20 @@ str(dataset$gender)
 
 ------------------------------------------------------------------------
 
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_هذا الكلام لنا بعدين
-بنحذفه\_\_\_\_\_\_\_\_\_\_\_\_
+#### determine and visualize optimal number of clusters:
 
-#From Project Description: -Apply K-means clustering to your dataset
-using at least three different sizes of K. You have to justify your
-choice for size K (we tried k=4, k= ,k=)
-
--then compare and discuss the results using different evaluation methods
-
-and metrics Silhouette coefficient , total within-cluster sum of square
-BCubed precision and recall
-
--Use visual representation and try your best to interpret the results
-and to understand the algorithms performance.
-
--you have to try at least three different sizes of K and report the
-Silhouette coefficient, the total within-cluster sum of squares, BCubed
-precision and recall.
-
-### determine and visualize optimal number of clusters:
-
-In order to determine the optimal number of clusters (k) for our
-dataset, we will experiment with three different sizes of k for
-clustering. To assist with this determination, we will employ various
-methods( kmeansruns, calculate the average silhouette ,total
-within-cluster sum of square and the BCubed(precision and recall) ) that
-aid in identifying the most suitable k value for our specific dataset.
+  In order to determine the optimal number of clusters (k) for our dataset, we will experiment with three different sizes of k for clustering. To assist with this determination, we will employ various methods( kmeansruns, calculate the average silhouette ,total within-cluster sum of square and the BCubed(precision and recall) ) that aid in identifying the most suitable k value for our specific dataset.
 
 ```{r}
-#install necessary packeges:
+#install necessary packages:
 library(factoextra)
 library(fpc)
 library(cluster)
 library(NbClust)
 ```
 
-##### 1- kmeansruns method:
+
+#### 1- kmeansruns method:
 
 ```{r}
 library(fpc)
@@ -892,13 +1422,12 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result 
 ```
 
+
 ```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
-According to the method's output, method suggests using k=3 cluster for
-our dataset, and we'll try another approach to see what performs best
-between them.
+  According to the method's output, method suggests using k=3 cluster for our dataset, and we'll try another approach to see what performs best between them.
 
 ------------------------------------------------------------------------
 
@@ -911,11 +1440,7 @@ library(factoextra)
 fviz_nbclust(dataset, kmeans, method = "silhouette")+ labs(subtitle = "Silhouette method")
 ```
 
-From the plot above we noticed that k = 2 has the highest average
-sillhouette width approximately (0.6). This indicates a relatively
-well-defined and distinct separation between the clusters, suggesting a
-higher level of coherence within each cluster compared to other values
-of k.
+From the plot above we noticed that k = 2 has the highest average sillhouette width approximately (0.6). This indicates a relatively well-defined and distinct separation between the clusters, suggesting a higher level of coherence within each cluster compared to other values of k.
 
 ------------------------------------------------------------------------
 
@@ -1029,7 +1554,7 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-#### 2- Cluster K= 3
+#### 2- Cluster K= 3:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1117,7 +1642,7 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-#### 3- Cluster K= 4
+#### 3- Cluster K= 4:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1128,7 +1653,7 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
-##### visualize 4 clusters
+##### visualize 4 clusters:
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1205,18 +1730,13 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-table + fonding(best cluster)
 
-Comparison Criteria
+##### Comparison Criteria
 
-```{r}
-
-
-```
 
 | No. of Clusters                    | k=2       | k=3       | k=4       |
 |------------------------------------|-----------|-----------|-----------|
 | Average Silhouette width           | 0.63      | 0.54      |           |
-| Total within-cluster sum of square | 591064.6  | 310351.6  | 2330049.1 |
+| Total within-cluster sum of square | 591064.6  | 310351.6  | 230049.1  |
 | BCubed Precison                    | 0.2516112 | 0.2516393 | 0.2522583 |
 | BCubed Recall                      | 0.5454527 | 0.387276  | 0.2729353 |
