@@ -8,6 +8,8 @@ editor_options:
 
 ### 1. Problem:
 
+With the increasing prevalence of smartphones, technology has had a profound impact on our daily lives, including how we interact with our bodies.By analyzing the body performance dataset, We aim to solve the problem of understanding the factors that contribute to optimal body performance and developing practical solutions.This research is crucial because it can improve athletic performance, prevent injuries, and enhance overall well-being. By analyzing the dataset, we hope to uncover patterns and correlations that will help us optimize training programs. 
+
 ### Goal :
 
 The primary objective of this project is to emphasize the significance
@@ -21,15 +23,11 @@ awareness of its importance.
 
 ### 2. Data Mining task:
 
-#### Classification gaol :
+#### 2.1 Classification gaol :
 
-we employ a classification approach to categorize individuals into
-distinct levels of fitness based on various data attributes, including
-body measurements such as weight, body fat percentage, and health
-indicators, as well as activity levels. Furthermore, we aim to predict
-performance outcomes by leveraging this collected data.
+Using the attribute "class" as our class label, we employ a classification approach to categorize individuals into different levels of fitness. This classification is based on a range of data attributes, including body measurements such as weight, body fat percentage, health indicators, and activity levels. Our objective extends beyond classification, as we also strive to predict performance outcomes by leveraging the collected data.
 
-#### Clustering gaol :
+#### 2.2 Clustering gaol :
 
 Our primary goal in utilizing clustering on our dataset is to identify
 inherent patterns or groupings within the data. By applying clustering
