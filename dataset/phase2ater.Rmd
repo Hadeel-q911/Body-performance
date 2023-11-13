@@ -937,22 +937,26 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
 
 -----------------------------
 
-#### try 3 diff
-based on 3 method that we tasted earlier we determine to try k=2, k=3, k=4 !!!!!
+#### Visualization of Cluters:
+
+based on methods that we tasted earlier we determine to try k=2(highest average sillhouette width) , k=3(from Kmeansruns), k=4.
 
 #### 1- Cluster K= 2
 
-Calculate K-means for k=2:
+Calculate K-means for k=2
 
 ```{r}
 #set a seed for random number generation to make the results reproducible
 set.seed(8953)
+
 kmeans.result <- kmeans(dataset, 2)
+
 # print the clusterng result
 kmeans.result
 ```
 
-visualize 2 clusters
+
+##### visualize 2 clusters
 
 ```{r}
 library(factoextra)
@@ -960,53 +964,90 @@ fviz_cluster(kmeans.result, data = dataset)
 ```
 
 
-#### average silhouette for 2 clusters
-
-# average silhouette for each clusters - choosing k using average
-silhouette Silhouette analysis
-
-Silhouette analysis allows you to calculate how similar each
-observations is with the cluster it is assigned relative to other
-clusters. This metric (silhouette width) ranges from -1 to 1 for each
-observation in your data and can be interpreted as follows:
-
-```         
-Values close to 1 suggest that the observation is well matched to the assigned cluster
-Values close to 0 suggest that the observation is borderline matched between two clusters
-Values close to -1 suggest that the observations may be assigned to the wrong cluster
-```
-
-In this exercise you will leverage the pam() and the silhouette()
-functions from the cluster library to perform silhouette analysis to
-compare the results of models with a k of 2 and a k of 3. You'll
-continue working with the lineup dataset.
-
-```         
-Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-```
+##### average silhouette for 2 clusters
 
 ```{r}
 library(cluster)
-avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) #a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
+avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
 
-fviz_silhouette(avg_sil)#k-means clustering with estimating k and initializations
+fviz_silhouette(avg_sil)
+```
+
+##### Within cluster sum of squares by cluster: 
+
+```{r}
+kmeans.result$tot.withinss
+```
+
+##### BCubed precision and recall:
+
+```{r}
+cluster_assignments <- c(kmeans.result$cluster)
+ground_truth_labels <- c(datasetBeforeClus$class)
+
+data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
+
+# Function to calculate BCubed precision and recall
+calculate_bcubed_metrics <- function(data) {
+  n <- nrow(data)
+  precision_sum <- 0
+  recall_sum <- 0
+
+  for (i in 1:n) {
+    cluster <- data$cluster[i]
+    label <- data$label[i]
+    
+# Count the number of items from the same category within the same cluster
+same_category_same_cluster <- sum(data$label[data$cluster == cluster] == label)
+    
+# Count the total number of items in the same cluster
+total_same_cluster <- sum(data$cluster == cluster)
+    
+# Count the total number of items with the same category
+total_same_category <- sum(data$label == label)
+    
+# Calculate precision and recall for the current item and add them to the sums
+precision_sum <- precision_sum + same_category_same_cluster /total_same_cluster
+recall_sum <- recall_sum + same_category_same_cluster / total_same_category
+  }
+
+  # Calculate average precision and recall
+  precision <- precision_sum / n
+  recall <- recall_sum / n
+
+  return(list(precision = precision, recall = recall))
+}
+
+# Calculate BCubed precision and recall
+metrics <- calculate_bcubed_metrics(data)
+
+# Extract precision and recall from the metrics
+precision <- metrics$precision
+recall <- metrics$recall
+
+# Print the results
+cat("BCubed Precision:", precision, "\n")
+cat("BCubed Recall:", recall, "\n")
 ```
 
 
-#### 2- K= 3 Clusters
-from method 1, .................
+----------------------------
+
+#### 2- Cluster K= 3
+
+
 
 ```{r}
-# run k-means clustering to find 3 clusters
 #set a seed for random number generation  to make the results reproducible
 set.seed(8953)
 kmeans.result <- kmeans(dataset, 3)
+
 # print the clusterng result
 kmeans.result
 ```
 
 
-#### visualize 2 clusters
+##### visualize 3 clusters
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1015,155 +1056,170 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-
-#average silhouette for each clusters - choosing k using average
-silhouette Silhouette analysis
-
-Silhouette analysis allows you to calculate how similar each
-observations is with the cluster it is assigned relative to other
-clusters. This metric (silhouette width) ranges from -1 to 1 for each
-observation in your data and can be interpreted as follows:
-
-```         
-Values close to 1 suggest that the observation is well matched to the assigned cluster
-Values close to 0 suggest that the observation is borderline matched between two clusters
-Values close to -1 suggest that the observations may be assigned to the wrong cluster
-```
-
-In this exercise you will leverage the pam() and the silhouette()
-functions from the cluster library to perform silhouette analysis to
-compare the results of models with a k of 2 and a k of 3. You'll
-continue working with the lineup dataset.
-
-```         
-Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-```
+##### average silhouette for 3 clusters
 
 ```{r}
-#average silhouette for each clusters 
 library(cluster)
-
-#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
 avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
 
-#k-means clustering with estimating k and initializations
 fviz_silhouette(avg_sil)
 ```
 
 
-#### 3- K= 4 Clusters
+##### Within cluster sum of squares by cluster: 
 
 ```{r}
-# run k-means clustering to find 4 clusters
+kmeans.result$tot.withinss
+```
+
+##### BCubed precision and recall:
+
+```{r}
+cluster_assignments <- c(kmeans.result$cluster)
+ground_truth_labels <- c(datasetBeforeClus$class)
+
+data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
+
+# Function to calculate BCubed precision and recall
+calculate_bcubed_metrics <- function(data) {
+  n <- nrow(data)
+  precision_sum <- 0
+  recall_sum <- 0
+
+  for (i in 1:n) {
+    cluster <- data$cluster[i]
+    label <- data$label[i]
+    
+# Count the number of items from the same category within the same cluster
+same_category_same_cluster <- sum(data$label[data$cluster == cluster] == label)
+    
+# Count the total number of items in the same cluster
+total_same_cluster <- sum(data$cluster == cluster)
+    
+# Count the total number of items with the same category
+total_same_category <- sum(data$label == label)
+    
+# Calculate precision and recall for the current item and add them to the sums
+precision_sum <- precision_sum + same_category_same_cluster /total_same_cluster
+recall_sum <- recall_sum + same_category_same_cluster / total_same_category
+  }
+
+  # Calculate average precision and recall
+  precision <- precision_sum / n
+  recall <- recall_sum / n
+
+  return(list(precision = precision, recall = recall))
+}
+
+# Calculate BCubed precision and recall
+metrics <- calculate_bcubed_metrics(data)
+
+# Extract precision and recall from the metrics
+precision <- metrics$precision
+recall <- metrics$recall
+
+# Print the results
+cat("BCubed Precision:", precision, "\n")
+cat("BCubed Recall:", recall, "\n")
+```
+
+
+-----------------------------
+
+#### 3- Cluster K= 4
+
+```{r}
 #set a seed for random number generation  to make the results reproducible
 set.seed(8953)
 kmeans.result <- kmeans(dataset, 4)
+
 # print the clusterng result
 kmeans.result
 ```
 
- visualize 4 clusters
+
+##### visualize 4 clusters
 
 ```{r}
-# visualize clustering (4 clusters)
+# visualize clustering (2 clusters)
 #install.packages("factoextra")
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-
-#### average silhouette for each clusters - choosing k using average
-silhouette Silhouette analysis
-
-Silhouette analysis allows you to calculate how similar each
-observations is with the cluster it is assigned relative to other
-clusters. This metric (silhouette width) ranges from -1 to 1 for each
-observation in your data and can be interpreted as follows:
-
-```         
-Values close to 1 suggest that the observation is well matched to the assigned cluster
-Values close to 0 suggest that the observation is borderline matched between two clusters
-Values close to -1 suggest that the observations may be assigned to the wrong cluster
-```
-
-In this exercise you will leverage the pam() and the silhouette()
-functions from the cluster library to perform silhouette analysis to
-compare the results of models with a k of 2 and a k of 3. You'll
-continue working with the lineup dataset.
-
-```         
-Pay close attention to the silhouette plot, does each observation clearly belong to its assigned cluster for k 
-```
-
-تفسيرنا
+##### average silhouette for 3 clusters
 
 ```{r}
-#average silhouette for each clusters 
 library(cluster)
-
-#a dissimilarity object inheriting from class dist or coercible to one. If not specified, dmatrix must be.
 avg_sil <- silhouette(kmeans.result$cluster,dist(dataset)) 
 
-#k-means clustering with estimating k and initializations
 fviz_silhouette(avg_sil)
 ```
 
+
+##### Within cluster sum of squares by cluster: 
+
+```{r}
+kmeans.result$tot.withinss
+```
+
+
+##### BCubed precision and recall:
+
+```{r}
+cluster_assignments <- c(kmeans.result$cluster)
+ground_truth_labels <- c(datasetBeforeClus$class)
+
+data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
+
+# Function to calculate BCubed precision and recall
+calculate_bcubed_metrics <- function(data) {
+  n <- nrow(data)
+  precision_sum <- 0
+  recall_sum <- 0
+
+  for (i in 1:n) {
+    cluster <- data$cluster[i]
+    label <- data$label[i]
+    
+# Count the number of items from the same category within the same cluster
+same_category_same_cluster <- sum(data$label[data$cluster == cluster] == label)
+    
+# Count the total number of items in the same cluster
+total_same_cluster <- sum(data$cluster == cluster)
+    
+# Count the total number of items with the same category
+total_same_category <- sum(data$label == label)
+    
+# Calculate precision and recall for the current item and add them to the sums
+precision_sum <- precision_sum + same_category_same_cluster /total_same_cluster
+recall_sum <- recall_sum + same_category_same_cluster / total_same_category
+  }
+
+  # Calculate average precision and recall
+  precision <- precision_sum / n
+  recall <- recall_sum / n
+
+  return(list(precision = precision, recall = recall))
+}
+
+# Calculate BCubed precision and recall
+metrics <- calculate_bcubed_metrics(data)
+
+# Extract precision and recall from the metrics
+precision <- metrics$precision
+recall <- metrics$recall
+
+# Print the results
+cat("BCubed Precision:", precision, "\n")
+cat("BCubed Recall:", recall, "\n")
+```
+
+
 ----------------
 
+table + fonding(best cluster)
 
-
-```{r !!}
-# 1-  define function to compute average silhouette for k clusters using silhouette()
-silhouette_score <- function(k){ 
-km <- kmeans(dataset, centers = k,nstart=25) # if centers is a number, how many random sets should be chosen?
-ss <- silhouette(km$cluster, dist(dataset))
-sil<- mean(ss[, 3])
-return(sil)
-}
-```
-
-
-
-```{r}
-set.seed(123)
-
-# function to compute total within-cluster sum of square 
-wss <- function(k) {
-  kmeans(df, k, nstart = 10 )$tot.withinss
-}
-
-# Compute and plot wss for k = 1 to k = 11
-k.values <- 1:11
-
-# extract wss for 2-11 clusters
-wss_values <- dataset(k.values, wss)
-
-plot(k.values, wss_values,
-       type="b", pch = 19, frame = FALSE, 
-       xlab="Number of clusters K",
-       ylab="Total within-clusters sum of squares")
-```
-
-
-```{r}
-#function to compute average silhouette for k clusters
-avg_sil <- function(k) {
-  km.res <- kmeans(df, centers = k, nstart = 25)
-  ss <- silhouette(km.res$cluster, dist(df))
-  mean(ss[, 3])
-}
-
-# Compute and plot wss for k = 2 to k = 15
-k.values <- 2:15
-
-# extract avg silhouette for 2-15 clusters
-avg_sil_values <- map_dbl(k.values, avg_sil)
-
-plot(k.values, avg_sil_values,
-       type = "b", pch = 19, frame = FALSE, 
-       xlab = "Number of clusters K",
-       ylab = "Average Silhouettes")
-```
 
 
 
