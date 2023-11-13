@@ -88,13 +88,16 @@ str(dataset)
 ```
 
 ------------------------------------------------------------------------
+
 ### 4. Data Preptocessing: 
 
 ### 4.1 performance dataset before preprocessing:
 
+
 ```{r}
 print(dataset)
 ```
+
 
 
 ```{r}
@@ -103,6 +106,7 @@ nrow(dataset)
 #Number of column
 ncol(dataset)
 ```
+
 
 ------------------------------------------------------------------------
 
