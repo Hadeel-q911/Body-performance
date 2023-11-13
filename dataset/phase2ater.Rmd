@@ -1624,6 +1624,8 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
+we can conclude from the graph and the results that this k=2 is possible to be the optimal k, since the data in a cluster are close “similar” to each other and dissimilar to data in the other cluster. Also, the recall is relatively high (0.71) and is the highest among the k’s chosen, the Precision is intermediate (0.28) which could be duo to presence of outliers or sensitivity to Initial Centroid. We can also note that the WSS is 26.8%, which is an excellent percentage indicating a good compactness of clusters, and that objects in a cluster are similar to one another. Lastly, the average silhouette width is 0.34 which is cnsidered high. Although, there is an overlapping between the two clusters, where may be 
+
 ------------------------------------------------------------------------
 
 ### 2- Cluster K= 3:
@@ -1814,6 +1816,6 @@ cat("BCubed Recall:", recall, "\n")
 | Total within-cluster sum of square | 230049.1  | 310351.6  | 230049.1  |
 | BCubed Precison                    | 0.2522583 | 0.2516393 | 0.2522583 |
 | BCubed Recall                      | 0.2729353 | 0.387276  | 0.2729353 |
-??????????
+| Visualization| all of the figures is shown above | all of the figures is shown above|all of the figures is shown above|
 
 
