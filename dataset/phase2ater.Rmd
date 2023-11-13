@@ -6,6 +6,10 @@ editor_options:
     wrap: 72
 ---
 
+### 1. Problem:
+
+With the increasing prevalence of smartphones, technology has had a profound impact on our daily lives, including how we interact with our bodies.By analyzing the body performance dataset, We aim to solve the problem of understanding the factors that contribute to optimal body performance and developing practical solutions.This research is crucial because it can improve athletic performance, prevent injuries, and enhance overall well-being. By analyzing the dataset, we hope to uncover patterns and correlations that will help us optimize training programs. 
+
 ### Goal :
 
 The primary objective of this project is to emphasize the significance
@@ -17,23 +21,13 @@ awareness of its importance.
 
 ------------------------------------------------------------------------
 
-### 1. Problem:
-
-------------------------------------------------------------------------
-
 ### 2. Data Mining task:
 
-??
+#### 2.1 Classification gaol :
 
-#### Classification gaol :
+Using the attribute "class" as our class label, we employ a classification approach to categorize individuals into different levels of fitness. This classification is based on a range of data attributes, including body measurements such as weight, body fat percentage, health indicators, and activity levels. Our objective extends beyond classification, as we also strive to predict performance outcomes by leveraging the collected data.
 
-we employ a classification approach to categorize individuals into
-distinct levels of fitness based on various data attributes, including
-body measurements such as weight, body fat percentage, and health
-indicators, as well as activity levels. Furthermore, we aim to predict
-performance outcomes by leveraging this collected data.
-
-#### Clustering gaol :
+#### 2.2 Clustering gaol :
 
 Our primary goal in utilizing clustering on our dataset is to identify
 inherent patterns or groupings within the data. By applying clustering
@@ -89,11 +83,16 @@ str(dataset)
 
 ------------------------------------------------------------------------
 
-### 3.4: performance dataset before preprocessing:
+### 4. Data Preptocessing: 
+
+### 4.1 performance dataset before preprocessing:
+
 
 ```{r}
 print(dataset)
 ```
+
+
 
 ```{r}
 #Number of rows
@@ -102,9 +101,10 @@ nrow(dataset)
 ncol(dataset)
 ```
 
+
 ------------------------------------------------------------------------
 
-### Understanding the dataset using graph representations:
+### 4.2 Understanding the dataset using graph representations:
 
 ### Encoding:
 
@@ -118,6 +118,7 @@ dataset$class = factor(dataset$class,levels =
                         c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
 
+
 ```{r}
  #encoding Gender:
 dataset$gender = factor(dataset$gender,levels =
@@ -126,7 +127,7 @@ dataset$gender = factor(dataset$gender,levels =
 
 ------------------------------------------------------------------------
 
-### check if the dataset is balanced or imbalanced (Class boxplot) :
+### 4.5 check if the dataset is balanced or imbalanced (Class boxplot) :
 
 After encoding the attribute (class) We employ a Boxplot graph on our
 class label (class) to ascertain whether our dataset is balanced or not.
@@ -205,7 +206,7 @@ plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales"
 
 ------------------------------------------------------------------------
 
-### Statistical Measures:
+### 4.3 Statistical Measures:
 
 ```{r}
  summary(dataset$age)
@@ -249,9 +250,7 @@ summary(dataset$sit.ups.counts)
 
 ------------------------------------------------------------------------
 
-## Data Preprocessing:
-
-### Check duplicated rows:
+### 4.4 Check duplicated rows:
 
 We check if there are any duplicated rows to decrease dataset volume.
 Hence enhancing data quality which leads to better model performance and
@@ -270,12 +269,13 @@ we found 1 row that's duplicate that need to be deleted.
 dataset <- dataset[!duplicated (dataset), ]
 ```
 
+
 ```{r}
 #To make sure that the deletion was successful 
 sum(duplicated(dataset))
 ```
 
-### Check nulls value:
+### 4.5 Check nulls value:
 
 Null values can cause issues when performing data analysis or building
 machine learning models, as they can lead to inaccurate results or
@@ -289,7 +289,7 @@ sum(is.na(dataset))
 
 ------------------------------------------------------------------------
 
-## Detect Outlier and Remove them:
+## 4.6  Detect Outlier and Remove them:
 
 We checked our dataset to see if there were any outlier values, and we
 found a couple. Statistical studies and modeling can be significantly
@@ -415,6 +415,7 @@ boxplot(dataset$gripForc,
 
 ```
 
+
 ------------------------------------------------------------------------
 
 the test that's measures flexibility in sitting and bending forward in
@@ -430,6 +431,7 @@ boxplot(dataset$sit.and.bend.forward_cm,
         main= "Boxplot of sit and bend forward_cm")
 ```
 
+
 ------------------------------------------------------------------------
 
 The boxplot of the "Test that measures the strength and endurance of the
@@ -443,6 +445,7 @@ boxplot(dataset$sit.ups.counts,
         ylab= "sit-ups" ,
         main= "Boxplot of sit-ups")
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -458,6 +461,7 @@ boxplot(dataset$broad.jump_cm,
         ylab= "broad jump_cm " ,
         main= "Boxplot of broad jump_cm ")
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -626,15 +630,14 @@ nrow(dataset)
 ncol(dataset)
 ```
 
-We noticed a decrease in the number of rows, which means that deletion
-the outliers was successful.
+We noticed a decrease in the number of rows, which means that deletion the outliers was successful.
 
 ------------------------------------------------------------------------
 
 ### Discretization :
 
 ```{r}
-#for clustering task:
+#To use it later in clustering task:
 AgeBeforeDis <- dataset$age
 ```
 
@@ -669,85 +672,6 @@ dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 
 ### Feature Selection :
 
-##Chi-square for contingency data:
-
-```{r يمكن نحذفه}
-#gender attribute
-contingency_table <- table(dataset$gender, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#age attribute
-contingency_table <- table(dataset$age, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#height_cm attribute
-contingency_table <- table(dataset$height_cm, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#weight_kg attribute
-contingency_table <- table(dataset$weight_kg, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#body.fat_.  attribute
-contingency_table <- table(dataset$body.fat_., dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#diastolic  attribute
-contingency_table <- table(dataset$diastolic, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#systolic attribute
-contingency_table <- table(dataset$systolic, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#gripForce attribute
-contingency_table <- table(dataset$gripForce, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#sit.and.bend.forward_cm attribute
-contingency_table <- table(dataset$sit.and.bend.forward_cm, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#sit.ups.counts attribute
-contingency_table <- table(dataset$sit.ups.counts, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
-```{r}
-#broad.jump_cm attribute
-contingency_table <- table(dataset$broad.jump_cm, dataset$class)
-chi_square_result <- chisq.test(contingency_table)
-print(chi_square_result)
-```
-
 Based on the dataset and the graphs we did earlier, there are several
 justifications for not performing feature selection:
 
@@ -777,65 +701,751 @@ consider all attributes without performing feature selection.
 
 ------------------------------------------------------------------------
 
+### 5 Dara Mining Task:
+
 ### 5.1 Classification:
+
+  Our classification objective is to develop a predictive model for our dataset with class labels A, B, C, and D based on various attributes. To address the challenge of a small dataset, we will employ a partitioning strategy suitable for limited data, utilizing three different sizes for training and testing sets. We will adopt the sampling method, allowing replacement of attributes with 'True' values. For each partition size, we will build three decision trees, employing distinct attribute selection methods: Information Gain (ID3), Gain Ratio (C4.5), and Gini Index (CART). The prediction will be carried out using the 'predict' method. Evaluation and testing will be performed using the 'confusionMatrix' method.
+
+#### Classification packages:
+  We install and call predifined packages in R language to help us in classification process. which shown below:
+
+```{r}
+library(party)
+library(partykit)
+library(RWeka)
+library(caret)
+library(rpart)
+library(rpart.plot)
+```
+
+
+-----------------------------------------------------------
+
+
+### Partitioning 70/30 
+  We partition the data the data into (70% training, 30% testing). This result in 9410 row in the training set and 3983 row in the testing set.
+
+```{r}
+set.seed(1234)
+ind=sample(2, nrow(dataset), replace=TRUE, prob=c(0.70 , 0.30))
+train_data=dataset[ind==1,]
+test_data=dataset[ind==2,]
+dim(train_data)
+dim(test_data)
+
+# Check class distribution in training set
+table(train_data$class)
+prop.table(table(train_data$class))
+
+# Check class distribution in testing set
+table(test_data$class)
+prop.table(table(test_data$class))
+```
+  
+  It appears that both training set and testing set are class balanced, with the counts for each class being approximately equal. This suggests that the distribution of instances across different classes in both the training and testing sets is relatively equal. Each class is represented proportionally, and there is no significant imbalance where a single class dominates the dataset. This balance in class representation is essential for training machine learning models, contributing to fair and unbiased predictions across all classes.
+
+-----------------------------------------------------------
+
+#####  Information Gain (ID3):
+
+```{r}
+features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
+target <- as.factor(dataset$class)
+dataset$class = as.factor(dataset$class)
+
+
+# Example of hyperparameter tuning
+model <- train(
+  x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,
+  method = "rpart",parms = list(split = "information"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3)
+)
+```
+
+The shown matrix based on training data.
+
+###### Tree based on information gain:
+
+```{r}
+# Load the necessary libraries
+library(rpart)
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="ID3 70/30", box.palette = "auto", nn = TRUE)
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest information gain. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+The above matrix is based on applying our model on test data.
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy| 57.6%|
+|Error Rate|42.4%|
+|Sensitivity(Recall)|43.88%|
+|Specificity|60,5%|
+|Precision|60.5%%|
+
+
+-----------------------------------------------------------
+
+##### Gain ratio:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(
+  x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,
+  method = "rpart",parms = list(split = "gain_ratio"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3)
+)
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on Gain ratio:
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="c4.5 70/30", box.palette = "auto", nn = TRUE)
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest gain ratio. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.86%|
+|Error Rate|42.14%|
+|Sensitivity(Recall)|41.42%|
+|Specificity|60.59%|
+|Precision|60.59%|
+
+-----------------------------------------------------------
+
+##### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+###### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 70/30")
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex (impurity reduction) values. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.86%|
+|Error Rate|42.14%|
+|Sensitivity(Recall)|41.42%|
+|Specificity|60.59%|
+|Precision|60.59%|
+
+
+-----------------------------------------------------------
+
+### Partitioning 75/25 
+We partition the data the data into (75% training, 25% testing). This result in 10070 row in the training set and 3323 row in the testing set.
+
+```{r}
+set.seed(1234)
+ind=sample (2, nrow(dataset), replace=TRUE, prob=c(0.75 , 0.25))
+train_data=dataset[ind==1,]
+test_data=dataset[ind==2,]
+dim(train_data)
+dim(test_data)
+
+# Check class distribution in training set
+table(train_data$class)
+prop.table(table(train_data$class))
+
+# Check class distribution in testing set
+table(test_data$class)
+prop.table(table(test_data$class))
+```
+
+the class is balanced in the training set and testing set.
+
+-----------------------------------------------------------
+
+#####  Information Gain (ID3):
+
+```{r}
+features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
+target <- as.factor(dataset$class)
+dataset$class = as.factor(dataset$class)
+
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "information"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+The shown matrix based on training data.
+
+###### Tree based on information gain:
+
+```{r}
+# Load the necessary libraries
+library(rpart)
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="ID3 75/25", box.palette = "auto", nn = TRUE)
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest information gain. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.8%|
+|Error Rate|42.20%|
+|Sensitivity(Recall)|43.86%|
+|Specificity|60.97%|
+|Precision| 60.97%|
+
+
+-----------------------------------------------------------
+
+##### Gain ratio:
+
+```{r}
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gain_ratio"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on Gain ratio:
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="c4.5 75/25", box.palette = "auto", nn = TRUE)
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest gain ratio. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.58%|
+|Error Rate|42.41%|
+|Sensitivity(Recall)|40.20%|
+|Specificity|52.47%|
+|Precision|61.81%|
+
+
+-----------------------------------------------------------
+
+##### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+###### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 75/25")
+```
+
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex (impurity reduction) values. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.58|
+|Error Rate|42.41|
+|Sensitivity(Recall)|40.20|
+|Specificity|61.81|
+|Precision|61.81|
+
+
+-----------------------------------------------------------
+
+#### Partitioning  80/20
+We partition the data the data into (80% training, 20% testing). This result in 10708 row in the training set and 2685 row in the testing set.
+
+```{r}
+set.seed(1234)
+ind=sample (2, nrow(dataset), replace=TRUE, prob=c(0.80 , 0.20))
+train_data=dataset[ind==1,]
+test_data=dataset[ind==2,]
+dim(train_data)
+dim(test_data)
+
+# Check class distribution in training set
+table(train_data$class)
+prop.table(table(train_data$class))
+
+# Check class distribution in testing set
+table(test_data$class)
+prop.table(table(test_data$class))
+```
+
+
+-----------------------------------------------------------
+
+#####  Information Gain (ID3):
+
+```{r}
+features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
+target <- as.factor(dataset$class)
+dataset$class = as.factor(dataset$class)
+
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "information"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on information gain:
+
+```{r}
+# Load the necessary libraries
+library(rpart)
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, box.palette = "auto", nn = TRUE, main = "Decision Tree for CART 80/20")
+```
+
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest information gain. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+The above matrix is based on applying our model on test data.
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.48%|
+|Error Rate|42,51%|
+|Sensitivity(Recall)|43.56%|
+|Specificity|61.18%|
+|Precision|61.18%|
+
+
+-----------------------------------------------------------
+
+##### Gain ratio:
+
+```{r}
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gain_ratio"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+The shown matrix based on training data.
+
+###### Tree based on Gain ratio:
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model,main="c4.5 80/20", box.palette = "auto", nn = TRUE)
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest gain ratio. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+
+####Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.37%|
+|Error Rate|42.63%|
+|Sensitivity(Recall)|43.32%|
+|Specificity|61.95%|
+|Precision|61.95%|
+
+-----------------------------------------------------------
+
+##### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+
+###### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 80/20")
+```
+
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex (impurity reduction) values. As a result, it was placed at the root level, representing the first level of the tree.
+
+###### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+#### Schedule for classification Evaluation:
+
+|Evaluation method|value|
+|-----------------|-----|
+|Accuracy|57.37%|
+|Error Rate|42.63%|
+|Sensitivity(Recall)|43.32%|
+|Specificity|61.95%|
+|Precision|61.95%|
+
+--------------------
+
+#### Classification Analysis:
+
+ID3:
+
+Accuracy for 70/30 partitioning: 0.576
+Accuracy for 75/25 partitioning: 0.578
+Accuracy for 80/20 partitioning: 0.5748
+C4.5:
+
+Accuracy for 70/30 partitioning: 0.5786
+Accuracy for 75/25 partitioning: 0.5758
+Accuracy for 80/20 partitioning: 0.573
+CART:
+
+Accuracy for 70/30 partitioning: 0.5786
+Accuracy for 75/25 partitioning: 0.5758
+Accuracy for 80/20 partitioning: 0.5737
+Analysis:
+
+  Overall, the accuracy values for the three decision tree algorithms (ID3, C4.5, and CART) are relatively close across different partition sizes.
+
+The highest accuracy is observed for C4.5 at 70/30 partitioning (0.5786), followed closely by CART and ID3 at the same partition size.
+
+ID3 performs consistently across different partition sizes, maintaining accuracy around 0.576 to 0.578.
+
+C4.5 and CART show slight variations in accuracy across partition sizes but generally stay close to each other.
+
+The impact of changing partition sizes on accuracy seems minimal, with fluctuations within a narrow range.
 
 ------------------------------------------------------------------------
 
 ### 5.2 Clustering:
+  Data clustering is the act of dividing data into distinct groups or clusters. It is an unsupervised learning technique, meaning it doesn't rely on known class labels "Class" in the training data. The data within each cluster share similarities with one another and differ from data in other clusters. In this case, we will employ the k-means clustering algorithm.
 
-#### Remove Class lable:
+### 1- Data prepreocessing before Clustering:
+  In order to optimize the performance of our models and achieve the most accurate results, it is crucial to preprocess certain attributes before applying data clustering techniques. 
+  where we will remove the class label and adding the old Age attribute "before discretizing", also we will convert all attribute into numeric:
 
-For unsupervised learning, At first we need to removing class label
-"Class".
+#### 1.1: Remove Class lable:
+
+For unsupervised learning, At first we need to removing class label "Class".
 
 ```{r}
 #in case we need the old dataset (with class label)
-datasetBeforeClus <- dataset
+dataWithclass <-dataset 
 
-dataset <- dataset[,-which(names(dataset) == "class")] 
+#delete class label
+dataset <- dataset [,-which(names(dataset)== "class")]                    
 
 #varify removing class
 str(dataset)
 ```
 
+As Showing in data frame above, deletion the "calss" attribute was successful.
+
 ------------------------------------------------------------------------
 
-#### Add AgeBeforeDis:
+#### 1.2 Add AgeBeforeDis:
 
-Based on our previous findings about discretizing the age attribute, we
-discovered that using fixed intervals may not accurately represent the
-true distribution of the data. This can result in biased or inaccurate
-cluster assignments.
+Based on our previous findings about discretizing the age attribute, we discovered that using fixed intervals may not accurately represent the true distribution of the data. This can result in biased or inaccurate cluster assignments.
 
-To overcome this issue, we suggest removing the discretized age
-attribute and adding the original age attribute called "AgeBeforeDis".
-This change is expected to improve the performance of our model, make
-the analysis easier, and enable more straightforward comparisons between
-different group.
+To overcome this issue, we suggest removing the discretized age attribute and adding the original age attribute called "AgeBeforeDis". This change is expected to improve the performance of our model, make the analysis easier, and enable more straightforward comparisons between different group.
 
 ```{r}
 dataset$age <- AgeBeforeDis
 
-#varify update
+#verify updating
 str(dataset)
 ```
 
-we notice that age attribute becomes on continuous value, which means
-updating age was successful.
+As Showing that age attribute becomes on continuous value, which means updating age was successful.
 
 ------------------------------------------------------------------------
 
-#### check datatype:
+#### 1.3 check datatype:
 
-for Clustering task all data types should be numeric type.
-
-```{r}
-str(dataset)
-```
-
-there is only one attribute that should be convert, which is gender
-attribute. Encoding gender attribute makes data type to Factor, so we
-should convert it to numeric.
+  for Clustering task all data types should be numeric, and from the data frame from last chunk,there is only one attribute that should be convert, which is gender attribute. where Encoding gender attribute makes data type to Factor, so we should convert it to numeric before clustering.
 
 #### Convert gender attribute type to numeric:
 
@@ -843,48 +1453,35 @@ should convert it to numeric.
 dataset$gender <- as.numeric(as.character(dataset$gender))
 
 # Verify the conversion
-str(dataset$gender)
+sapply(dataset, class)
 ```
+
+
+```{r ??}
+#scale all attributes in the dataset so they would be standardized 
+#dataset <- scale(dataset)
+```
+
+Now all attribute are numeric and scaled, so we are ready to perform k-means clustering.
 
 ------------------------------------------------------------------------
 
-#\_\_\_\_\_\_\_\_\_\_\_\_\_\_هذا الكلام لنا بعدين
-بنحذفه\_\_\_\_\_\_\_\_\_\_\_\_
+#### determine and visualize optimal number of clusters:
 
-#From Project Description: -Apply K-means clustering to your dataset
-using at least three different sizes of K. You have to justify your
-choice for size K (we tried k=4, k= ,k=)
-
--then compare and discuss the results using different evaluation methods
-
-and metrics Silhouette coefficient , total within-cluster sum of square
-BCubed precision and recall
-
--Use visual representation and try your best to interpret the results
-and to understand the algorithms performance.
-
--you have to try at least three different sizes of K and report the
-Silhouette coefficient, the total within-cluster sum of squares, BCubed
-precision and recall.
-
-### determine and visualize optimal number of clusters:
-
-In order to determine the optimal number of clusters (k) for our
-dataset, we will experiment with three different sizes of k for
-clustering. To assist with this determination, we will employ various
-methods( kmeansruns, calculate the average silhouette ,total
-within-cluster sum of square and the BCubed(precision and recall) ) that
-aid in identifying the most suitable k value for our specific dataset.
+  In order to determine the optimal number of clusters (k) for our dataset, we will experiment with three different sizes of k for clustering. To assist with this determination, we will employ various methods( kmeansruns, calculate the average silhouette ,total within-cluster sum of square and the BCubed(precision and recall) ) that aid in identifying the most suitable k value for our specific dataset.
 
 ```{r}
-#install necessary packeges:
+#install necessary packages:
+
 library(factoextra)
 library(fpc)
 library(cluster)
 library(NbClust)
 ```
 
-##### 1- kmeansruns method:
+
+#### a) kmeansruns method:
+This function assigns data points to clusters based on proximity to centroids. To determine the optimal number of clusters,different techniques like the elbow method or silhouette analysis can be used. This helps identify the value of k that produces the best clustering performance.
 
 ```{r}
 library(fpc)
@@ -892,17 +1489,17 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result 
 ```
 
+
 ```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
-According to the method's output, method suggests using k=3 cluster for
-our dataset, and we'll try another approach to see what performs best
-between them.
+  According to the method's output, method suggests using k=3 cluster for our dataset, and we'll try another approach to see what performs best between them.
 
 ------------------------------------------------------------------------
 
-##### 2- Average silhouette method:
+##### b) Average silhouette method:
+This method calculates the average silhouette width for different values of k, determining how well data points fit into their assigned clusters. 
 
 ```{r}
 library(NbClust)
@@ -911,16 +1508,13 @@ library(factoextra)
 fviz_nbclust(dataset, kmeans, method = "silhouette")+ labs(subtitle = "Silhouette method")
 ```
 
-From the plot above we noticed that k = 2 has the highest average
-sillhouette width approximately (0.6). This indicates a relatively
-well-defined and distinct separation between the clusters, suggesting a
-higher level of coherence within each cluster compared to other values
-of k.
+From the plot above we noticed that k = 2 has the highest average sillhouette width approximately (0.6). This indicates a relatively well-defined and distinct separation between the clusters, suggesting a higher level of coherence within each cluster compared to other values of k. 
 
 ------------------------------------------------------------------------
 
 ##### 3- total within-cluster sum of square method:
-
+  This method determines the number of clusters according to the turning point in a curve, the curve is plotted using the total within-cluster sum of square (WSS) as in y-axis, and Noumber of clusters in x-axis 
+  
 ```{r}
 library(factoextra) 
 
@@ -929,22 +1523,23 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
   labs(subtitle = "Elbow method")
 ```
 
-The output of the this method recommends that we use k=4 cluster for our
-dataset.
+The output of the this method recommends that we use k=4 cluster for our dataset.
 
 ------------------------------------------------------------------------
 
 #### Visualization of Cluters:
 
-based on methods that we tasted earlier we determine to try k=2(highest
-average sillhouette width) , k=3(from Kmeansruns), k=4(total
-within-cluster sum of square method).
+In this section, we will perform k-means clustering and visualize its result using three different k’s that have been chosen based on methods that we tasted earlier
+k=2(highest average sillhouette width),
+k=3(from Kmeansruns), 
+k=4(total within-cluster sum of square method). 
+then we will compute WSS and Bcubed preceision and recall and average silhouette for each cluster as methods of evaluating clustering results.
 
-#### 1- Cluster K= 2
+### 1- Cluster K= 2
 
 Calculate K-means for k=2
 
-```{r}
+```{r here}
 #set a seed for random number generation to make the results reproducible
 set.seed(8953)
 
@@ -954,14 +1549,14 @@ kmeans.result <- kmeans(dataset, 2)
 kmeans.result
 ```
 
-##### visualize 2 clusters
+#### visualize 2 clusters
 
 ```{r}
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 2 clusters
+#### average silhouette for 2 clusters
 
 ```{r}
 library(cluster)
@@ -970,17 +1565,17 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-##### Within cluster sum of squares by cluster:
+#### Within cluster sum of squares by cluster:
 
 ```{r}
 kmeans.result$tot.withinss
 ```
 
-##### BCubed precision and recall for k=2:
+#### BCubed precision and recall for k=2:
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
-ground_truth_labels <- c(datasetBeforeClus$class)
+ground_truth_labels <- c(dataWithclass$class)
 
 data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
 
@@ -1027,9 +1622,11 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
+we can conclude from the graph and the results that this k=2 is possible to be the optimal k, since the data in a cluster are close “similar” to each other and dissimilar to data in the other cluster. Also, the recall is relatively high (0.71) and is the highest among the k’s chosen, the Precision is intermediate (0.28) which could be duo to presence of outliers or sensitivity to Initial Centroid. We can also note that the WSS is 26.8%, which is an excellent percentage indicating a good compactness of clusters, and that objects in a cluster are similar to one another. Lastly, the average silhouette width is 0.34 which is cnsidered high. Although, there is an overlapping between the two clusters, where may be 
+
 ------------------------------------------------------------------------
 
-#### 2- Cluster K= 3
+### 2- Cluster K= 3:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1040,7 +1637,8 @@ kmeans.result <- kmeans(dataset, 3)
 kmeans.result
 ```
 
-##### visualize 3 clusters
+
+#### visualize 3 clusters
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1049,7 +1647,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 3 clusters
+#### average silhouette for 3 clusters
 
 ```{r}
 library(cluster)
@@ -1068,7 +1666,7 @@ kmeans.result$tot.withinss
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
-ground_truth_labels <- c(datasetBeforeClus$class)
+ground_truth_labels <- c(dataWithclass$class)
 
 data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
 
@@ -1117,7 +1715,7 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-#### 3- Cluster K= 4
+### 3- Cluster K= 4:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1128,7 +1726,7 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
-##### visualize 4 clusters
+#### visualize 4 clusters:
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1137,7 +1735,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 4 clusters
+#### average silhouette for 4 clusters
 
 ```{r}
 library(cluster)
@@ -1156,7 +1754,7 @@ kmeans.result$tot.withinss
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
-ground_truth_labels <- c(datasetBeforeClus$class)
+ground_truth_labels <- c(dataWithclass$class)
 
 data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
 
@@ -1205,18 +1803,17 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-table + fonding(best cluster)
 
-Comparison Criteria
+### Comparison Criteria:
 
-```{r}
-
-
-```
 
 | No. of Clusters                    | k=2       | k=3       | k=4       |
 |------------------------------------|-----------|-----------|-----------|
-| Average Silhouette width           | 0.63      | 0.54      |           |
-| Total within-cluster sum of square | 591064.6  | 310351.6  | 2330049.1 |
-| BCubed Precison                    | 0.2516112 | 0.2516393 | 0.2522583 |
-| BCubed Recall                      | 0.5454527 | 0.387276  | 0.2729353 |
+|Average Silhouette width for each cluter|cluter1=0.56,cluter2=0.67|cluter1=0.58 ,cluter2=0.60 ,cluter3=0.41 |  cluter1=0.55 ,cluter2=0.30 ,cluter3=0.37 ,cluter4=0.46 |
+| Average Silhouette width           | 0.63      | 0.54      | 0.42     |
+| Total within-cluster sum of square | 230049.1  | 310351.6  | 230049.1  |
+| BCubed Precison                    | 0.2522583 | 0.2516393 | 0.2522583 |
+| BCubed Recall                      | 0.2729353 | 0.387276  | 0.2729353 |
+| Visualization| all of the figures is shown above | all of the figures is shown above|all of the figures is shown above|
+
+
