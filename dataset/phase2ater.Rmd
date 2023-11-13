@@ -636,15 +636,14 @@ nrow(dataset)
 ncol(dataset)
 ```
 
-We noticed a decrease in the number of rows, which means that deletion
-the outliers was successful.
+We noticed a decrease in the number of rows, which means that deletion the outliers was successful.
 
 ------------------------------------------------------------------------
 
 ### Discretization :
 
 ```{r}
-#for clustering task:
+#To use it later in clustering task:
 AgeBeforeDis <- dataset$age
 ```
 
@@ -1372,12 +1371,47 @@ print(paste("Precision for Class 1:", precision[1]))
 |Specificity|61.95%|
 |Precision|61.95%|
 
+--------------------
+
+#### Classification Analysis:
+
+ID3:
+
+Accuracy for 70/30 partitioning: 0.576
+Accuracy for 75/25 partitioning: 0.578
+Accuracy for 80/20 partitioning: 0.5748
+C4.5:
+
+Accuracy for 70/30 partitioning: 0.5786
+Accuracy for 75/25 partitioning: 0.5758
+Accuracy for 80/20 partitioning: 0.573
+CART:
+
+Accuracy for 70/30 partitioning: 0.5786
+Accuracy for 75/25 partitioning: 0.5758
+Accuracy for 80/20 partitioning: 0.5737
+Analysis:
+
+  Overall, the accuracy values for the three decision tree algorithms (ID3, C4.5, and CART) are relatively close across different partition sizes.
+
+The highest accuracy is observed for C4.5 at 70/30 partitioning (0.5786), followed closely by CART and ID3 at the same partition size.
+
+ID3 performs consistently across different partition sizes, maintaining accuracy around 0.576 to 0.578.
+
+C4.5 and CART show slight variations in accuracy across partition sizes but generally stay close to each other.
+
+The impact of changing partition sizes on accuracy seems minimal, with fluctuations within a narrow range.
 
 ------------------------------------------------------------------------
 
 ### 5.2 Clustering:
+  Data clustering is the act of dividing data into distinct groups or clusters. It is an unsupervised learning technique, meaning it doesn't rely on known class labels "Class" in the training data. The data within each cluster share similarities with one another and differ from data in other clusters. In this case, we will employ the k-means clustering algorithm.
 
-#### Remove Class lable:
+### 1- Data prepreocessing before Clustering:
+  In order to optimize the performance of our models and achieve the most accurate results, it is crucial to preprocess certain attributes before applying data clustering techniques. 
+  where we will remove the class label and adding the old Age attribute "before discretizing", also we will convert all attribute into numeric:
+
+#### 1.1: Remove Class lable:
 
 For unsupervised learning, At first we need to removing class label "Class".
 
@@ -1392,56 +1426,30 @@ dataset <- dataset [,-which(names(dataset)== "class")]
 str(dataset)
 ```
 
-```{r}
-str(dataWithclass)
-```
-
-```{r}
-#in case we need the class attribute in clustering
-dataWithclass$class <- as.numeric(as.character(dataWithclass$class))
-
-#verify convert
-str(dataWithclass$class)
-```
+As Showing in data frame above, deletion the "calss" attribute was successful.
 
 ------------------------------------------------------------------------
 
-#### Add AgeBeforeDis:
+#### 1.2 Add AgeBeforeDis:
 
-Based on our previous findings about discretizing the age attribute, we
-discovered that using fixed intervals may not accurately represent the
-true distribution of the data. This can result in biased or inaccurate
-cluster assignments.
+Based on our previous findings about discretizing the age attribute, we discovered that using fixed intervals may not accurately represent the true distribution of the data. This can result in biased or inaccurate cluster assignments.
 
-To overcome this issue, we suggest removing the discretized age
-attribute and adding the original age attribute called "AgeBeforeDis".
-This change is expected to improve the performance of our model, make
-the analysis easier, and enable more straightforward comparisons between
-different group.
+To overcome this issue, we suggest removing the discretized age attribute and adding the original age attribute called "AgeBeforeDis". This change is expected to improve the performance of our model, make the analysis easier, and enable more straightforward comparisons between different group.
 
 ```{r}
 dataset$age <- AgeBeforeDis
 
 #verify updating
-str(dataset$age)
-```
-
-we notice that age attribute becomes on continuous value, which means
-updating age was successful.
-
-------------------------------------------------------------------------
-
-#### check datatype:
-
-for Clustering task all data types should be numeric.
-
-```{r}
 str(dataset)
 ```
 
-there is only one attribute that should be convert, which is gender
-attribute. Encoding gender attribute makes data type to Factor, so we
-should convert it to numeric.
+As Showing that age attribute becomes on continuous value, which means updating age was successful.
+
+------------------------------------------------------------------------
+
+#### 1.3 check datatype:
+
+  for Clustering task all data types should be numeric, and from the data frame from last chunk,there is only one attribute that should be convert, which is gender attribute. where Encoding gender attribute makes data type to Factor, so we should convert it to numeric before clustering.
 
 #### Convert gender attribute type to numeric:
 
@@ -1449,8 +1457,16 @@ should convert it to numeric.
 dataset$gender <- as.numeric(as.character(dataset$gender))
 
 # Verify the conversion
-str(dataset$gender)
+sapply(dataset, class)
 ```
+
+
+```{r ??}
+#scale all attributes in the dataset so they would be standardized 
+#dataset <- scale(dataset)
+```
+
+Now all attribute are numeric and scaled, so we are ready to perform k-means clustering.
 
 ------------------------------------------------------------------------
 
@@ -1460,6 +1476,7 @@ str(dataset$gender)
 
 ```{r}
 #install necessary packages:
+
 library(factoextra)
 library(fpc)
 library(cluster)
@@ -1467,7 +1484,8 @@ library(NbClust)
 ```
 
 
-#### 1- kmeansruns method:
+#### a) kmeansruns method:
+This function assigns data points to clusters based on proximity to centroids. To determine the optimal number of clusters,different techniques like the elbow method or silhouette analysis can be used. This helps identify the value of k that produces the best clustering performance.
 
 ```{r}
 library(fpc)
@@ -1484,7 +1502,8 @@ fviz_cluster(kmeansruns.result, data = dataset)
 
 ------------------------------------------------------------------------
 
-##### 2- Average silhouette method:
+##### b) Average silhouette method:
+This method calculates the average silhouette width for different values of k, determining how well data points fit into their assigned clusters. 
 
 ```{r}
 library(NbClust)
@@ -1493,12 +1512,13 @@ library(factoextra)
 fviz_nbclust(dataset, kmeans, method = "silhouette")+ labs(subtitle = "Silhouette method")
 ```
 
-From the plot above we noticed that k = 2 has the highest average sillhouette width approximately (0.6). This indicates a relatively well-defined and distinct separation between the clusters, suggesting a higher level of coherence within each cluster compared to other values of k.
+From the plot above we noticed that k = 2 has the highest average sillhouette width approximately (0.6). This indicates a relatively well-defined and distinct separation between the clusters, suggesting a higher level of coherence within each cluster compared to other values of k. 
 
 ------------------------------------------------------------------------
 
 ##### 3- total within-cluster sum of square method:
-
+  This method determines the number of clusters according to the turning point in a curve, the curve is plotted using the total within-cluster sum of square (WSS) as in y-axis, and Noumber of clusters in x-axis 
+  
 ```{r}
 library(factoextra) 
 
@@ -1507,22 +1527,23 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
   labs(subtitle = "Elbow method")
 ```
 
-The output of the this method recommends that we use k=4 cluster for our
-dataset.
+The output of the this method recommends that we use k=4 cluster for our dataset.
 
 ------------------------------------------------------------------------
 
 #### Visualization of Cluters:
 
-based on methods that we tasted earlier we determine to try k=2(highest
-average sillhouette width) , k=3(from Kmeansruns), k=4(total
-within-cluster sum of square method).
+In this section, we will perform k-means clustering and visualize its result using three different k’s that have been chosen based on methods that we tasted earlier
+k=2(highest average sillhouette width),
+k=3(from Kmeansruns), 
+k=4(total within-cluster sum of square method). 
+then we will compute WSS and Bcubed preceision and recall and average silhouette for each cluster as methods of evaluating clustering results.
 
-#### 1- Cluster K= 2
+### 1- Cluster K= 2
 
 Calculate K-means for k=2
 
-```{r}
+```{r here}
 #set a seed for random number generation to make the results reproducible
 set.seed(8953)
 
@@ -1532,14 +1553,14 @@ kmeans.result <- kmeans(dataset, 2)
 kmeans.result
 ```
 
-##### visualize 2 clusters
+#### visualize 2 clusters
 
 ```{r}
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 2 clusters
+#### average silhouette for 2 clusters
 
 ```{r}
 library(cluster)
@@ -1548,17 +1569,17 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-##### Within cluster sum of squares by cluster:
+#### Within cluster sum of squares by cluster:
 
 ```{r}
 kmeans.result$tot.withinss
 ```
 
-##### BCubed precision and recall for k=2:
+#### BCubed precision and recall for k=2:
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
-ground_truth_labels <- c(datasetBeforeClus$class)
+ground_truth_labels <- c(dataWithclass$class)
 
 data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
 
@@ -1607,7 +1628,7 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-#### 2- Cluster K= 3:
+### 2- Cluster K= 3:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1618,7 +1639,8 @@ kmeans.result <- kmeans(dataset, 3)
 kmeans.result
 ```
 
-##### visualize 3 clusters
+
+#### visualize 3 clusters
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1627,7 +1649,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 3 clusters
+#### average silhouette for 3 clusters
 
 ```{r}
 library(cluster)
@@ -1646,7 +1668,7 @@ kmeans.result$tot.withinss
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
-ground_truth_labels <- c(datasetBeforeClus$class)
+ground_truth_labels <- c(dataWithclass$class)
 
 data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
 
@@ -1695,7 +1717,7 @@ cat("BCubed Recall:", recall, "\n")
 
 ------------------------------------------------------------------------
 
-#### 3- Cluster K= 4:
+### 3- Cluster K= 4:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1706,7 +1728,7 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
-##### visualize 4 clusters:
+#### visualize 4 clusters:
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1715,7 +1737,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 4 clusters
+#### average silhouette for 4 clusters
 
 ```{r}
 library(cluster)
@@ -1734,7 +1756,7 @@ kmeans.result$tot.withinss
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
-ground_truth_labels <- c(datasetBeforeClus$class)
+ground_truth_labels <- c(dataWithclass$class)
 
 data <- data.frame(cluster = cluster_assignments, label = ground_truth_labels)
 
@@ -1784,12 +1806,15 @@ cat("BCubed Recall:", recall, "\n")
 ------------------------------------------------------------------------
 
 
-##### Comparison Criteria
+### Comparison Criteria:
 
 
 | No. of Clusters                    | k=2       | k=3       | k=4       |
 |------------------------------------|-----------|-----------|-----------|
-| Average Silhouette width           | 0.63      | 0.54      |           |
-| Total within-cluster sum of square | 591064.6  | 310351.6  | 230049.1  |
-| BCubed Precison                    | 0.2516112 | 0.2516393 | 0.2522583 |
-| BCubed Recall                      | 0.5454527 | 0.387276  | 0.2729353 |
+|Average Silhouette width for each cluter|cluter1=0.56,cluter2=0.67|cluter1=0.58 ,cluter2=0.60 ,cluter3=0.41 |  cluter1=0.55 ,cluter2=0.30 ,cluter3=0.37 ,cluter4=0.46 |
+| Average Silhouette width           | 0.63      | 0.54      | 0.42     |
+| Total within-cluster sum of square | 230049.1  | 310351.6  | 230049.1  |
+| BCubed Precison                    | 0.2522583 | 0.2516393 | 0.2522583 |
+| BCubed Recall                      | 0.2729353 | 0.387276  | 0.2729353 |
+
+
