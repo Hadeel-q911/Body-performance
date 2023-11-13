@@ -1167,5 +1167,8 @@ plot(k.values, avg_sil_values,
 
 
 
+```{r}
+
+```
 
 
