@@ -933,13 +933,13 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
   geom_vline(xintercept = 4, linetype = 4)+
   labs(subtitle = "Elbow method")
 ```
-
+The output of the this method recommends that we use k=4 cluster for our dataset.
 
 -----------------------------
 
 #### Visualization of Cluters:
 
-based on methods that we tasted earlier we determine to try k=2(highest average sillhouette width) , k=3(from Kmeansruns), k=4.
+based on methods that we tasted earlier we determine to try k=2(highest average sillhouette width) , k=3(from Kmeansruns), k=4(total within-cluster sum of square method).
 
 #### 1- Cluster K= 2
 
