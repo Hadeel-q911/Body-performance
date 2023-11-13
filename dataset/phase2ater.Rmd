@@ -6,6 +6,8 @@ editor_options:
     wrap: 72
 ---
 
+### 1. Problem:
+
 ### Goal :
 
 The primary objective of this project is to emphasize the significance
@@ -17,13 +19,7 @@ awareness of its importance.
 
 ------------------------------------------------------------------------
 
-### 1. Problem:
-
-------------------------------------------------------------------------
-
 ### 2. Data Mining task:
-
-
 
 #### Classification gaol :
 
@@ -739,9 +735,11 @@ train_data=dataset[ind==1,]
 test_data=dataset[ind==2,]
 dim(train_data)
 dim(test_data)
+
 # Check class distribution in training set
 table(train_data$class)
 prop.table(table(train_data$class))
+
 # Check class distribution in testing set
 table(test_data$class)
 prop.table(table(test_data$class))
@@ -783,7 +781,7 @@ rpart_model <- model$finalModel
 rpart.plot(rpart_model,main="ID3 70/30", box.palette = "auto", nn = TRUE)
 ```
 
-We applied two decision tree representations which are regular and simple tree.The result shows that Chest pain type (cp) had the highest information gain value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest information gain. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -849,7 +847,7 @@ rpart_model <- model$finalModel
 rpart.plot(rpart_model,main="c4.5 70/30", box.palette = "auto", nn = TRUE)
 ```
 
-We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest gain ratio. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -910,7 +908,7 @@ rpart_model <- model$finalModel
 rpart.plot(rpart_model, main = "Decision Tree for CART 70/30")
 ```
 
-We applied decision tree representation.The result shows that A blood disorder (thal) had the highest ΔGini (impurity reduction) value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex (impurity reduction) values. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1002,7 +1000,7 @@ rpart_model <- model$finalModel
 rpart.plot(rpart_model,main="ID3 75/25", box.palette = "auto", nn = TRUE)
 ```
 
-We applied two decision tree representations which are regular and simple tree.The result shows that Chest pain type (cp) had the highest information gain value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest information gain. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1065,7 +1063,7 @@ rpart_model <- model$finalModel
 rpart.plot(rpart_model,main="c4.5 75/25", box.palette = "auto", nn = TRUE)
 ```
 
-We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest gain ratio. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1122,11 +1120,11 @@ library(rpart.plot)
 rpart_model <- model$finalModel
 
 # Print the decision tree
-rpart.plot(rpart_model, main = "Decision Tree for CART 70/30")
+rpart.plot(rpart_model, main = "Decision Tree for CART 75/25")
 ```
 
 
-We applied decision tree representation.The result shows that A blood disorder (thal) had the highest ΔGini (impurity reduction) value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex (impurity reduction) values. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1212,11 +1210,11 @@ library(rpart.plot)
 rpart_model <- model$finalModel
 
 # Print the decision tree
-rpart.plot(rpart_model, box.palette = "auto", nn = TRUE)
+rpart.plot(rpart_model, box.palette = "auto", nn = TRUE, main = "Decision Tree for CART 80/20")
 ```
 
 
-  We applied two decision tree representations which are regular and simple tree.The result shows that Chest pain type (cp) had the highest information gain value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest information gain. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1275,10 +1273,10 @@ library(rpart.plot)
 rpart_model <- model$finalModel
 
 # Print the decision tree
-rpart.plot(rpart_model,main="c4.5 75/25", box.palette = "auto", nn = TRUE)
+rpart.plot(rpart_model,main="c4.5 80/20", box.palette = "auto", nn = TRUE)
 ```
 
-We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest gain ratio. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1337,7 +1335,7 @@ rpart_model <- model$finalModel
 rpart.plot(rpart_model, main = "Decision Tree for CART 80/20")
 ```
 
-We applied decision tree representation.The result shows that A blood disorder (thal) had the highest ΔGini (impurity reduction) value so it was represented in first level (root). 
+The decision tree representation was utilized, and the findings indicate that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex (impurity reduction) values. As a result, it was placed at the root level, representing the first level of the tree.
 
 ###### Prediction on test data and Confusion matrix:
 
@@ -1816,5 +1814,6 @@ cat("BCubed Recall:", recall, "\n")
 | Total within-cluster sum of square | 230049.1  | 310351.6  | 230049.1  |
 | BCubed Precison                    | 0.2522583 | 0.2516393 | 0.2522583 |
 | BCubed Recall                      | 0.2729353 | 0.387276  | 0.2729353 |
+??????????
 
 
