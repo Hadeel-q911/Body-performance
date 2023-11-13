@@ -1588,7 +1588,7 @@ sum of square (WSS) as in y-axis, and Noumber of clusters in x-axis
 library(factoextra) 
 
 fviz_nbclust(dataset, kmeans, method = "wss") +
-  geom_vline(xintercept = 3, linetype = 4)+
+  geom_vline(xintercept = 4, linetype = 4)+
   labs(subtitle = "Elbow method")
 ```
 
