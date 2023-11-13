@@ -63,7 +63,7 @@ them have 11 attributes.
 Table 1 : Data dictionary showing description of all Attributes
 
 | name                    | description                                                                                           | data type | possible value |
-|------------------|--------------------|------------------|------------------|
+|-----------|---------------------------------------|-----------|-----------|
 | Age                     | The person's age in years                                                                             | numerical | 21-64          |
 | Gender                  | The person's gender                                                                                   | binary    | F,M            |
 | Height_cm               | The person's Height in cm                                                                             | numerical | 125-194        |
@@ -95,7 +95,6 @@ str(dataset)
 print(dataset)
 ```
 
-
 ```{r}
 #Number of rows
 nrow(dataset)
@@ -119,14 +118,11 @@ dataset$class = factor(dataset$class,levels =
                         c("A","B", "C","D"), labels = c(1, 2, 3,4))
 ```
 
-
-
 ```{r}
  #encoding Gender:
 dataset$gender = factor(dataset$gender,levels =
                          c("F","M"), labels = c(0,1))
 ```
-
 
 ------------------------------------------------------------------------
 
@@ -158,7 +154,6 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
      xlab = "gender", ylab = "class",
      xlim = c(0,1), ylim = c(0,4))
 ```
-
 
 ------------------------------------------------------------------------
 
@@ -274,7 +269,6 @@ we found 1 row that's duplicate that need to be deleted.
 #Remove duplicated rows 
 dataset <- dataset[!duplicated (dataset), ]
 ```
-
 
 ```{r}
 #To make sure that the deletion was successful 
@@ -644,13 +638,11 @@ the outliers was successful.
 AgeBeforeDis <- dataset$age
 ```
 
-
 We transformed the continuous vales of the age into intervals by
 dividing the values to be fall on one of three possible interval labels
 with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by
 discretisation the values well be meaningful and simpler to classify or
 perform other methods that can help us later in our model.
-
 
 ```{r}
 # Define bins for discretization
@@ -686,14 +678,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #age attribute
 contingency_table <- table(dataset$age, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #height_cm attribute
@@ -702,14 +692,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #weight_kg attribute
 contingency_table <- table(dataset$weight_kg, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #body.fat_.  attribute
@@ -718,14 +706,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #diastolic  attribute
 contingency_table <- table(dataset$diastolic, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #systolic attribute
@@ -734,14 +720,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #gripForce attribute
 contingency_table <- table(dataset$gripForce, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #sit.and.bend.forward_cm attribute
@@ -750,14 +734,12 @@ chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
 
-
 ```{r}
 #sit.ups.counts attribute
 contingency_table <- table(dataset$sit.ups.counts, dataset$class)
 chi_square_result <- chisq.test(contingency_table)
 print(chi_square_result)
 ```
-
 
 ```{r}
 #broad.jump_cm attribute
@@ -795,15 +777,16 @@ consider all attributes without performing feature selection.
 
 ------------------------------------------------------------------------
 
-### 5.1 Classification:                                                                                              
-
+### 5.1 Classification:
 
 ------------------------------------------------------------------------
 
-### 5.2 Clustering:  
+### 5.2 Clustering:
 
 #### Remove Class lable:
-For unsupervised learning, At first we need to removing class label "Class".
+
+For unsupervised learning, At first we need to removing class label
+"Class".
 
 ```{r}
 #in case we need the old dataset (with class label)
@@ -818,10 +801,17 @@ str(dataset)
 ------------------------------------------------------------------------
 
 #### Add AgeBeforeDis:
-Based on our previous findings about discretizing the age attribute, we discovered that using fixed intervals may not accurately represent the true distribution of the data. This can result in biased or inaccurate cluster assignments.
 
-To overcome this issue, we suggest removing the discretized age attribute and adding the original age attribute called "AgeBeforeDis". 
-This change is expected to improve the performance of our model, make the analysis easier, and enable more straightforward comparisons between different group.
+Based on our previous findings about discretizing the age attribute, we
+discovered that using fixed intervals may not accurately represent the
+true distribution of the data. This can result in biased or inaccurate
+cluster assignments.
+
+To overcome this issue, we suggest removing the discretized age
+attribute and adding the original age attribute called "AgeBeforeDis".
+This change is expected to improve the performance of our model, make
+the analysis easier, and enable more straightforward comparisons between
+different group.
 
 ```{r}
 dataset$age <- AgeBeforeDis
@@ -830,20 +820,22 @@ dataset$age <- AgeBeforeDis
 str(dataset)
 ```
 
-
-we notice that age attribute becomes on continuous value, which means updating age was successful.
+we notice that age attribute becomes on continuous value, which means
+updating age was successful.
 
 ------------------------------------------------------------------------
 
 #### check datatype:
+
 for Clustering task all data types should be numeric type.
 
 ```{r}
 str(dataset)
 ```
 
-there is only one attribute that should be convert, which is gender attribute. Encoding gender attribute makes data type to Factor, so we should convert it to numeric.
-
+there is only one attribute that should be convert, which is gender
+attribute. Encoding gender attribute makes data type to Factor, so we
+should convert it to numeric.
 
 #### Convert gender attribute type to numeric:
 
@@ -856,33 +848,33 @@ str(dataset$gender)
 
 ------------------------------------------------------------------------
 
+#\_\_\_\_\_\_\_\_\_\_\_\_\_\_هذا الكلام لنا بعدين
+بنحذفه\_\_\_\_\_\_\_\_\_\_\_\_
 
-#______________هذا الكلام لنا بعدين بنحذفه____________
-
-#From Project Description:
--Apply K-means clustering to your dataset using at least three different
-sizes of K. You have to justify your choice for size K (we tried k=4, k=
-,k=)
+#From Project Description: -Apply K-means clustering to your dataset
+using at least three different sizes of K. You have to justify your
+choice for size K (we tried k=4, k= ,k=)
 
 -then compare and discuss the results using different evaluation methods
 
-and
-metrics Silhouette coefficient , 
-total within-cluster sum of square
+and metrics Silhouette coefficient , total within-cluster sum of square
 BCubed precision and recall
 
 -Use visual representation and try your best to interpret the results
 and to understand the algorithms performance.
 
 -you have to try at least three different sizes of K and report the
-Silhouette coefficient,
-the total within-cluster sum of squares,
-BCubed precision and recall.
-
+Silhouette coefficient, the total within-cluster sum of squares, BCubed
+precision and recall.
 
 ### determine and visualize optimal number of clusters:
 
-In order to determine the optimal number of clusters (k) for our dataset, we will experiment with three different sizes of k for clustering. To assist with this determination, we will employ various methods( kmeansruns, calculate the average silhouette ,total within-cluster sum of square and the BCubed(precision and recall) ) that aid in identifying the most suitable k value for our specific dataset.
+In order to determine the optimal number of clusters (k) for our
+dataset, we will experiment with three different sizes of k for
+clustering. To assist with this determination, we will employ various
+methods( kmeansruns, calculate the average silhouette ,total
+within-cluster sum of square and the BCubed(precision and recall) ) that
+aid in identifying the most suitable k value for our specific dataset.
 
 ```{r}
 #install necessary packeges:
@@ -892,7 +884,6 @@ library(cluster)
 library(NbClust)
 ```
 
-
 ##### 1- kmeansruns method:
 
 ```{r}
@@ -901,15 +892,15 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result 
 ```
 
-
 ```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
+According to the method's output, method suggests using k=3 cluster for
+our dataset, and we'll try another approach to see what performs best
+between them.
 
-According to the method's output, method suggests using k=3 cluster for our dataset, and we'll try another approach to see what performs best between them.
-
-----------------------------
+------------------------------------------------------------------------
 
 ##### 2- Average silhouette method:
 
@@ -920,9 +911,13 @@ library(factoextra)
 fviz_nbclust(dataset, kmeans, method = "silhouette")+ labs(subtitle = "Silhouette method")
 ```
 
-From the plot above we noticed that k = 2 has the highest average sillhouette width approximately (0.6). This indicates a relatively well-defined and distinct separation between the clusters, suggesting a higher level of coherence within each cluster compared to other values of k.
+From the plot above we noticed that k = 2 has the highest average
+sillhouette width approximately (0.6). This indicates a relatively
+well-defined and distinct separation between the clusters, suggesting a
+higher level of coherence within each cluster compared to other values
+of k.
 
-----------------------
+------------------------------------------------------------------------
 
 ##### 3- total within-cluster sum of square method:
 
@@ -933,13 +928,17 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
   geom_vline(xintercept = 4, linetype = 4)+
   labs(subtitle = "Elbow method")
 ```
-The output of the this method recommends that we use k=4 cluster for our dataset.
 
------------------------------
+The output of the this method recommends that we use k=4 cluster for our
+dataset.
+
+------------------------------------------------------------------------
 
 #### Visualization of Cluters:
 
-based on methods that we tasted earlier we determine to try k=2(highest average sillhouette width) , k=3(from Kmeansruns), k=4(total within-cluster sum of square method).
+based on methods that we tasted earlier we determine to try k=2(highest
+average sillhouette width) , k=3(from Kmeansruns), k=4(total
+within-cluster sum of square method).
 
 #### 1- Cluster K= 2
 
@@ -955,14 +954,12 @@ kmeans.result <- kmeans(dataset, 2)
 kmeans.result
 ```
 
-
 ##### visualize 2 clusters
 
 ```{r}
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
-
 
 ##### average silhouette for 2 clusters
 
@@ -973,7 +970,7 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-##### Within cluster sum of squares by cluster: 
+##### Within cluster sum of squares by cluster:
 
 ```{r}
 kmeans.result$tot.withinss
@@ -1030,12 +1027,9 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
-
-----------------------------
+------------------------------------------------------------------------
 
 #### 2- Cluster K= 3
-
-
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1045,7 +1039,6 @@ kmeans.result <- kmeans(dataset, 3)
 # print the clusterng result
 kmeans.result
 ```
-
 
 ##### visualize 3 clusters
 
@@ -1065,8 +1058,7 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-
-##### Within cluster sum of squares by cluster: 
+##### Within cluster sum of squares by cluster:
 
 ```{r}
 kmeans.result$tot.withinss
@@ -1123,8 +1115,7 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
-
------------------------------
+------------------------------------------------------------------------
 
 #### 3- Cluster K= 4
 
@@ -1136,7 +1127,6 @@ kmeans.result <- kmeans(dataset, 4)
 # print the clusterng result
 kmeans.result
 ```
-
 
 ##### visualize 4 clusters
 
@@ -1156,13 +1146,11 @@ avg_sil <- silhouette(kmeans.result$cluster,dist(dataset))
 fviz_silhouette(avg_sil)
 ```
 
-
-##### Within cluster sum of squares by cluster: 
+##### Within cluster sum of squares by cluster:
 
 ```{r}
 kmeans.result$tot.withinss
 ```
-
 
 ##### BCubed precision and recall:
 
@@ -1215,16 +1203,21 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
-
-----------------
+------------------------------------------------------------------------
 
 table + fonding(best cluster)
 
-
-
+Comparison Criteria
 
 ```{r}
 
+
 ```
 
-
+| No. of Clusters                    |  k=2              |  k=3             |  k=4            |
+|------------------------|----------------|----------------|----------------|
+| Average Silhouette width           |                   |                  |                 |
+| Total within-cluster sum of square |                   |                  |                 |
+| BCubed precison                    |                   |                  |                 |
+| BCubed recall                      |                   |                  |                 |
+| Visualization                      |                   |                  |                 |
