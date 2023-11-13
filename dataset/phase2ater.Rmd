@@ -63,7 +63,7 @@ them have 11 attributes.
 Table 1 : Data dictionary showing description of all Attributes
 
 | name                    | description                                                                                           | data type | possible value |
-|-----------|---------------------------------------|-----------|-----------|
+|-------------|---------------------------------|-------------|-------------|
 | Age                     | The person's age in years                                                                             | numerical | 21-64          |
 | Gender                  | The person's gender                                                                                   | binary    | F,M            |
 | Height_cm               | The person's Height in cm                                                                             | numerical | 125-194        |
@@ -976,7 +976,7 @@ fviz_silhouette(avg_sil)
 kmeans.result$tot.withinss
 ```
 
-##### BCubed precision and recall:
+##### BCubed precision and recall for k=2:
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
@@ -1064,7 +1064,7 @@ fviz_silhouette(avg_sil)
 kmeans.result$tot.withinss
 ```
 
-##### BCubed precision and recall:
+##### BCubed precision and recall for k=3:
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
@@ -1137,7 +1137,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-##### average silhouette for 3 clusters
+##### average silhouette for 4 clusters
 
 ```{r}
 library(cluster)
@@ -1152,7 +1152,7 @@ fviz_silhouette(avg_sil)
 kmeans.result$tot.withinss
 ```
 
-##### BCubed precision and recall:
+##### BCubed precision and recall for k=4:
 
 ```{r}
 cluster_assignments <- c(kmeans.result$cluster)
@@ -1214,10 +1214,9 @@ Comparison Criteria
 
 ```
 
-| No. of Clusters                    |  k=2              |  k=3             |  k=4            |
-|------------------------|----------------|----------------|----------------|
-| Average Silhouette width           |                   |                  |                 |
-| Total within-cluster sum of square |                   |                  |                 |
-| BCubed precison                    |                   |                  |                 |
-| BCubed recall                      |                   |                  |                 |
-| Visualization                      |                   |                  |                 |
+| No. of Clusters                    | k=2       | k=3       | k=4       |
+|------------------------------------|-----------|-----------|-----------|
+| Average Silhouette width           | 0.63      | 0.54      |           |
+| Total within-cluster sum of square | 591064.6  | 310351.6  | 2330049.1 |
+| BCubed Precison                    | 0.2516112 | 0.2516393 | 0.2522583 |
+| BCubed Recall                      | 0.5454527 | 0.387276  | 0.2729353 |
