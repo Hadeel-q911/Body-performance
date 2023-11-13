@@ -710,12 +710,12 @@ consider all attributes without performing feature selection.
 
 ### 5 Dara Mining Task:
 
-
 ### 5.1 Classification:
-### Classification:
+
+  Our classification objective is to develop a predictive model for our dataset with class labels A, B, C, and D based on various attributes. To address the challenge of a small dataset, we will employ a partitioning strategy suitable for limited data, utilizing three different sizes for training and testing sets. We will adopt the sampling method, allowing replacement of attributes with 'True' values. For each partition size, we will build three decision trees, employing distinct attribute selection methods: Information Gain (ID3), Gain Ratio (C4.5), and Gini Index (CART). The prediction will be carried out using the 'predict' method. Evaluation and testing will be performed using the 'confusionMatrix' method.
 
 #### Classification packages:
-We install and call predifined packages in R language to help us in classification process. which shown below:
+  We install and call predifined packages in R language to help us in classification process. which shown below:
 
 ```{r}
 library(party)
@@ -819,7 +819,6 @@ The above matrix is based on applying our model on test data.
 |Sensitivity(Recall)|43.88%|
 |Specificity|60,5%|
 |Precision|60.5%%|
-
 
 
 -----------------------------------------------------------
@@ -1387,10 +1386,22 @@ For unsupervised learning, At first we need to removing class label "Class".
 dataWithclass <-dataset 
 
 #delete class label
-dataset <- dataset[,-which(names(dataset) == "class")
+dataset <- dataset [,-which(names(dataset)== "class")]                    
 
 #varify removing class
 str(dataset)
+```
+
+```{r}
+str(dataWithclass)
+```
+
+```{r}
+#in case we need the class attribute in clustering
+dataWithclass$class <- as.numeric(as.character(dataWithclass$class))
+
+#verify convert
+str(dataWithclass$class)
 ```
 
 ------------------------------------------------------------------------
@@ -1412,7 +1423,7 @@ different group.
 dataset$age <- AgeBeforeDis
 
 #verify updating
-str(dataset)
+str(dataset$age)
 ```
 
 we notice that age attribute becomes on continuous value, which means
