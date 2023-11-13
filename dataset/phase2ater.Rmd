@@ -1585,11 +1585,11 @@ point in a curve, the curve is plotted using the total within-cluster
 sum of square (WSS) as in y-axis, and Noumber of clusters in x-axis
 
 ```{r}
-#library(factoextra) 
+library(factoextra) 
 
-#fviz_nbclust(dataset, kmeans, method = "wss") +
-  #geom_vline(xintercept = 4, linetype = 4)+
-  #labs(subtitle = "Elbow method")
+fviz_nbclust(dataset, kmeans, method = "wss") +
+  geom_vline(xintercept = 4, linetype = 4)+
+  labs(subtitle = "Elbow method")
 ```
 
 The output of the this method recommends that we use k=4 cluster for our
@@ -1876,6 +1876,12 @@ recall <- metrics$recall
 cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
+
+-The average silhouette width of 0.42 suggests a moderate level of separation between clusters, indicating that the clusters are distinguishable, but there may be some overlap.
+-The lower WCSS indicates that the clusters are relatively compact, with instances within each cluster being closer to each other.
+
+-The BCubed metrics : A Precision of 0.25 means that about 25% of instances within the same cluster have the same ground truth label. A Recall of 0.27 means that about 27% of instances with the same ground truth label are in the same cluster.
+
 
 ------------------------------------------------------------------------
 
