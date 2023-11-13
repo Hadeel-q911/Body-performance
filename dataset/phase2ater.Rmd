@@ -794,11 +794,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -808,6 +811,7 @@ print(paste("Precision for Class 1:", precision[1]))
 The above matrix is based on applying our model on test data.
 
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy| 57.6%|
@@ -845,7 +849,6 @@ rpart_model <- model$finalModel
 
 # Print the decision tree
 rpart.plot(rpart_model,main="c4.5 70/30", box.palette = "auto", nn = TRUE)
-
 ```
 
 We applied two decision tree representations which are regular and simple tree.The result shows A blood disorder (thal) had the highest gain ratio value so it was represented in first level (root). 
@@ -858,11 +861,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -871,7 +877,9 @@ print(paste("Precision for Class 1:", precision[1]))
 
 
 The above matrix is based on applying our model on test data.
+
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy|57.86%|
@@ -914,11 +922,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -927,7 +938,9 @@ print(paste("Precision for Class 1:", precision[1]))
 
 
 The above matrix is based on applying our model on test data.
+
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy|57.86%|
@@ -949,9 +962,11 @@ train_data=dataset[ind==1,]
 test_data=dataset[ind==2,]
 dim(train_data)
 dim(test_data)
+
 # Check class distribution in training set
 table(train_data$class)
 prop.table(table(train_data$class))
+
 # Check class distribution in testing set
 table(test_data$class)
 prop.table(table(test_data$class))
@@ -999,11 +1014,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -1014,6 +1032,7 @@ print(paste("Precision for Class 1:", precision[1]))
 The above matrix is based on applying our model on test data.
 
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy|57.8%|
@@ -1058,11 +1077,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -1116,11 +1138,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -1129,6 +1154,7 @@ print(paste("Precision for Class 1:", precision[1]))
 
 
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy|57.58|
@@ -1202,11 +1228,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -1216,6 +1245,7 @@ print(paste("Precision for Class 1:", precision[1]))
 
 The above matrix is based on applying our model on test data.
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy|57.48%|
@@ -1260,11 +1290,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -1273,6 +1306,7 @@ print(paste("Precision for Class 1:", precision[1]))
 
 
 ####Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
 |Accuracy|57.37%|
@@ -1315,11 +1349,14 @@ testPred<- factor(testPred)
 test_data$class <- factor(test_data$class)
 results<- confusionMatrix(testPred,test_data$class)
 conf_matrix <- results$table
+
 print(results)
+
 error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
 precision <- diag(conf_matrix) / rowSums(conf_matrix)
 specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
 sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
 print(paste("specificity:", specificity))
 print(paste("sensitivity", sensitivity))
 print(paste("Error Rate:", error_rate))
@@ -1327,13 +1364,14 @@ print(paste("Precision for Class 1:", precision[1]))
 ```
 
 #### Schedule for classification Evaluation:
+
 |Evaluation method|value|
 |-----------------|-----|
-|Accuracy|   |
-|Error Rate|  |
-|Sensitivity(Recall)|  |
-|Specificity|  |
-|Precision|  |
+|Accuracy|57.37%|
+|Error Rate|42.63%|
+|Sensitivity(Recall)|43.32%|
+|Specificity|61.95%|
+|Precision|61.95%|
 
 
 ------------------------------------------------------------------------
@@ -1349,7 +1387,7 @@ For unsupervised learning, At first we need to removing class label "Class".
 dataWithclass <-dataset 
 
 #delete class label
-dataset <- dataset[, -which(names(dataset) == "class")
+dataset <- dataset[,-which(names(dataset) == "class")
 
 #varify removing class
 str(dataset)
