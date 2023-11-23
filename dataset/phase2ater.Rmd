@@ -6,7 +6,7 @@ editor_options:
     wrap: 72
 ---
 
-### 1. Problem:
+## 1. Problem:
 
 With the increasing prevalence of smartphones, technology has had a
 profound impact on our daily lives, including how we interact with our
@@ -28,9 +28,9 @@ awareness of its importance.
 
 ------------------------------------------------------------------------
 
-### 2. Data Mining task:
+## 2. Data Mining task:
 
-#### 2.1 Classification gaol :
+#### 2.1 Classification goal :
 
 Using the attribute "class" as our class label, we employ a
 classification approach to categorize individuals into different levels
@@ -40,7 +40,7 @@ indicators, and activity levels. Our objective extends beyond
 classification, as we also strive to predict performance outcomes by
 leveraging the collected data.
 
-#### 2.2 Clustering gaol :
+#### 2.2 Clustering goal :
 
 Our primary goal in utilizing clustering on our dataset is to identify
 inherent patterns or groupings within the data. By applying clustering
@@ -52,37 +52,70 @@ valuable knowledge or trends that may be hidden within the dataset.
 
 ------------------------------------------------------------------------
 
-### 3. Data:
+## 3. Data:
 
-#### 3.1: Data Source :
+### 3.1: Data Source :
 
-It from Kaggle website , The
+Body performance dataset it from Kaggle website , The
 link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>)
 show the source data.
 
 ### 3.2: General Information about Body performance dataset :
 
-Our dataset is called "Body performance" , The dataset provide the grade
+Our dataset is called "Body performance" ,the dataset provide the grade
 of performance and some data such as gender and age along with body
-measurements and other performance tests , It has 13394 row and each of
-them have 11 attributes.
+measurements and other performance tests ,it has 13394 row and each of
+them have 12 attributes.
 
-Table 1 : Data dictionary showing description of all Attributes
++----------+--------------------------------+----------+----------+
+| name     | description                    | data     | p        |
+|          |                                | type     | ossible  |
+|          |                                |          | value    |
++==========+================================+==========+==========+
+| Age      | The person's age in years      | nu       | 21-64    |
+|          |                                | merical  |          |
++----------+--------------------------------+----------+----------+
+| Gender   | The person's gender            | binary   | F,M      |
++----------+--------------------------------+----------+----------+
+| He       | The person's Height in cm      | nu       | 125-194  |
+| ight_cm  |                                | merical  |          |
++----------+--------------------------------+----------+----------+
+| we       | The person's weight in Kg      | nu       | 2        |
+| ight_kg  |                                | merical  | 6.3-138  |
++----------+--------------------------------+----------+----------+
+| body     | the amount of essential fat .  | nu       | 3        |
+| fat\_%   |                                | merical  | %-78.4%  |
++----------+--------------------------------+----------+----------+
+| di       | measures pressure the blood    | nu       | 0-156    |
+| astolic  | vessels when the heart is at   | merical  |          |
+|          | rest                           |          |          |
++----------+--------------------------------+----------+----------+
+| s        | measures pressure in the       | nu       | 0-201    |
+| ystolic  | arteries when the heart beats  | merical  |          |
+|          | in minutes                     |          |          |
++----------+--------------------------------+----------+----------+
+| gr       | fingers flexibility tests      | nu       | 0-70.5   |
+| ipForce  |                                | merical  |          |
++----------+--------------------------------+----------+----------+
+| sit and  | measures flexibility in        | nu       | -25-213  |
+| bend for | sitting and bending forward in | merical  |          |
+| ward_cm  | centimeters.                   |          |          |
++----------+--------------------------------+----------+----------+
+| sit-ups  | measures the strength and      | nu       | 0-80     |
+| co       | endurance of the abdominals    | merical  |          |
+| unts_cm  | and hip-flexor muscles in      |          |          |
+|          | centimeter.                    |          |          |
++----------+--------------------------------+----------+----------+
+| broad    | It is a method of measuring    | nu       | 0-303    |
+| jump_cm  | how far a person can jump from | merical  |          |
+|          | a standing position to a       |          |          |
+|          | landing position.              |          |          |
++----------+--------------------------------+----------+----------+
+| class    | body performance score         | nu       | A,B,C,D  |
+|          |                                | merical  |          |
++----------+--------------------------------+----------+----------+
 
-| name                    | description                                                                                           | data type | possible value |
-|---------------|-----------------------------|---------------|---------------|
-| Age                     | The person's age in years                                                                             | numerical | 21-64          |
-| Gender                  | The person's gender                                                                                   | binary    | F,M            |
-| Height_cm               | The person's Height in cm                                                                             | numerical | 125-194        |
-| weight_kg               | The person's weight in Kg                                                                             | numerical | 26.3-138       |
-| body fat\_%             | the amount of essential fat .                                                                         | numerical | 3%-78.4%       |
-| diastolic               | measures pressure the blood vessels when the heart is at rest                                         | numerical | 0-156          |
-| systolic                | measures pressure in the arteries when the heart beats in minutes                                     | numerical | 0-201          |
-| gripForce               | fingers flexibility tests                                                                             | numerical | 0-70.5         |
-| sit and bend forward_cm | measures flexibility in sitting and bending forward in centimeters.                                   | numerical | -25-213        |
-| sit-ups counts_cm       | measures the strength and endurance of the abdominals and hip-flexor muscles in centimeter.           | numerical | 0-80           |
-| broad jump_cm           | It is a method of measuring how far a person can jump from a standing position to a landing position. | numerical | 0-303          |
-| class                   | body performance score                                                                                | numerical | A,B,C,D        |
+: Table 1: Data dictionary attributes
 
 ------------------------------------------------------------------------
 
@@ -96,7 +129,7 @@ str(dataset)
 
 ------------------------------------------------------------------------
 
-### 4. Data Preptocessing:
+## 4. Data Preprocessing:
 
 ### 4.1 performance dataset before preprocessing:
 
@@ -107,6 +140,7 @@ print(dataset)
 ```{r}
 #Number of rows
 nrow(dataset)
+
 #Number of column
 ncol(dataset)
 ```
@@ -135,7 +169,7 @@ dataset$gender = factor(dataset$gender,levels =
 
 ------------------------------------------------------------------------
 
-### 4.5 check if the dataset is balanced or imbalanced (Class boxplot) :
+### Check if the dataset is balanced or imbalanced (Class boxplot) :
 
 After encoding the attribute (class) We employ a Boxplot graph on our
 class label (class) to ascertain whether our dataset is balanced or not.
@@ -187,10 +221,10 @@ plot(dataset$height_cm, dataset$weight_kg, main = "Body Measurement",
 
 Observation:
 
-he histogram represents the frequency distribution of body fat values.
+the histogram represents the frequency distribution of body fat values.
 We observe that the majority of values lie within the range of 10-30.
 However, the histogram also reveals the presence of outliers in the
-dataset .
+dataset.
 
 ```{r}
 hist(dataset$body.fat_.)
@@ -207,9 +241,43 @@ diastolic. The plot shows no correlation between the two attributes,
 indicating no proportional relationship
 
 ```{r}
-plot(dataset$age, dataset$diastolic, main = "Bold pressure of Males abd famales", 
+plot(dataset$age, dataset$diastolic, main = "", 
      xlab = "age", ylab = "diastolic",
      xlim = c(20,64), ylim = c(0,200))
+```
+
+------------------------------------------------------------------------
+
+#### 5- Scatter plot of age and gripForce:
+
+Observation: The grapgic shows a decline in grip force as age increases.
+This trend indicates that with age, the strength and efficiency of the
+grip force may decrease, This data highlights the importance of
+understanding and managing age-related changes in physical performance
+and functional abilities.
+
+```{r}
+plot(dataset$age, dataset$gripForce, main = "", 
+     xlab = "age", ylab = "gripForce",
+     xlim = c(20,64), ylim = c(20,71 ))
+```
+
+------------------------------------------------------------------------
+
+#### 6- Scatter plot of broad.jump_cm and weight_kg, :
+
+By examining the data in the scatter plot, we can identify potential
+trends or patterns. For example, we might notice that athletes with
+higher weights tend to have longer broad jump distances. This could
+indicate a relationship between weight and broad jump performance,
+potentially due to differences in body composition, muscle mass, or
+overall strength.
+
+```{r}
+dataset
+plot(dataset$broad.jump_cm, dataset$weight_kg, 
+     xlab = "broad.jump_cm", ylab = "weight_kg",
+     xlim = c(0,303), ylim = c(26.3,138 ))
 ```
 
 ------------------------------------------------------------------------
@@ -260,11 +328,8 @@ summary(dataset$sit.ups.counts)
 
 ### 4.4 Check duplicated rows:
 
-We check if there are any duplicated rows to decrease dataset volume.
-Hence enhancing data quality which leads to better model performance and
-speed.
-
-witch there's no duplicated rows as showing:
+We check if there are any duplicated rows. that enhancing data quality
+which leads to better model performance and speed.
 
 ```{r}
 sum(duplicated(dataset))
@@ -281,6 +346,8 @@ dataset <- dataset[!duplicated (dataset), ]
 #To make sure that the deletion was successful 
 sum(duplicated(dataset))
 ```
+
+------------------------------------------------------------------------
 
 ### 4.5 Check nulls value:
 
@@ -305,11 +372,6 @@ impair the validity and reliability of inferences made from the research
 since they are data points that differ dramatically from the majority of
 the data. Therefore, in order to prevent them from harming our outcomes,
 we must erase them before we begin our task.
-
-An outlier detection approach was used on the dataset to solve this
-problem. The detection approach used makes use of the Outliers package's
-Outlier() function. This method revealed the outliers among the data
-points.
 
 ```{r}
 #install outliers package:
@@ -488,7 +550,6 @@ Find_outlier
 
 #Delete age outliers:
 dataset= dataset[-Find_outlier,]
-
 ```
 
 ------------------------------------------------------------------------
@@ -627,9 +688,9 @@ To make sure that the deletion was successful, we searched for the
 number of rows.
 
 ```{r}
-#check after deleting
-#Number of rows and column
+#Number of rows  
 nrow(dataset)
+#Number of column
 ncol(dataset)
 ```
 
@@ -638,7 +699,7 @@ the outliers was successful.
 
 ------------------------------------------------------------------------
 
-### Discretization :
+### 4.7 Discretization :
 
 ```{r}
 #To use it later in clustering task:
@@ -658,7 +719,7 @@ dataset$age=cut(dataset$age, breaks = seq(21,64, by=14), right=FALSE)
 
 ------------------------------------------------------------------------
 
-### Normalizetion:
+### 4.8 Normalizetion:
 
 In order to ensure comparability across individuals and eliminate biases
 resulting from differences in measurement units or scales, we have
@@ -668,13 +729,12 @@ force, sit and bend forward distance (in centimeters), sit-ups count,
 and broad jump distance (in centimeters).
 
 ```{r}
-View(dataset)
 dataset [,3:4:5:6:7:8:9:11]=scale(dataset [,3:4:5:6:7:8:9:11])
 ```
 
 ------------------------------------------------------------------------
 
-### Feature Selection :
+### 4.9 Feature Selection :
 
 Based on the dataset and the graphs we did earlier, there are several
 justifications for not performing feature selection:
@@ -684,7 +744,7 @@ justifications for not performing feature selection:
 The number of attributes (12) is not excessively high, and it is within
 a manageable range for modeling and analysis.
 
-#### 2.Correlation Assessment:
+#### 2. Correlation Assessment:
 
 just because some graphs indicate a lack of correlation between certain
 attributes, it doesn't imply that those attributes hold no value or
@@ -705,7 +765,7 @@ consider all attributes without performing feature selection.
 
 ------------------------------------------------------------------------
 
-### 5 Data Mining Task:
+## 5. Data Mining Technique:
 
 ### 5.1 Classification:
 
@@ -723,7 +783,8 @@ method. Evaluation and testing will be performed using the
 
 #### Classification packages:
 
-We install and call predifined packages in R language to help us in classification process. which shown below:
+We install and call predifined packages in R language to help us in
+classification process. which shown below:
 
 ```{r}
 library(party)
@@ -769,7 +830,7 @@ unbiased predictions across all classes.
 
 ------------------------------------------------------------------------
 
-##### Information Gain (ID3):
+#### Information Gain (ID3):
 
 ```{r}
 features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
@@ -787,7 +848,7 @@ model <- train(
 
 The shown matrix based on training data.
 
-###### Tree based on information gain:
+#### Tree based on information gain:
 
 ```{r}
 # Load the necessary libraries
@@ -806,7 +867,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest
 information gain. As a result, it was placed at the root level,
 representing the first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -840,9 +901,11 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60,5%  |
 | Precision           | 60.5%% |
 
+: Table 2: Information Gain evaluation
+
 ------------------------------------------------------------------------
 
-##### Gain ratio:
+#### Gain ratio:
 
 ```{r}
 # Example of hyperparameter tuning
@@ -855,7 +918,7 @@ model <- train(
 
 The shown matrix based on training data.
 
-###### Tree based on Gain ratio:
+#### Tree based on Gain ratio:
 
 ```{r}
 # Load the necessary libraries
@@ -873,7 +936,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest gain
 ratio. As a result, it was placed at the root level, representing the
 first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -907,9 +970,11 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60.59% |
 | Precision           | 60.59% |
 
+: Table 3: Gain Ratio evaluation
+
 ------------------------------------------------------------------------
 
-##### Gini index:
+#### Gini index:
 
 ```{r}
 # Example of hyperparameter tuning
@@ -917,7 +982,7 @@ model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "b
   y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
 ```
 
-###### Tree based on Gini index :
+#### Tree based on Gini index :
 
 ```{r}
 # Load the necessary libraries
@@ -931,11 +996,11 @@ rpart.plot(rpart_model, main = "Decision Tree for CART 70/30")
 ```
 
 The decision tree representation was utilized, and the findings indicate
-that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex
+that the attribute (sit.and.bend.forward_cm) has the greatest Gini index
 (impurity reduction) values. As a result, it was placed at the root
 level, representing the first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -968,6 +1033,8 @@ The above matrix is based on applying our model on test data.
 | Sensitivity(Recall) | 41.42% |
 | Specificity         | 60.59% |
 | Precision           | 60.59% |
+
+: Table 4: Gini index evaluation
 
 ------------------------------------------------------------------------
 
@@ -997,7 +1064,7 @@ the class is balanced in the training set and testing set.
 
 ------------------------------------------------------------------------
 
-##### Information Gain (ID3):
+#### Information Gain (ID3):
 
 ```{r}
 features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
@@ -1011,7 +1078,7 @@ model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "b
 
 The shown matrix based on training data.
 
-###### Tree based on information gain:
+#### Tree based on information gain:
 
 ```{r}
 # Load the necessary libraries
@@ -1030,7 +1097,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest
 information gain. As a result, it was placed at the root level,
 representing the first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -1064,9 +1131,11 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60.97% |
 | Precision           | 60.97% |
 
+: Table 6:
+
 ------------------------------------------------------------------------
 
-##### Gain ratio:
+#### Gain ratio:
 
 ```{r}
 model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
@@ -1075,7 +1144,7 @@ model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "b
 
 The shown matrix based on training data.
 
-###### Tree based on Gain ratio:
+#### Tree based on Gain ratio:
 
 ```{r}
 # Load the necessary libraries
@@ -1093,7 +1162,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest gain
 ratio. As a result, it was placed at the root level, representing the
 first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -1125,9 +1194,11 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 52.47% |
 | Precision           | 61.81% |
 
+: Table 7:
+
 ------------------------------------------------------------------------
 
-##### Gini index:
+#### Gini index:
 
 ```{r}
 # Example of hyperparameter tuning
@@ -1135,7 +1206,7 @@ model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "b
   y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
 ```
 
-###### Tree based on Gini index :
+#### Tree based on Gini index :
 
 ```{r}
 # Load the necessary libraries
@@ -1153,7 +1224,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex
 (impurity reduction) values. As a result, it was placed at the root
 level, representing the first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -1185,6 +1256,8 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 61.81 |
 | Precision           | 61.81 |
 
+: Table 8:
+
 ------------------------------------------------------------------------
 
 #### Partitioning 80/20
@@ -1211,7 +1284,7 @@ prop.table(table(test_data$class))
 
 ------------------------------------------------------------------------
 
-##### Information Gain (ID3):
+#### Information Gain (ID3):
 
 ```{r}
 features <-dataset[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")]
@@ -1224,7 +1297,7 @@ model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "b
 
 The shown matrix based on training data.
 
-###### Tree based on information gain:
+#### Tree based on information gain:
 
 ```{r}
 # Load the necessary libraries
@@ -1243,7 +1316,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest
 information gain. As a result, it was placed at the root level,
 representing the first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -1276,9 +1349,11 @@ Schedule for classification Evaluation:
 | Specificity         | 61.18% |
 | Precision           | 61.18% |
 
+: Table 9:
+
 ------------------------------------------------------------------------
 
-##### Gain ratio:
+#### Gain ratio:
 
 ```{r}
 model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
@@ -1287,7 +1362,7 @@ model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "b
 
 The shown matrix based on training data.
 
-###### Tree based on Gain ratio:
+#### Tree based on Gain ratio:
 
 ```{r}
 # Load the necessary libraries
@@ -1305,67 +1380,7 @@ that the attribute (sit.and.bend.forward_cm) has the greatest gain
 ratio. As a result, it was placed at the root level, representing the
 first level of the tree.
 
-###### Prediction on test data and Confusion matrix:
-
-```{r}
-testPred<- predict(model,newdata=test_data)
-testPred<- factor(testPred)
-test_data$class <- factor(test_data$class)
-results<- confusionMatrix(testPred,test_data$class)
-conf_matrix <- results$table
-
-print(results)
-
-error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
-precision <- diag(conf_matrix) / rowSums(conf_matrix)
-specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
-sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
-
-print(paste("specificity:", specificity))
-print(paste("sensitivity", sensitivity))
-print(paste("Error Rate:", error_rate))
-print(paste("Precision for Class 1:", precision[1]))
-```
-
-####Schedule for classification Evaluation:
-
-| Evaluation method   | value  |
-|---------------------|--------|
-| Accuracy            | 57.37% |
-| Error Rate          | 42.63% |
-| Sensitivity(Recall) | 43.32% |
-| Specificity         | 61.95% |
-| Precision           | 61.95% |
-
-------------------------------------------------------------------------
-
-##### Gini index:
-
-```{r}
-# Example of hyperparameter tuning
-model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
-  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
-```
-
-###### Tree based on Gini index :
-
-```{r}
-# Load the necessary libraries
-library(rpart.plot)
-
-# Assuming 'model' is your trained model
-rpart_model <- model$finalModel
-
-# Print the decision tree
-rpart.plot(rpart_model, main = "Decision Tree for CART 80/20")
-```
-
-The decision tree representation was utilized, and the findings indicate
-that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex
-(impurity reduction) values. As a result, it was placed at the root
-level, representing the first level of the tree.
-
-###### Prediction on test data and Confusion matrix:
+#### Prediction on test data and Confusion matrix:
 
 ```{r}
 testPred<- predict(model,newdata=test_data)
@@ -1396,6 +1411,68 @@ print(paste("Precision for Class 1:", precision[1]))
 | Sensitivity(Recall) | 43.32% |
 | Specificity         | 61.95% |
 | Precision           | 61.95% |
+
+------------------------------------------------------------------------
+
+#### Gini index:
+
+```{r}
+# Example of hyperparameter tuning
+model <- train(x = train_data[, c("gender","age" ,"height_cm",  "weight_kg" , "body.fat_.", "diastolic", "systolic","gripForce", "sit.and.bend.forward_cm","sit.ups.counts","broad.jump_cm")],
+  y = train_data$class,method = "rpart",parms = list(split = "gini"),tuneGrid = data.frame(cp = seq(0.01, 0.1, by = 0.01)),trControl = trainControl(method = "cv", number = 3))
+```
+
+#### Tree based on Gini index :
+
+```{r}
+# Load the necessary libraries
+library(rpart.plot)
+
+# Assuming 'model' is your trained model
+rpart_model <- model$finalModel
+
+# Print the decision tree
+rpart.plot(rpart_model, main = "Decision Tree for CART 80/20")
+```
+
+The decision tree representation was utilized, and the findings indicate
+that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex
+(impurity reduction) values. As a result, it was placed at the root
+level, representing the first level of the tree.
+
+#### Prediction on test data and Confusion matrix:
+
+```{r}
+testPred<- predict(model,newdata=test_data)
+testPred<- factor(testPred)
+test_data$class <- factor(test_data$class)
+results<- confusionMatrix(testPred,test_data$class)
+conf_matrix <- results$table
+
+print(results)
+
+error_rate <- 1 - sum(diag(conf_matrix)) / sum(conf_matrix)
+precision <- diag(conf_matrix) / rowSums(conf_matrix)
+specificity <- conf_matrix[1, 1] / sum(conf_matrix[1, ])
+sensitivity <- conf_matrix[2, 2] / sum(conf_matrix[2, ])
+
+print(paste("specificity:", specificity))
+print(paste("sensitivity", sensitivity))
+print(paste("Error Rate:", error_rate))
+print(paste("Precision for Class 1:", precision[1]))
+```
+
+#### Schedule for classification Evaluation:
+
+| Evaluation method   | value  |
+|---------------------|--------|
+| Accuracy            | 57.37% |
+| Error Rate          | 42.63% |
+| Sensitivity(Recall) | 43.32% |
+| Specificity         | 61.95% |
+| Precision           | 61.95% |
+
+: Table 10:
 
 ------------------------------------------------------------------------
 
@@ -1439,13 +1516,17 @@ each cluster share similarities with one another and differ from data in
 other clusters. In this case, we will employ the k-means clustering
 algorithm.
 
-### 1- Data prepreocessing before Clustering:
+### 1- Data preprocessing before Clustering:
 
 In order to optimize the performance of our models and achieve the most
 accurate results, it is crucial to preprocess certain attributes before
-applying data clustering techniques. where we will remove the class
-label and adding the old Age attribute "before discretizing", also we
-will convert all attribute into numeric:
+applying data clustering techniques. where we will:
+
+1-Remove the class label.
+
+2-Adding the old Age attribute "before discretizing".
+
+3-convert all attribute into numeric data type.
 
 #### 1.1: Remove Class lable:
 
@@ -1453,7 +1534,7 @@ For unsupervised learning, At first we need to removing class label
 "Class".
 
 ```{r}
-#in case we need the old dataset (with class label)
+#in case we need the dataset with class label
 dataWithclass <-dataset 
 
 #delete class label
@@ -1468,7 +1549,7 @@ successful.
 
 ------------------------------------------------------------------------
 
-#### 1.2 Add AgeBeforeDis:
+#### 1.2 Add Age Before discretization:
 
 Based on our previous findings about discretizing the age attribute, we
 discovered that using fixed intervals may not accurately represent the
@@ -1493,10 +1574,10 @@ updating age was successful.
 
 ------------------------------------------------------------------------
 
-#### 1.3 check datatype:
+#### 1.3 Check datatype:
 
 for Clustering task all data types should be numeric, and from the data
-frame from last chunk,there is only one attribute that should be
+frame from last chunk ,there is only one attribute that should be
 convert, which is gender attribute. where Encoding gender attribute
 makes data type to Factor, so we should convert it to numeric before
 clustering.
@@ -1506,11 +1587,12 @@ clustering.
 ```{r}
 dataset$gender <- as.numeric(as.character(dataset$gender))
 
-# Verify the conversion
+# Verify the conversion and all other attribute class type
 sapply(dataset, class)
 ```
 
-Now all attribute are numeric, so we are ready to perform k-means clustering.
+Now all attribute are numeric, so we are ready to perform k-means
+clustering.
 
 ------------------------------------------------------------------------
 
@@ -1520,12 +1602,16 @@ In order to determine the optimal number of clusters (k) for our
 dataset, we will experiment with three different sizes of k for
 clustering. To assist with this determination, we will employ various
 methods( kmeansruns, calculate the average silhouette ,total
-within-cluster sum of square and the BCubed(precision and recall) ) that
-aid in identifying the most suitable k value for our specific dataset.
+within-cluster sum of square (Elbow method) and the BCubed (precision
+and recall) ) that aid in identifying the most suitable k value for our
+specific dataset. also, we employed three different methods. It should
+be noted that the identification of the correct k value from the 3
+resulte from each method is may vary. However, utilizing these three
+methods aids in studying the three most suitable k values for the
+dataset.
 
 ```{r}
 #install necessary packages:
-
 library(factoextra)
 library(fpc)
 library(cluster)
@@ -1546,7 +1632,7 @@ kmeansruns.result <- kmeansruns(dataset)
 kmeansruns.result 
 ```
 
-visualize clustering:
+#### Visualize clustering:
 
 ```{r}
 fviz_cluster(kmeansruns.result, data = dataset)
@@ -1558,7 +1644,7 @@ between them.
 
 ------------------------------------------------------------------------
 
-##### b) Average silhouette method:
+#### b) Average silhouette method:
 
 This method calculates the average silhouette width for different values
 of k, determining how well data points fit into their assigned clusters.
@@ -1578,7 +1664,7 @@ of k.
 
 ------------------------------------------------------------------------
 
-##### 3- total within-cluster sum of square method:
+#### c) total within-cluster sum of square method:
 
 This method determines the number of clusters according to the turning
 point in a curve, the curve is plotted using the total within-cluster
@@ -1592,7 +1678,7 @@ fviz_nbclust(dataset, kmeans, method = "wss") +
   labs(subtitle = "Elbow method")
 ```
 
-The output of the this method recommends that we use k=4 cluster for our
+The output of the this method recommends that we use k=3 cluster for our
 dataset.
 
 ------------------------------------------------------------------------
@@ -1602,11 +1688,12 @@ dataset.
 In this section, we will perform k-means clustering and visualize its
 result using three different k's that have been chosen based on methods
 that we tasted earlier k=2(highest average sillhouette width), k=3(from
-Kmeansruns), k=4(total within-cluster sum of square method). then we
-will compute WSS and Bcubed preceision and recall and average silhouette
-for each cluster as methods of evaluating clustering results.
+Kmeansruns and Elbow method), k=4(3nd highest average sillhouette width
+after k=2,3). then we will compute WSS and Bcubed preceision and recall
+and average silhouette for each cluster as methods of evaluating
+clustering results.
 
-### 1- 2-Means Cluster:
+### First Cluster: 2-Means Cluster:
 
 Calculate K-means for k=2:
 
@@ -1620,14 +1707,14 @@ kmeans.result <- kmeans(dataset, 2)
 kmeans.result
 ```
 
-#### visualize 2 clusters
+#### Visualize 2 clusters:
 
 ```{r}
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-#### average silhouette for 2 clusters
+#### Average silhouette for 2 clusters
 
 ```{r}
 library(cluster)
@@ -1693,13 +1780,19 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
--The silhouette width and WCSS suggest that k=2 provides a reasonable clustering solution, with well-defined and compact clusters.
+-The silhouette width and WCSS suggest that k=2 provides a reasonable
+clustering solution, with well-defined and compact clusters.
 
--The BCubed Precision and Recall values indicate the effectiveness of the clustering with respect to the ground truth labels. A Precision of 0.25 suggests that about 25% of instances within the same cluster have the same ground truth label, while a Recall of 0.55 indicates that about 55% of instances with the same ground truth label are in the same cluster.
+-The BCubed Precision and Recall values indicate the effectiveness of
+the clustering with respect to the ground truth labels. A Precision of
+0.25 suggests that about 25% of instances within the same cluster have
+the same ground truth label, while a Recall of 0.55 indicates that about
+55% of instances with the same ground truth label are in the same
+cluster.
 
 ------------------------------------------------------------------------
 
-### 2- 3-Means Cluster:
+### Second cluster: 3-Means Cluster:
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1710,7 +1803,7 @@ kmeans.result <- kmeans(dataset, 3)
 kmeans.result
 ```
 
-#### visualize 3 clusters
+#### Visualize 3 clusters
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1719,7 +1812,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-#### average silhouette for 3 clusters
+#### Average silhouette for 3 clusters
 
 ```{r}
 library(cluster)
@@ -1785,13 +1878,20 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
--The average silhouette width of 0.54 suggests that there is a moderate separation between clusters, but it might not be as distinct as in the case of k=2.
+-The average silhouette width of 0.54 suggests that there is a moderate
+separation between clusters, but it might not be as distinct as in the
+case of k=2.
 
--The lower WCSS (310351.6) compared to k=2 implies that the clusters are more compact, indicating that data points within each cluster are closer to each other.                                                 -These values indicate that about 25% of instances within the same cluster have the same ground truth label (Precision), and about 39% of instances with the same ground truth label are in the same cluster (Recall).
+-The lower WCSS (310351.6) compared to k=2 implies that the clusters are
+more compact, indicating that data points within each cluster are closer
+to each other. -These values indicate that about 25% of instances within
+the same cluster have the same ground truth label (Precision), and about
+39% of instances with the same ground truth label are in the same
+cluster (Recall).
 
 ------------------------------------------------------------------------
 
-### 3-  4-Means Cluster :
+### Third cluster: 4-Means Cluster :
 
 ```{r}
 #set a seed for random number generation  to make the results reproducible
@@ -1802,7 +1902,7 @@ kmeans.result <- kmeans(dataset, 4)
 kmeans.result
 ```
 
-#### visualize 4 clusters:
+#### Visualize 4 clusters:
 
 ```{r}
 # visualize clustering (2 clusters)
@@ -1811,7 +1911,7 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
-#### average silhouette for 4 clusters:
+#### Average silhouette for 4 clusters:
 
 ```{r}
 library(cluster)
@@ -1877,28 +1977,81 @@ cat("BCubed Precision:", precision, "\n")
 cat("BCubed Recall:", recall, "\n")
 ```
 
--The average silhouette width of 0.42 suggests a moderate level of separation between clusters, indicating that the clusters are distinguishable, but there may be some overlap.
--The lower WCSS indicates that the clusters are relatively compact, with instances within each cluster being closer to each other.
+-The average silhouette width of 0.42 suggests a moderate level of
+separation between clusters, indicating that the clusters are
+distinguishable, but there may be some overlap. -The lower WCSS
+indicates that the clusters are relatively compact, with instances
+within each cluster being closer to each other.
 
--The BCubed metrics : A Precision of 0.25 means that about 25% of instances within the same cluster have the same ground truth label. A Recall of 0.27 means that about 27% of instances with the same ground truth label are in the same cluster.
-
+-The BCubed metrics : A Precision of 0.25 means that about 25% of
+instances within the same cluster have the same ground truth label. A
+Recall of 0.27 means that about 27% of instances with the same ground
+truth label are in the same cluster.
 
 ------------------------------------------------------------------------
 
-### Comparison Criteria:
+## 6. Evaluation and Comparison:
 
+### Classification:
 
-| No. of Clusters| k=2 (best)| k=3| k=4|
-|---------------------|-----------|-------------------|--------------------|
-| Average Silhouette width for each cluter| cluter1=0.56,cluter2=0.67         | cluter1=0.58 ,cluter2=0.60 ,cluter3=0.41 | cluter1=0.55 ,cluter2=0.30 ,cluter3=0.37 ,cluter4=0.46 |
-| Average Silhouette width| 0.63| 0.54| 0.42|
-| Total within-cluster sum of square| 591064.6| 310351.6| 230049.1|
-| BCubed Precison| 0.2516112| 0.2516393| 0.2522583|
-| BCubed Recall| 0.5454527| 0.387276| 0.2729353|
-| Visualization| all of the figures is shown above | all of the figures is shown above| all of the figures is shown above|
+### Clustering:
 
-  Upon comparing the results of the clustering task using the k-means algorithm reveal that the most effective cluster configuration is achieved when k=2. This is supported by the higher average silhouette width for cluster 2 (0.67) compared to the other clusters in different configurations. It suggests that instances within cluster 2 are closely grouped and well-separated from instances in other clusters, indicating a higher level of cohesion and separation. Furthermore, the overall average silhouette width for k=2 (0.63) surpasses the average values for k=3 (0.54) and k=4 (0.42), indicating better overall clustering performance.
++--------------+--------------+--------------+--------------+
+| No. of       | k=2 (best)   | k=3          | k=4          |
+| Clusters     |              |              |              |
++:============:+:============:+:============:+:============:+
+| Average      | c            | cluter1=0.58 | cluter1=0.55 |
+| Silhouette   | luter1=0.56, | ,            | ,            |
+| width for    |              | cluter2=0.60 | cluter2=0.30 |
+| each cluter  | cluter2=0.67 | ,            | ,            |
+|              |              | cluter3=0.41 | cluter3=0.37 |
+|              |              |              | ,            |
+|              |              |              | cluter4=0.46 |
++--------------+--------------+--------------+--------------+
+| Average      | 0.63         | 0.54         | 0.42         |
+| Silhouette   |              |              |              |
+| width        |              |              |              |
++--------------+--------------+--------------+--------------+
+| Total w      | 591064.6     | 310351.6     | 230049.1     |
+| i            |              |              |              |
+| thin-cluster |              |              |              |
+| sum of       |              |              |              |
+| square       |              |              |              |
++--------------+--------------+--------------+--------------+
+| BCubed       | 0.2516112    | 0.2516393    | 0.2522583    |
+| Precison     |              |              |              |
++--------------+--------------+--------------+--------------+
+| BCubed       | 0.5454527    | 0.387276     | 0.2729353    |
+| Recall       |              |              |              |
++--------------+--------------+--------------+--------------+
+| V            | all of the   | all of the   | all of the   |
+| isualization | figures is   | figures is   | figures is   |
+|              | shown above  | shown above  | shown above  |
++--------------+--------------+--------------+--------------+
 
-  However, it's important to note that there is still some overlap between the clusters in all configurations. This is evident from the BCubed precision and recall measures, which suggest that the clusters do not perfectly capture the true underlying structure of the data. For example, with k=2, the BCubed precision is 0.2516112, indicating that only around 25% of the instances within each cluster are correctly clustered together. Similarly, the BCubed recall is 0.5454527, suggesting that only approximately 27% of the instances that should belong to a specific cluster are actually assigned to that cluster.
+: Table 11: Comparison clusters
 
+Upon comparing the results of the clustering task using the k-means
+algorithm reveal that the most effective cluster configuration is
+achieved when k=2. This is supported by the higher average silhouette
+width for cluster 2 (0.67) compared to the other clusters in different
+configurations. It suggests that instances within cluster 2 are closely
+grouped and well-separated from instances in other clusters, indicating
+a higher level of cohesion and separation. Furthermore, the overall
+average silhouette width for k=2 (0.63) surpasses the average values for
+k=3 (0.54) and k=4 (0.42), indicating better overall clustering
+performance.
 
+However, it's important to note that there is still some overlap between
+the clusters in all configurations. This is evident from the BCubed
+precision and recall measures, which suggest that the clusters do not
+perfectly capture the true underlying structure of the data. For
+example, with k=2, the BCubed precision is 0.2516112, indicating that
+only around 25% of the instances within each cluster are correctly
+clustered together. Similarly, the BCubed recall is 0.5454527,
+suggesting that only approximately 27% of the instances that should
+belong to a specific cluster are actually assigned to that cluster.
+
+------------------------------------------------------------------------
+
+## 7. Finding:
