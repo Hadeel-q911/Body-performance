@@ -54,7 +54,7 @@ valuable knowledge or trends that may be hidden within the dataset.
 
 ## 3. Data:
 
-### 3.1: Data Source : ^[[1]](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)^
+### ^[[1]](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)^3.1: Data Source : 
 
 Body performance dataset it from Kaggle website , The
 link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>)
@@ -190,7 +190,7 @@ ncol(dataset)
 
 ------------------------------------------------------------------------
 
-### 4.2 Understanding the dataset using graph representations:^[[2]](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda),[[2]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^
+### ^[[2]](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda),[[2]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^4.2 Understanding the dataset using graph representations:
 
 ### Encoding:
 
@@ -810,7 +810,7 @@ consider all attributes without performing feature selection.
 
 ## 5. Data Mining Technique:
 
-### 5.1 Classification:^[[3]](https://rpubs.com/camguild/803096)^
+### ^[[3]](https://rpubs.com/camguild/803096)^5.1 Classification:
 
 Our classification objective is to develop a predictive model for our
 dataset with class labels A, B, C, and D based on various attributes. To
@@ -1550,7 +1550,7 @@ fluctuations within a narrow range.
 
 ------------------------------------------------------------------------
 
-### 5.2 Clustering:^[[4]](https://rpubs.com/odenipinedo/cluster-analysis-in-R)^
+### ^[[4]](https://rpubs.com/odenipinedo/cluster-analysis-in-R)^5.2 Clustering:
 
 Data clustering is the act of dividing data into distinct groups or
 clusters. It is an unsupervised learning technique, meaning it doesn't
@@ -2097,7 +2097,7 @@ belong to a specific cluster are actually assigned to that cluster.
 
 ------------------------------------------------------------------------
 
-## 7. Finding:^[[5]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^
+## ^[[5]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^7. Finding:
 
 Considering the project's goal and the problem at hand, the
 classification task emerged as the more advantageous approach for
