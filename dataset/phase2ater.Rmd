@@ -54,7 +54,7 @@ valuable knowledge or trends that may be hidden within the dataset.
 
 ## 3. Data:
 
-### ^[[1]](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)^3.1: Data Source : 
+### ^[[1]](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)^3.1: Data Source :
 
 Body performance dataset it from Kaggle website , The
 link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>)
@@ -67,96 +67,50 @@ of performance and some data such as gender and age along with body
 measurements and other performance tests ,it has 13394 row and each of
 them have 12 attributes.
 
-+------------+------------+------------+------------+
-| name       | d          | data type  | p ossible  |
-|            | escription |            | value      |
-+============+============+============+============+
-| Age        | The        | numerical  | 21-64      |
-|            | person's   |            |            |
-|            | age in     |            |            |
-|            | years      |            |            |
-+------------+------------+------------+------------+
-| Gender     | The        | binary     | F,M        |
-|            | person's   |            |            |
-|            | gender     |            |            |
-+------------+------------+------------+------------+
-| Height_cm  | The        | numerical  | 125-194    |
-|            | person's   |            |            |
-|            | Height in  |            |            |
-|            | cm         |            |            |
-+------------+------------+------------+------------+
-| we ight_kg | The        | numerical  | 2 6.3-138  |
-|            | person's   |            |            |
-|            | weight in  |            |            |
-|            | Kg         |            |            |
-+------------+------------+------------+------------+
-| body       | the amount | numerical  | 3 %-78.4%  |
-| fat\_%     | of         |            |            |
-|            | essential  |            |            |
-|            | fat .      |            |            |
-+------------+------------+------------+------------+
-| diastolic  | measures   | numerical  | 0-156      |
-|            | pressure   |            |            |
-|            | the blood  |            |            |
-|            | vessels    |            |            |
-|            | when the   |            |            |
-|            | heart is   |            |            |
-|            | at rest    |            |            |
-+------------+------------+------------+------------+
-| systolic   | measures   | numerical  | 0-201      |
-|            | pressure   |            |            |
-|            | in the     |            |            |
-|            | arteries   |            |            |
-|            | when the   |            |            |
-|            | heart      |            |            |
-|            | beats in   |            |            |
-|            | minutes    |            |            |
-+------------+------------+------------+------------+
-| gripForce  | fingers    | numerical  | 0-70.5     |
-|            | f          |            |            |
-|            | lexibility |            |            |
-|            | tests      |            |            |
-+------------+------------+------------+------------+
-| sit and    | measures   | numerical  | -25-213    |
-| bend for   | f          |            |            |
-| ward_cm    | lexibility |            |            |
-|            | in sitting |            |            |
-|            | and        |            |            |
-|            | bending    |            |            |
-|            | forward in |            |            |
-|            | ce         |            |            |
-|            | ntimeters. |            |            |
-+------------+------------+------------+------------+
-| sit-ups    | measures   | numerical  | 0-80       |
-| counts_cm  | the        |            |            |
-|            | strength   |            |            |
-|            | and        |            |            |
-|            | endurance  |            |            |
-|            | of the     |            |            |
-|            | abdominals |            |            |
-|            | and        |            |            |
-|            | hip-flexor |            |            |
-|            | muscles in |            |            |
-|            | c          |            |            |
-|            | entimeter. |            |            |
-+------------+------------+------------+------------+
-| broad      | It is a    | numerical  | 0-303      |
-| jump_cm    | method of  |            |            |
-|            | measuring  |            |            |
-|            | how far a  |            |            |
-|            | person can |            |            |
-|            | jump from  |            |            |
-|            | a standing |            |            |
-|            | position   |            |            |
-|            | to a       |            |            |
-|            | landing    |            |            |
-|            | position.  |            |            |
-+------------+------------+------------+------------+
-| class      | body       | numerical  | A,B,C,D    |
-|            | p          |            |            |
-|            | erformance |            |            |
-|            | score      |            |            |
-+------------+------------+------------+------------+
++---------+--------------------------------------+---------+---------+
+| name    | d escription                         | data    | p       |
+|         |                                      | type    | ossible |
+|         |                                      |         | value   |
++=========+======================================+=========+=========+
+| Age     | The person's age in years            | nu      | 21-64   |
+|         |                                      | merical |         |
++---------+--------------------------------------+---------+---------+
+| Gender  | The person's gender                  | binary  | F,M     |
++---------+--------------------------------------+---------+---------+
+| He      | The person's Height in cm            | nu      | 125-194 |
+| ight_cm |                                      | merical |         |
++---------+--------------------------------------+---------+---------+
+| we      | The person's weight in Kg            | nu      | 2       |
+| ight_kg |                                      | merical | 6.3-138 |
++---------+--------------------------------------+---------+---------+
+| body    | the amount of essential fat .        | nu      | 3       |
+| fat\_%  |                                      | merical | %-78.4% |
++---------+--------------------------------------+---------+---------+
+| di      | measures pressure the blood vessels  | nu      | 0-156   |
+| astolic | when the heart is at rest            | merical |         |
++---------+--------------------------------------+---------+---------+
+| s       | measures pressure in the arteries    | nu      | 0-201   |
+| ystolic | when the heart beats in minutes      | merical |         |
++---------+--------------------------------------+---------+---------+
+| gr      | fingers f lexibility tests           | nu      | 0-70.5  |
+| ipForce |                                      | merical |         |
++---------+--------------------------------------+---------+---------+
+| sit and | measures f lexibility in sitting and | nu      | -25-213 |
+| bend    | bending forward in ce ntimeters.     | merical |         |
+| for     |                                      |         |         |
+| ward_cm |                                      |         |         |
++---------+--------------------------------------+---------+---------+
+| sit-ups | measures the strength and endurance  | nu      | 0-80    |
+| co      | of the abdominals and hip-flexor     | merical |         |
+| unts_cm | muscles in c entimeter.              |         |         |
++---------+--------------------------------------+---------+---------+
+| broad   | It is a method of measuring how far  | nu      | 0-303   |
+| jump_cm | a person can jump from a standing    | merical |         |
+|         | position to a landing position.      |         |         |
++---------+--------------------------------------+---------+---------+
+| class   | body p erformance score              | nu      | A,B,C,D |
+|         |                                      | merical |         |
++---------+--------------------------------------+---------+---------+
 
 : Table 1: Data dictionary attributes
 
@@ -742,7 +696,7 @@ the outliers was successful.
 
 ------------------------------------------------------------------------
 
-### 4.7 Discretization :
+### ^[[3]](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)^ 4.7 Discretization :
 
 ```{r}
 #To use it later in clustering task:
@@ -810,7 +764,7 @@ consider all attributes without performing feature selection.
 
 ## 5. Data Mining Technique:
 
-### ^[[3]](https://rpubs.com/camguild/803096)^5.1 Classification:
+### ^[[4]](https://rpubs.com/camguild/803096)^5.1 Classification:
 
 Our classification objective is to develop a predictive model for our
 dataset with class labels A, B, C, and D based on various attributes. To
@@ -1550,7 +1504,7 @@ fluctuations within a narrow range.
 
 ------------------------------------------------------------------------
 
-### ^[[4]](https://rpubs.com/odenipinedo/cluster-analysis-in-R)^5.2 Clustering:
+### ^[[5]](https://rpubs.com/odenipinedo/cluster-analysis-in-R)^ 5.2 Clustering:
 
 Data clustering is the act of dividing data into distinct groups or
 clusters. It is an unsupervised learning technique, meaning it doesn't
@@ -2039,38 +1993,30 @@ truth label are in the same cluster.
 
 ### 6.2 Clustering:
 
-+--------------+---------+---------+---------+
-| No. of       | k=2     | k=3     | k=4     |
-| Clusters     | (best)  |         |         |
-+:============:+:=======:+:=======:+:=======:+
-| Average      | cluter  | clute   | clute   |
-| Silhouette   | 1=0.56, | r1=0.58 | r1=0.55 |
-| width for    |         | ,       | ,       |
-| each cluter  | clute   | clute   | clute   |
-|              | r2=0.67 | r2=0.60 | r2=0.30 |
-|              |         | ,       | ,       |
-|              |         | clute   | clute   |
-|              |         | r3=0.41 | r3=0.37 |
-|              |         |         | ,clute  |
-|              |         |         | r4=0.46 |
-+--------------+---------+---------+---------+
-| Average      | 0.63    | 0.54    | 0.42    |
-| Silhouette   |         |         |         |
-| width        |         |         |         |
-+--------------+---------+---------+---------+
-| Total        | 5       | 3       | 2       |
-| within-      | 91064.6 | 10351.6 | 30049.1 |
-| cluster sum  |         |         |         |
-| of square    |         |         |         |
-+--------------+---------+---------+---------+
-| BCubed       | 0       | 0       | 0       |
-| Precison     | .       | .       | .       |
-|              | 2516112 | 2516393 | 2522583 |
-+--------------+---------+---------+---------+
-| BCubed       | 0       | 0       | 0       |
-| Recall       | .       | .387276 | .       |
-|              | 5454527 |         | 2729353 |
-+--------------+---------+---------+---------+
++---------------+---------------+---------------+---------------+
+| No. of        | k=2 (best)    | k=3           | k=4           |
+| Clusters      |               |               |               |
++:=============:+:=============:+:=============:+:=============:+
+| Average       | cluter        | clute r1=0.58 | clute r1=0.55 |
+| Silhouette    | 1=0.56,       | , clute       | , clute       |
+| width for     |               | r2=0.60 ,     | r2=0.30 ,     |
+| each cluter   | clute r2=0.67 | clute r3=0.41 | clute r3=0.37 |
+|               |               |               | ,clute        |
+|               |               |               | r4=0.46       |
++---------------+---------------+---------------+---------------+
+| Average       | 0.63          | 0.54          | 0.42          |
+| Silhouette    |               |               |               |
+| width         |               |               |               |
++---------------+---------------+---------------+---------------+
+| Total within- | 5 91064.6     | 3 10351.6     | 2 30049.1     |
+| cluster sum   |               |               |               |
+| of square     |               |               |               |
++---------------+---------------+---------------+---------------+
+| BCubed        | 0 . 2516112   | 0 . 2516393   | 0 . 2522583   |
+| Precison      |               |               |               |
++---------------+---------------+---------------+---------------+
+| BCubed Recall | 0 . 5454527   | 0 .387276     | 0 . 2729353   |
++---------------+---------------+---------------+---------------+
 
 : Table 11: Comparison clusters
 
@@ -2097,7 +2043,7 @@ belong to a specific cluster are actually assigned to that cluster.
 
 ------------------------------------------------------------------------
 
-## ^[[5]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^7. Finding:
+## ^[[6]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^7. Finding:
 
 Considering the project's goal and the problem at hand, the
 classification task emerged as the more advantageous approach for
@@ -2133,13 +2079,16 @@ EDA](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda)
 , [guide to complete statistical
 analysis](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
 
-[3].[Classification and Regression Trees (CART) in
+[3].
+[discretize](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)
+
+[4].[Classification and Regression Trees (CART) in
 R](https://rpubs.com/camguild/803096)
 
-[4]. [Cluster Analysis in
+[5]. [Cluster Analysis in
 R](https://rpubs.com/odenipinedo/cluster-analysis-in-R)
 
-[5].[guide to complete statistical
+[6].[guide to complete statistical
 analysis](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
 
 [overall].[Body performance note
