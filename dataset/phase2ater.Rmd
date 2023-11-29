@@ -67,53 +67,89 @@ of performance and some data such as gender and age along with body
 measurements and other performance tests ,it has 13394 row and each of
 them have 12 attributes.
 
-+----------+--------------------------------+----------+----------+
-| name     | description                    | data     | p        |
-|          |                                | type     | ossible  |
-|          |                                |          | value    |
-+==========+================================+==========+==========+
-| Age      | The person's age in years      | nu       | 21-64    |
-|          |                                | merical  |          |
-+----------+--------------------------------+----------+----------+
-| Gender   | The person's gender            | binary   | F,M      |
-+----------+--------------------------------+----------+----------+
-| He       | The person's Height in cm      | nu       | 125-194  |
-| ight_cm  |                                | merical  |          |
-+----------+--------------------------------+----------+----------+
-| we       | The person's weight in Kg      | nu       | 2        |
-| ight_kg  |                                | merical  | 6.3-138  |
-+----------+--------------------------------+----------+----------+
-| body     | the amount of essential fat .  | nu       | 3        |
-| fat\_%   |                                | merical  | %-78.4%  |
-+----------+--------------------------------+----------+----------+
-| di       | measures pressure the blood    | nu       | 0-156    |
-| astolic  | vessels when the heart is at   | merical  |          |
-|          | rest                           |          |          |
-+----------+--------------------------------+----------+----------+
-| s        | measures pressure in the       | nu       | 0-201    |
-| ystolic  | arteries when the heart beats  | merical  |          |
-|          | in minutes                     |          |          |
-+----------+--------------------------------+----------+----------+
-| gr       | fingers flexibility tests      | nu       | 0-70.5   |
-| ipForce  |                                | merical  |          |
-+----------+--------------------------------+----------+----------+
-| sit and  | measures flexibility in        | nu       | -25-213  |
-| bend for | sitting and bending forward in | merical  |          |
-| ward_cm  | centimeters.                   |          |          |
-+----------+--------------------------------+----------+----------+
-| sit-ups  | measures the strength and      | nu       | 0-80     |
-| co       | endurance of the abdominals    | merical  |          |
-| unts_cm  | and hip-flexor muscles in      |          |          |
-|          | centimeter.                    |          |          |
-+----------+--------------------------------+----------+----------+
-| broad    | It is a method of measuring    | nu       | 0-303    |
-| jump_cm  | how far a person can jump from | merical  |          |
-|          | a standing position to a       |          |          |
-|          | landing position.              |          |          |
-+----------+--------------------------------+----------+----------+
-| class    | body performance score         | nu       | A,B,C,D  |
-|          |                                | merical  |          |
-+----------+--------------------------------+----------+----------+
++-------------+-------------+-------------+-------------+
+| name        | description | data type   | p ossible   |
+|             |             |             | value       |
++=============+=============+=============+=============+
+| Age         | The         | nu merical  | 21-64       |
+|             | person's    |             |             |
+|             | age in      |             |             |
+|             | years       |             |             |
++-------------+-------------+-------------+-------------+
+| Gender      | The         | binary      | F,M         |
+|             | person's    |             |             |
+|             | gender      |             |             |
++-------------+-------------+-------------+-------------+
+| He ight_cm  | The         | nu merical  | 125-194     |
+|             | person's    |             |             |
+|             | Height in   |             |             |
+|             | cm          |             |             |
++-------------+-------------+-------------+-------------+
+| we ight_kg  | The         | nu merical  | 2 6.3-138   |
+|             | person's    |             |             |
+|             | weight in   |             |             |
+|             | Kg          |             |             |
++-------------+-------------+-------------+-------------+
+| body fat\_% | the amount  | nu merical  | 3 %-78.4%   |
+|             | of          |             |             |
+|             | essential   |             |             |
+|             | fat .       |             |             |
++-------------+-------------+-------------+-------------+
+| di astolic  | measures    | nu merical  | 0-156       |
+|             | pressure    |             |             |
+|             | the blood   |             |             |
+|             | vessels     |             |             |
+|             | when the    |             |             |
+|             | heart is at |             |             |
+|             | rest        |             |             |
++-------------+-------------+-------------+-------------+
+| s ystolic   | measures    | nu merical  | 0-201       |
+|             | pressure in |             |             |
+|             | the         |             |             |
+|             | arteries    |             |             |
+|             | when the    |             |             |
+|             | heart beats |             |             |
+|             | in minutes  |             |             |
++-------------+-------------+-------------+-------------+
+| gr ipForce  | fingers     | nu merical  | 0-70.5      |
+|             | flexibility |             |             |
+|             | tests       |             |             |
++-------------+-------------+-------------+-------------+
+| sit and     | measures    | nu merical  | -25-213     |
+| bend for    | flexibility |             |             |
+| ward_cm     | in sitting  |             |             |
+|             | and bending |             |             |
+|             | forward in  |             |             |
+|             | c           |             |             |
+|             | entimeters. |             |             |
++-------------+-------------+-------------+-------------+
+| sit-ups co  | measures    | nu merical  | 0-80        |
+| unts_cm     | the         |             |             |
+|             | strength    |             |             |
+|             | and         |             |             |
+|             | endurance   |             |             |
+|             | of the      |             |             |
+|             | abdominals  |             |             |
+|             | and         |             |             |
+|             | hip-flexor  |             |             |
+|             | muscles in  |             |             |
+|             | centimeter. |             |             |
++-------------+-------------+-------------+-------------+
+| broad       | It is a     | nu merical  | 0-303       |
+| jump_cm     | method of   |             |             |
+|             | measuring   |             |             |
+|             | how far a   |             |             |
+|             | person can  |             |             |
+|             | jump from a |             |             |
+|             | standing    |             |             |
+|             | position to |             |             |
+|             | a landing   |             |             |
+|             | position.   |             |             |
++-------------+-------------+-------------+-------------+
+| class       | body        | nu merical  | A,B,C,D     |
+|             | performance |             |             |
+|             | score       |             |             |
++-------------+-------------+-------------+-------------+
 
 : Table 1: Data dictionary attributes
 
@@ -1992,42 +2028,54 @@ truth label are in the same cluster.
 
 ## 6. Evaluation and Comparison:
 
-### Classification:
+### 6.1 Classification:
 
-### Clustering:
 
-+--------------+--------------+--------------+--------------+
-| No. of       | k=2 (best)   | k=3          | k=4          |
-| Clusters     |              |              |              |
-+:============:+:============:+:============:+:============:+
-| Average      | c            | cluter1=0.58 | cluter1=0.55 |
-| Silhouette   | luter1=0.56, | ,            | ,            |
-| width for    |              | cluter2=0.60 | cluter2=0.30 |
-| each cluter  | cluter2=0.67 | ,            | ,            |
-|              |              | cluter3=0.41 | cluter3=0.37 |
-|              |              |              | ,            |
-|              |              |              | cluter4=0.46 |
-+--------------+--------------+--------------+--------------+
-| Average      | 0.63         | 0.54         | 0.42         |
-| Silhouette   |              |              |              |
-| width        |              |              |              |
-+--------------+--------------+--------------+--------------+
-| Total w      | 591064.6     | 310351.6     | 230049.1     |
-| i            |              |              |              |
-| thin-cluster |              |              |              |
-| sum of       |              |              |              |
-| square       |              |              |              |
-+--------------+--------------+--------------+--------------+
-| BCubed       | 0.2516112    | 0.2516393    | 0.2522583    |
-| Precison     |              |              |              |
-+--------------+--------------+--------------+--------------+
-| BCubed       | 0.5454527    | 0.387276     | 0.2729353    |
-| Recall       |              |              |              |
-+--------------+--------------+--------------+--------------+
-| V            | all of the   | all of the   | all of the   |
-| isualization | figures is   | figures is   | figures is   |
-|              | shown above  | shown above  | shown above  |
-+--------------+--------------+--------------+--------------+
+
+### 6.2 Clustering:
+
++----------+----------+----------+----------+
+| No. of   | k=2      | k=3      | k=4      |
+| Clusters | (best)   |          |          |
++:========:+:========:+:========:+:========:+
+| Average  | c l u t  | c l u    | c l u    |
+| S        | e        | t        | t        |
+| i        | r1=0.56, | er1=0.58 | er1=0.55 |
+| lhouette |          | , c l u  | , c l u  |
+| width    | c l u    | t        | t        |
+| for each | t        | er2=0.60 | er2=0.30 |
+| cluter   | er2=0.67 | , c l u  | , c l u  |
+|          |          | t        | t        |
+|          |          | er3=0.41 | er3=0.37 |
+|          |          |          | , c l u  |
+|          |          |          | t        |
+|          |          |          | er4=0.46 |
++----------+----------+----------+----------+
+| Average  | 0.63     | 0.54     | 0.42     |
+| S        |          |          |          |
+| i        |          |          |          |
+| lhouette |          |          |          |
+| width    |          |          |          |
++----------+----------+----------+----------+
+| Total w  | 591064.6 | 310351.6 | 230049.1 |
+| i t h i  |          |          |          |
+| n        |          |          |          |
+| -cluster |          |          |          |
+| sum of   |          |          |          |
+| square   |          |          |          |
++----------+----------+----------+----------+
+| BCubed   | 0        | 0        | 0        |
+| Precison | .2516112 | .2516393 | .2522583 |
++----------+----------+----------+----------+
+| BCubed   | 0        | 0.387276 | 0        |
+| Recall   | .5454527 |          | .2729353 |
++----------+----------+----------+----------+
+| V i s u  | all of   | all of   | all of   |
+| a        | the      | the      | the      |
+| lization | figures  | figures  | figures  |
+|          | is shown | is shown | is shown |
+|          | above    | above    | above    |
++----------+----------+----------+----------+
 
 : Table 11: Comparison clusters
 
