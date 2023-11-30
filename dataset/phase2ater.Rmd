@@ -67,50 +67,53 @@ of performance and some data such as gender and age along with body
 measurements and other performance tests ,it has 13394 row and each of
 them have 12 attributes.
 
-+---------+--------------------------------------+---------+---------+
-| name    | d escription                         | data    | p       |
-|         |                                      | type    | ossible |
-|         |                                      |         | value   |
-+=========+======================================+=========+=========+
-| Age     | The person's age in years            | nu      | 21-64   |
-|         |                                      | merical |         |
-+---------+--------------------------------------+---------+---------+
-| Gender  | The person's gender                  | binary  | F,M     |
-+---------+--------------------------------------+---------+---------+
-| He      | The person's Height in cm            | nu      | 125-194 |
-| ight_cm |                                      | merical |         |
-+---------+--------------------------------------+---------+---------+
-| we      | The person's weight in Kg            | nu      | 2       |
-| ight_kg |                                      | merical | 6.3-138 |
-+---------+--------------------------------------+---------+---------+
-| body    | the amount of essential fat .        | nu      | 3       |
-| fat\_%  |                                      | merical | %-78.4% |
-+---------+--------------------------------------+---------+---------+
-| di      | measures pressure the blood vessels  | nu      | 0-156   |
-| astolic | when the heart is at rest            | merical |         |
-+---------+--------------------------------------+---------+---------+
-| s       | measures pressure in the arteries    | nu      | 0-201   |
-| ystolic | when the heart beats in minutes      | merical |         |
-+---------+--------------------------------------+---------+---------+
-| gr      | fingers f lexibility tests           | nu      | 0-70.5  |
-| ipForce |                                      | merical |         |
-+---------+--------------------------------------+---------+---------+
-| sit and | measures f lexibility in sitting and | nu      | -25-213 |
-| bend    | bending forward in ce ntimeters.     | merical |         |
-| for     |                                      |         |         |
-| ward_cm |                                      |         |         |
-+---------+--------------------------------------+---------+---------+
-| sit-ups | measures the strength and endurance  | nu      | 0-80    |
-| co      | of the abdominals and hip-flexor     | merical |         |
-| unts_cm | muscles in c entimeter.              |         |         |
-+---------+--------------------------------------+---------+---------+
-| broad   | It is a method of measuring how far  | nu      | 0-303   |
-| jump_cm | a person can jump from a standing    | merical |         |
-|         | position to a landing position.      |         |         |
-+---------+--------------------------------------+---------+---------+
-| class   | body p erformance score              | nu      | A,B,C,D |
-|         |                                      | merical |         |
-+---------+--------------------------------------+---------+---------+
++----------+-------------------------------+----------+----------+
+| name     | description                   | data     | p        |
+|          |                               | type     | ossible  |
+|          |                               |          | value    |
++==========+===============================+==========+==========+
+| Age      | The person's age in years     | nu       | 21-64    |
+|          |                               | merical  |          |
++----------+-------------------------------+----------+----------+
+| Gender   | The person's gender           | binary   | F,M      |
++----------+-------------------------------+----------+----------+
+| He       | The person's Height in cm     | nu       | 125-194  |
+| ight_cm  |                               | merical  |          |
++----------+-------------------------------+----------+----------+
+| we       | The person's weight in Kg     | nu       | 2        |
+| ight_kg  |                               | merical  | 6.3-138  |
++----------+-------------------------------+----------+----------+
+| body     | the amount of essential fat . | nu       | 3        |
+| fat\_%   |                               | merical  | %-78.4%  |
++----------+-------------------------------+----------+----------+
+| di       | measures pressure the blood   | nu       | 0-156    |
+| astolic  | vessels when the heart is at  | merical  |          |
+|          | rest                          |          |          |
++----------+-------------------------------+----------+----------+
+| s        | measures pressure in the      | nu       | 0-201    |
+| ystolic  | arteries when the heart beats | merical  |          |
+|          | in minutes                    |          |          |
++----------+-------------------------------+----------+----------+
+| gr       | fingers f lexibility tests    | nu       | 0-70.5   |
+| ipForce  |                               | merical  |          |
++----------+-------------------------------+----------+----------+
+| sit and  | measures f lexibility in      | nu       | -25-213  |
+| bend for | sitting and bending forward   | merical  |          |
+| ward_cm  | in ce ntimeters.              |          |          |
++----------+-------------------------------+----------+----------+
+| sit-ups  | measures the strength and     | nu       | 0-80     |
+| co       | endurance of the abdominals   | merical  |          |
+| unts_cm  | and hip-flexor muscles in c   |          |          |
+|          | entimeter.                    |          |          |
++----------+-------------------------------+----------+----------+
+| broad    | It is a method of measuring   | nu       | 0-303    |
+| jump_cm  | how far a person can jump     | merical  |          |
+|          | from a standing position to a |          |          |
+|          | landing position.             |          |          |
++----------+-------------------------------+----------+----------+
+| class    | body p erformance score       | nu       | A,B,C,D  |
+|          |                               | merical  |          |
++----------+-------------------------------+----------+----------+
 
 : Table 1: Data dictionary attributes
 
@@ -133,6 +136,7 @@ str(dataset)
 ```{r}
 print(dataset)
 ```
+
 
 ```{r}
 #Number of rows
@@ -194,6 +198,7 @@ plot(dataset$gender, dataset$class, main = " the performance between meal amd fe
      xlab = "gender", ylab = "class",
      xlim = c(0,1), ylim = c(0,4))
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -424,6 +429,7 @@ boxplot(dataset$weight_kg ,
         main= "Boxplot of weight")
 
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -1635,9 +1641,9 @@ kmeansruns.result
 fviz_cluster(kmeansruns.result, data = dataset)
 ```
 
-According to the method's output, method suggests using k=3 cluster for
-our dataset, and we'll try another approach to see what performs best
-between them.
+According to the method's output, method suggests using k=3 cluster for our dataset, and we'll try another approach to see what performs best between them. 
+
+from the above results and the cluster representation. First cluster contains 2927 objects with total sum of square 79739.78 . Second cluster contains 3364 object with total sum of square 99564.13 . third cluster contains 6760 objects with total sum of sequare 131047.67. The value of the total sum of square indicate that the larger value means the larger seperation. So,the object in the third cluster are more separated than the object in the first and second cluster.
 
 ------------------------------------------------------------------------
 
@@ -1993,30 +1999,34 @@ truth label are in the same cluster.
 
 ### 6.2 Clustering:
 
-+---------------+---------------+---------------+---------------+
-| No. of        | k=2 (best)    | k=3           | k=4           |
-| Clusters      |               |               |               |
-+:=============:+:=============:+:=============:+:=============:+
-| Average       | cluter        | clute r1=0.58 | clute r1=0.55 |
-| Silhouette    | 1=0.56,       | , clute       | , clute       |
-| width for     |               | r2=0.60 ,     | r2=0.30 ,     |
-| each cluter   | clute r2=0.67 | clute r3=0.41 | clute r3=0.37 |
-|               |               |               | ,clute        |
-|               |               |               | r4=0.46       |
-+---------------+---------------+---------------+---------------+
-| Average       | 0.63          | 0.54          | 0.42          |
-| Silhouette    |               |               |               |
-| width         |               |               |               |
-+---------------+---------------+---------------+---------------+
-| Total within- | 5 91064.6     | 3 10351.6     | 2 30049.1     |
-| cluster sum   |               |               |               |
-| of square     |               |               |               |
-+---------------+---------------+---------------+---------------+
-| BCubed        | 0 . 2516112   | 0 . 2516393   | 0 . 2522583   |
-| Precison      |               |               |               |
-+---------------+---------------+---------------+---------------+
-| BCubed Recall | 0 . 5454527   | 0 .387276     | 0 . 2729353   |
-+---------------+---------------+---------------+---------------+
++--------------+--------------+--------------+--------------+
+| No. of       | k=2 (best)   | k=3          | k=4          |
+| Clusters     |              |              |              |
++:============:+:============:+:============:+:============:+
+| Average      | cluter       | clute        | clute        |
+| Silhouette   | 1=0.56,      | r1=0.58 ,    | r1=0.55 ,    |
+| width for    |              | clute        | clute        |
+| each cluter  | clute        | r2=0.60 ,    | r2=0.30 ,    |
+|              | r2=0.67      | clute        | clute        |
+|              |              | r3=0.41      | r3=0.37      |
+|              |              |              | ,clute       |
+|              |              |              | r4=0.46      |
++--------------+--------------+--------------+--------------+
+| Average      | 0.63         | 0.54         | 0.42         |
+| Silhouette   |              |              |              |
+| width        |              |              |              |
++--------------+--------------+--------------+--------------+
+| Total        | 5 91064.6    | 3 10351.6    | 2 30049.1    |
+| within-      |              |              |              |
+| cluster sum  |              |              |              |
+| of square    |              |              |              |
++--------------+--------------+--------------+--------------+
+| BCubed       | 0 . 2516112  | 0 . 2516393  | 0 . 2522583  |
+| Precison     |              |              |              |
++--------------+--------------+--------------+--------------+
+| BCubed       | 0 . 5454527  | 0 .387276    | 0 . 2729353  |
+| Recall       |              |              |              |
++--------------+--------------+--------------+--------------+
 
 : Table 11: Comparison clusters
 
