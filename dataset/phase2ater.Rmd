@@ -2004,6 +2004,47 @@ truth label are in the same cluster.
 
 ### 6.1 Classification:
 
+80% training 20% testing:
+
+|                     |        |          |            |
+|---------------------|--------|----------|------------|
+|                     | GI     | GI ratio | Gini Index |
+| Accuracy            | 57.48% | 57.37%   | 57.37%     |
+| Sensitivity(Recall) | 43.56% | 43.32%   | 43.32%     |
+| Specificity         | 61.18% | 61.95%   | 61.95%     |
+| Precision           | 61.18% | 61.95%   | 61.95%     |
+
+
+In this partitioning, GI exhibits a slightly higher accuracy, suggesting that it may be marginally more predictive than the other algorithms, albeit with a small difference.
+
+75% training 25% testing:
+
+|                     |        |          |            |
+|---------------------|--------|----------|------------|
+|                     | GI     | GI ratio | Gini Index |
+| Accuracy            | 57.8%  | 57.58%   | 57.58%     |
+| Sensitivity(Recall) | 43.86% | 40.20%   | 40.20%     |
+| Specificity         | 60.97% | 52.47%   | 52.47%     |
+| Precision           | 60.97% | 61.81%   | 61.81%     |
+
+ in 75/25 GI stands out with slightly higher accuracy, sensitivity, and specificity compared to GI ratio and Gini Index. These metrics collectively suggest that GI performs slightly better in correctly classifying instances, especially in identifying positive and negative cases.
+
+
+
+70% training 30% testing:
+
+|                     |        |          |            |
+|---------------------|--------|----------|------------|
+|                     | GI     | GI ratio | Gini Index |
+| Accuracy            | 57.6%  | 57.86%   | 57.86%     |
+| Sensitivity(Recall) | 43.88% | 41.42%   | 41.42%     |
+| Specificity         | 60.5%  | 60.59%   | 60.59%     |
+| Precision           | 60.5%  | 60.59%   | 60.59%     |
+
+with a 70%-30% training-testing split, GI ratio slightly outperforms the other algorithms in terms of accuracy and specificity. However, GI maintains a higher sensitivity, suggesting better performance in identifying positive instances. The precision values are consistent across all algorithms. Overall, the choice of algorithm may depend on specific priorities, such as whether false positives or false negatives carry more significance in the given context.
+
+------------------------------
+
 ### 6.2 Clustering:
 
 +--------------+--------------+--------------+--------------+
@@ -2062,27 +2103,9 @@ belong to a specific cluster are actually assigned to that cluster.
 
 ## ^[[6]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^7. Finding:
 
-Considering the project's goal and the problem at hand, the
-classification task emerged as the more advantageous approach for
-analysis. By assigning class labels to the data, the classification task
-enabled the identification of influential factors significantly
-impacting body scores. The decision tree algorithm provided valuable
-insights into these factors, shedding light on their importance and
-relationships.
+Based on Comparison Criteria, it appears that the clustering algorithm has achieved a relatively high average silhouette width of 63%, indicating that the clusters generated are well-separated and the instances within each cluster are similar to one another. This suggests that the clustering algorithm has successfully identified distinct groups or patterns in our body performance dataset. While the Classification accuracy achieved is 57.6%. This means that the classification model correctly predicted the class labels for 57.6% of the instances in the test set. Therefor, Clustering can be more suitable.
 
-In contrast, the clustering task encountered challenges primarily due to
-the presence of overlapping clusters. While the clustering task
-facilitated the understanding of similarities among body performance
-data points, it did not directly contribute to problem-solving or goal
-attainment.
-
-In conclusion, the classification task proved to be a more helpful and
-accurate approach for addressing the problem and achieving the project's
-goal. It allowed for the identification of factors influencing body
-scores, providing valuable insights for optimizing training programs.
-Conversely, the clustering task, while offering some insights into data
-patterns, did not directly contribute to problem-solving or goal
-achievement.
+However, Considering the project's goal and the problem at hand, the clustering task encountered challenges primarily due to the presence of overlapping clusters. While the clustering task facilitated the understanding of similarities among body performance data points, it did not directly contribute to problem-solving or goal attainment. while the classification task emerged as the more advantageous approach for analysis. By assigning class labels to the data, the classification task enabled the identification of influential factors significantly impacting body scores. (The decision tree algorithm provided valuable insights into these factors), shedding light on their importance and relationships. However, the accurcy does not provide quality of the classification model.
 
 ------------------------------------------------------------------------
 
