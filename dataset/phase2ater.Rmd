@@ -1717,6 +1717,9 @@ library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
 
+Based on the above results and cluster representation, the first cluster contains 4620 objects with a total sum of squares of 285656.3, while the second cluster contains 8431 objects with a total sum of squares of 305408.3. The higher total sum of squares in the second cluster suggests a larger separation, indicating that the objects in the second cluster are more dispersed or separated compared to those in the first cluster. A lower WSS value indicates that the objects within the cluster are closer to the centroid, suggesting a more compact and well-defined cluster.Overall,
+The clustering algorithm has achieved a 75.3% separation, suggesting that the clusters are relatively well-defined and distinct from each other.
+
 #### Average silhouette for 2 clusters
 
 ```{r}
@@ -1814,6 +1817,8 @@ kmeans.result
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
+
+we can infer that the clustering algorithm has successfully separated the data into three distinct clusters. Cluster 1 has the lowest total sum of square value, followed by Cluster 3, and Cluster 2 has the highest total sum of square value.Therefore, Cluster 1 appears to be the most compact and well-defined cluster, while Cluster 2 shows a higher level of dispersion. Overall, the clustering algorithm has achieved an 87.0% separation, indicating a relatively high level of separation and distinctiveness between the three clusters.
 
 #### Average silhouette for 3 clusters
 
@@ -1913,6 +1918,8 @@ kmeans.result
 library(factoextra)
 fviz_cluster(kmeans.result, data = dataset)
 ```
+
+Based on the above results and cluster representation, First cluster contains 2584 objects with total sum of square 56577.82. Second cluster contains 3111 object with total sum of square 53341.05 . Third cluster contains 2508 objects with total sum of sequare 58639.75. Fourth cluster contains  4848 objects with total sum of sequare 61490.52, which is the highest total sum of squares. A higher sum of squares indicates a larger separation. Therefore, the objects in the fourth cluster are more separated. Cluster 2 has the lowest WSS value, followed by Cluster 1, Cluster 3, and Cluster 4. Therefore, Cluster 2 appears to be the most compact and well-defined cluster, while Cluster 4 shows a higher level of dispersion. Overall, the clustering algorithm has achieved a 90.4% separation, indicating a relatively high level of separation and distinctiveness between the four clusters.
 
 #### Average silhouette for 4 clusters:
 
