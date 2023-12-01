@@ -1677,7 +1677,7 @@ sum of square (WSS) as in y-axis, and Noumber of clusters in x-axis
 library(factoextra) 
 
 fviz_nbclust(dataset, kmeans, method = "wss") +
-  geom_vline(xintercept = 4, linetype = 4)+
+  geom_vline(xintercept = 4, linetype = 3)+
   labs(subtitle = "Elbow method")
 ```
 
@@ -2106,6 +2106,8 @@ belong to a specific cluster are actually assigned to that cluster.
 Based on Comparison Criteria, it appears that the clustering algorithm has achieved a relatively high average silhouette width of 63%, indicating that the clusters generated are well-separated and the instances within each cluster are similar to one another. This suggests that the clustering algorithm has successfully identified distinct groups or patterns in our body performance dataset. While the Classification accuracy achieved is 57.6%. This means that the classification model correctly predicted the class labels for 57.6% of the instances in the test set. Therefor, Clustering can be more suitable.
 
 However, Considering the project's goal and the problem at hand, the clustering task encountered challenges primarily due to the presence of overlapping clusters. While the clustering task facilitated the understanding of similarities among body performance data points, it did not directly contribute to problem-solving or goal attainment. while the classification task emerged as the more advantageous approach for analysis. By assigning class labels to the data, the classification task enabled the identification of influential factors significantly impacting body scores. (The decision tree algorithm provided valuable insights into these factors), shedding light on their importance and relationships. However, the accurcy does not provide quality of the classification model.
+
+In summary, considering the similar percentage result achieved by both classification and clustering approaches, we made the decision to choose classification due to its direct suitability to our specific problem and its effective ability to accurately classify the data.
 
 ------------------------------------------------------------------------
 
