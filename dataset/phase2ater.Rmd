@@ -68,51 +68,51 @@ measurements and other performance tests ,it has 13394 row and each of
 them have 12 attributes.
 
 +----------+-------------------------------+----------+----------+
-| name     | description                   | data     | p        |
-|          |                               | type     | ossible  |
-|          |                               |          | value    |
+| name     | description                   | data     | possible |
+|          |                               | type     | value    |
+|          |                               |          |          |
 +==========+===============================+==========+==========+
-| Age      | The person's age in years     | nu       | 21-64    |
-|          |                               | merical  |          |
+| Age      | The person's age in years     | Numeric  | 21-64    |
+|          |                               |          |          |
 +----------+-------------------------------+----------+----------+
 | Gender   | The person's gender           | binary   | F,M      |
 +----------+-------------------------------+----------+----------+
-| He       | The person's Height in cm     | nu       | 125-194  |
-| ight_cm  |                               | merical  |          |
+| Height_cm| The person's Height in cm     | Numeric  | 125-194  |
+|          |                               |          |          |
 +----------+-------------------------------+----------+----------+
-| we       | The person's weight in Kg     | nu       | 2        |
-| ight_kg  |                               | merical  | 6.3-138  |
+| weight_kg| The person's weight in Kg     | Numeric  | 2        |
+|          |                               |          | 6.3-138  |
 +----------+-------------------------------+----------+----------+
-| body     | the amount of essential fat . | nu       | 3        |
-| fat\_%   |                               | merical  | %-78.4%  |
+| body     | the amount of essential fat . | Numeric  | 3        |
+| fat\_%   |                               |          | %-78.4%  |
 +----------+-------------------------------+----------+----------+
-| di       | measures pressure the blood   | nu       | 0-156    |
-| astolic  | vessels when the heart is at  | merical  |          |
+| diastolic| measures pressure the blood   | Numeric  | 0-156    |
+|          | vessels when the heart is at  |          |          |
 |          | rest                          |          |          |
 +----------+-------------------------------+----------+----------+
-| s        | measures pressure in the      | nu       | 0-201    |
-| ystolic  | arteries when the heart beats | merical  |          |
+|          | measures pressure in the      | Numeric  | 0-201    |
+| Systolic | arteries when the heart beats |          |          |
 |          | in minutes                    |          |          |
 +----------+-------------------------------+----------+----------+
-| gr       | fingers f lexibility tests    | nu       | 0-70.5   |
-| ipForce  |                               | merical  |          |
+| gripForce| fingers flexibility tests     | Numeric  | 0-70.5   |
+|          |                               |          |          |
 +----------+-------------------------------+----------+----------+
-| sit and  | measures f lexibility in      | nu       | -25-213  |
-| bend for | sitting and bending forward   | merical  |          |
-| ward_cm  | in ce ntimeters.              |          |          |
+| sit and  | measures flexibility in       | Numeric  | -25-213  |
+| bend for | sitting and bending forward   |          |          |
+| ward_cm  | in centimeters.               |          |          |
 +----------+-------------------------------+----------+----------+
-| sit-ups  | measures the strength and     | nu       | 0-80     |
-| co       | endurance of the abdominals   | merical  |          |
-| unts_cm  | and hip-flexor muscles in c   |          |          |
+| sit-ups  | measures the strength and     | Numeric  | 0-80     |
+| counts_cm| endurance of the abdominals   |          |          |
+|          | and hip-flexor muscles in c   |          |          |
 |          | entimeter.                    |          |          |
 +----------+-------------------------------+----------+----------+
-| broad    | It is a method of measuring   | nu       | 0-303    |
-| jump_cm  | how far a person can jump     | merical  |          |
+| broad    | It is a method of measuring   | Numeric  | 0-303    |
+| jump_cm  | how far a person can jump     |          |          |
 |          | from a standing position to a |          |          |
 |          | landing position.             |          |          |
 +----------+-------------------------------+----------+----------+
-| class    | body p erformance score       | nu       | A,B,C,D  |
-|          |                               | merical  |          |
+| class    | body performance score        | Ordinal  | A,B,C,D  |
+|          |                               |          |          |
 +----------+-------------------------------+----------+----------+
 
 : Table 1: Data dictionary attributes
