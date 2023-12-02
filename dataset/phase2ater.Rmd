@@ -2123,19 +2123,19 @@ In summary, considering the similar percentage result achieved by both classific
 ------------------------------------------------------------------------
 
 ## 8. References:
-
-[1] [“Body performance Data,” Kaggle, Jun. 29, 2022. ](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)
-
-[2].[Codeguyas, “Body Performance Data EDA,” Kaggle, Dec. 19, 2021.](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda)
-
-[3].
-[“discretize function - RDocumentation.”](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)
-
-[4].[“RPubs - Classification and Regression Trees (CART) in R.”](https://rpubs.com/camguild/803096)
-
-[5]. [“RPubs - Cluster Analysis in R.”](https://rpubs.com/odenipinedo/cluster-analysis-in-R)
-
-[6].[Shivanirana, “📌🧐Guide to Complete Statistical Analysis📊✅,” Kaggle, Mar. 11, 2022. ](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
-
-[overall].[Body performance note
-book](https://rpubs.com/TeraPutera/LBB-CM-2)
+>
+>[1] [“Body performance Data,” Kaggle, Jun. 29, 2022. ](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)
+>
+>[2].[Codeguyas, “Body Performance Data EDA,” Kaggle, Dec. 19, 2021.](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda)
+>
+>[3].
+>[“discretize function - RDocumentation.”](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)
+>
+>[4].[“RPubs - Classification and Regression Trees (CART) in R.”](https://rpubs.com/camguild/803096)
+>
+>[5]. [“RPubs - Cluster Analysis in R.”](https://rpubs.com/odenipinedo/cluster-analysis-in-R)
+>
+>[6].[Shivanirana, “📌🧐Guide to Complete Statistical Analysis📊✅,” Kaggle, Mar. 11, 2022. ](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
+>
+>[overall].[Body performance note
+>book](https://rpubs.com/TeraPutera/LBB-CM-2)
