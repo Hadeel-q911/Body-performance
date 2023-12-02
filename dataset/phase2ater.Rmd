@@ -904,7 +904,7 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60,5%  |
 | Precision           | 60.5%% |
 
-: Table 2: Information Gain evaluation
+: Table 2: Statistics for partition 70/30 (Information Gain)
 
 ------------------------------------------------------------------------
 
@@ -973,7 +973,7 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60.59% |
 | Precision           | 60.59% |
 
-: Table 3: Gain Ratio evaluation
+: Table 3: Statistics for partition 70/30 (Gain ratio)
 
 ------------------------------------------------------------------------
 
@@ -1037,7 +1037,7 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60.59% |
 | Precision           | 60.59% |
 
-: Table 4: Gini index evaluation
+: Table 4: Statistics for partition 70/30 (Gini index)
 
 ------------------------------------------------------------------------
 
@@ -1134,7 +1134,7 @@ The above matrix is based on applying our model on test data.
 | Specificity         | 60.97% |
 | Precision           | 60.97% |
 
-: Table 6:
+: Table 6: Statistics for partition 75/25 (information gain)
 
 ------------------------------------------------------------------------
 
@@ -1197,7 +1197,7 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 52.47% |
 | Precision           | 61.81% |
 
-: Table 7:
+: Table 7: Statistics for partition 75/25 (Gain ratio)
 
 ------------------------------------------------------------------------
 
@@ -1259,7 +1259,7 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 61.81 |
 | Precision           | 61.81 |
 
-: Table 8:
+: Table 8: Statistics for partition 75/25 (Gini index)
 
 ------------------------------------------------------------------------
 
@@ -1341,8 +1341,8 @@ print(paste("Error Rate:", error_rate))
 print(paste("Precision for Class 1:", precision[1]))
 ```
 
-The above matrix is based on applying our model on test data. \####
-Schedule for classification Evaluation:
+The above matrix is based on applying our model on test data.
+### Schedule for classification Evaluation:
 
 | Evaluation method   | value  |
 |---------------------|--------|
@@ -1352,7 +1352,7 @@ Schedule for classification Evaluation:
 | Specificity         | 61.18% |
 | Precision           | 61.18% |
 
-: Table 9:
+: Table 9: Statistics for partition 80/20 (Information Gain)
 
 ------------------------------------------------------------------------
 
@@ -1415,7 +1415,7 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 61.95% |
 | Precision           | 61.95% |
 
-: Table 10:
+: Table 10: Statistics for partition 80/20 (Gain ratio)
 
 ------------------------------------------------------------------------
 
@@ -1477,7 +1477,7 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 61.95% |
 | Precision           | 61.95% |
 
-: Table 11:
+: Table 11: Statistics for partition 80/20 (Gini index)
 
 ------------------------------------------------------------------------
 
@@ -2016,7 +2016,7 @@ truth label are in the same cluster.
 | Specificity         | 61.18% | 61.95%   | 61.95%     |
 | Precision           | 61.18% | 61.95%   | 61.95%     |
 
-: Table 12:
+: Table 12: 80/20 Comparison Classification algorithm
 
 
 
@@ -2032,7 +2032,7 @@ In this partitioning, GI exhibits a slightly higher accuracy, suggesting that it
 | Specificity         | 60.97% | 52.47%   | 52.47%     |
 | Precision           | 60.97% | 61.81%   | 61.81%     |
 
-: Table 13:
+: Table 13: 75/25 Comparison Classification algorithm
 
  in 75/25 GI stands out with slightly higher accuracy, sensitivity, and specificity compared to GI ratio and Gini Index. These metrics collectively suggest that GI performs slightly better in correctly classifying instances, especially in identifying positive and negative cases.
 
@@ -2048,7 +2048,7 @@ In this partitioning, GI exhibits a slightly higher accuracy, suggesting that it
 | Specificity         | 60.5%  | 60.59%   | 60.59%     |
 | Precision           | 60.5%  | 60.59%   | 60.59%     |
 
-: Table 14:
+: Table 14: 70/30 Comparison Classification algorithm
 
 
 with a 70%-30% training-testing split, GI ratio slightly outperforms the other algorithms in terms of accuracy and specificity. However, GI maintains a higher sensitivity, suggesting better performance in identifying positive instances. The precision values are consistent across all algorithms. Overall, the choice of algorithm may depend on specific priorities, such as whether false positives or false negatives carry more significance in the given context.
