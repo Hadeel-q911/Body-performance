@@ -30,7 +30,7 @@ awareness of its importance.
 
 ## 2. Data Mining task:
 
-#### 2.1 Classification goal :
+### 2.1 Classification goal :
 
 Using the attribute "class" as our class label, we employ a
 classification approach to categorize individuals into different levels
@@ -40,7 +40,7 @@ indicators, and activity levels. Our objective extends beyond
 classification, as we also strive to predict performance outcomes by
 leveraging the collected data.
 
-#### 2.2 Clustering goal :
+### 2.2 Clustering goal :
 
 Our primary goal in utilizing clustering on our dataset is to identify
 inherent patterns or groupings within the data. By applying clustering
@@ -54,11 +54,11 @@ valuable knowledge or trends that may be hidden within the dataset.
 
 ## 3. Data:
 
-### ^[[1]](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)^3.1: Data Source :
+### 3.1: Data Source :
 
 Body performance dataset it from Kaggle website , The
 link(<https://www.kaggle.com/datasets/kukuroo3/body-performance-data>)
-show the source data.
+show the source data. ^[[1]](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)^
 
 ### 3.2: General Information about Body performance dataset :
 
@@ -148,7 +148,7 @@ ncol(dataset)
 
 ------------------------------------------------------------------------
 
-### ^[[2]](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda),[[2]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^4.2 Understanding the dataset using graph representations:
+### ^[[2]](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda),[[6]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^4.2 Understanding the dataset using graph representations:
 
 ### Encoding:
 
@@ -702,7 +702,7 @@ the outliers was successful.
 
 ------------------------------------------------------------------------
 
-### ^[[3]](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)^ 4.7 Discretization :
+### 4.7 Discretization :
 
 ```{r}
 #To use it later in clustering task:
@@ -713,7 +713,7 @@ We transformed the continuous vales of the age into intervals by
 dividing the values to be fall on one of three possible interval labels
 with equal width which is ( 21, 35],( 35, 49] and ( 49, 63] by
 discretisation the values well be meaningful and simpler to classify or
-perform other methods that can help us later in our model.
+perform other methods that can help us later in our model.^[[3]](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)^
 
 ```{r}
 # Define bins for discretization
@@ -770,7 +770,7 @@ consider all attributes without performing feature selection.
 
 ## 5. Data Mining Technique:
 
-### ^[[4]](https://rpubs.com/camguild/803096)^5.1 Classification:
+### 5.1 Classification:
 
 Our classification objective is to develop a predictive model for our
 dataset with class labels A, B, C, and D based on various attributes. To
@@ -782,7 +782,7 @@ we will build three decision trees, employing distinct attribute
 selection methods: Information Gain (ID3), Gain Ratio (C4.5), and Gini
 Index (CART). The prediction will be carried out using the 'predict'
 method. Evaluation and testing will be performed using the
-'confusionMatrix' method.
+'confusionMatrix' method.^[[4]](https://rpubs.com/camguild/803096)^
 
 #### Classification packages:
 
@@ -1415,6 +1415,8 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 61.95% |
 | Precision           | 61.95% |
 
+: Table 10:
+
 ------------------------------------------------------------------------
 
 #### Gini index:
@@ -1475,7 +1477,7 @@ print(paste("Precision for Class 1:", precision[1]))
 | Specificity         | 61.95% |
 | Precision           | 61.95% |
 
-: Table 10:
+: Table 11:
 
 ------------------------------------------------------------------------
 
@@ -1510,14 +1512,14 @@ fluctuations within a narrow range.
 
 ------------------------------------------------------------------------
 
-### ^[[5]](https://rpubs.com/odenipinedo/cluster-analysis-in-R)^ 5.2 Clustering:
+### 5.2 Clustering:
 
 Data clustering is the act of dividing data into distinct groups or
 clusters. It is an unsupervised learning technique, meaning it doesn't
 rely on known class labels "Class" in the training data. The data within
 each cluster share similarities with one another and differ from data in
 other clusters. In this case, we will employ the k-means clustering
-algorithm.
+algorithm.^[[5]](https://rpubs.com/odenipinedo/cluster-analysis-in-R)^
 
 ### 1- Data preprocessing before Clustering:
 
@@ -2014,6 +2016,9 @@ truth label are in the same cluster.
 | Specificity         | 61.18% | 61.95%   | 61.95%     |
 | Precision           | 61.18% | 61.95%   | 61.95%     |
 
+: Table 12:
+
+
 
 In this partitioning, GI exhibits a slightly higher accuracy, suggesting that it may be marginally more predictive than the other algorithms, albeit with a small difference.
 
@@ -2026,6 +2031,8 @@ In this partitioning, GI exhibits a slightly higher accuracy, suggesting that it
 | Sensitivity(Recall) | 43.86% | 40.20%   | 40.20%     |
 | Specificity         | 60.97% | 52.47%   | 52.47%     |
 | Precision           | 60.97% | 61.81%   | 61.81%     |
+
+: Table 13:
 
  in 75/25 GI stands out with slightly higher accuracy, sensitivity, and specificity compared to GI ratio and Gini Index. These metrics collectively suggest that GI performs slightly better in correctly classifying instances, especially in identifying positive and negative cases.
 
@@ -2040,6 +2047,9 @@ In this partitioning, GI exhibits a slightly higher accuracy, suggesting that it
 | Sensitivity(Recall) | 43.88% | 41.42%   | 41.42%     |
 | Specificity         | 60.5%  | 60.59%   | 60.59%     |
 | Precision           | 60.5%  | 60.59%   | 60.59%     |
+
+: Table 14:
+
 
 with a 70%-30% training-testing split, GI ratio slightly outperforms the other algorithms in terms of accuracy and specificity. However, GI maintains a higher sensitivity, suggesting better performance in identifying positive instances. The precision values are consistent across all algorithms. Overall, the choice of algorithm may depend on specific priorities, such as whether false positives or false negatives carry more significance in the given context.
 
@@ -2076,7 +2086,7 @@ with a 70%-30% training-testing split, GI ratio slightly outperforms the other a
 | Recall       |              |              |              |
 +--------------+--------------+--------------+--------------+
 
-: Table 11: Comparison clusters
+: Table 15: Comparison clusters
 
 Upon comparing the results of the clustering task using the k-means
 algorithm reveal that the most effective cluster configuration is
@@ -2102,37 +2112,30 @@ belong to a specific cluster are actually assigned to that cluster.
 
 ------------------------------------------------------------------------
 
-## ^[[6]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^7. Finding:
+## 7. Finding:
 
 Based on Comparison Criteria, it appears that the clustering algorithm has achieved a relatively high average silhouette width of 63%, indicating that the clusters generated are well-separated and the instances within each cluster are similar to one another. This suggests that the clustering algorithm has successfully identified distinct groups or patterns in our body performance dataset. While the Classification accuracy achieved is 57.86%. This means that the classification model correctly predicted the class labels for 57.86% of the instances in the test set. Therefor, Clustering can be more suitable.
 
 However, Considering the project's goal and the problem at hand, the clustering task encountered challenges primarily due to the presence of overlapping clusters. While the clustering task facilitated the understanding of similarities among body performance data points, it did not directly contribute to problem-solving or goal attainment. while the classification task emerged as the more advantageous approach for analysis. By assigning class labels to the data, the classification task enabled the identification of influential factors significantly impacting body scores. (The decision tree algorithm provided valuable insights into these factors), shedding light on their importance and relationships. However, the accurcy does not provide quality of the classification model.
 
-In summary, considering the similar percentage result achieved by both classification and clustering approaches, we made the decision to choose classification due to its direct suitability to our specific problem and its effective ability to accurately classify the data.
+In summary, considering the similar percentage result achieved by both classification and clustering approaches, we made the decision to choose classification due to its direct suitability to our specific problem and its effective ability to accurately classify the data.^[[6]](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)^
 
 ------------------------------------------------------------------------
 
 ## 8. References:
 
-[1] [data
-source](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)
+[1] [“Body performance Data,” Kaggle, Jun. 29, 2022. ](https://www.kaggle.com/datasets/kukuroo3/body-performance-data)
 
-[2].[Body Performance Data
-EDA](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda)
-, [guide to complete statistical
-analysis](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
+[2].[Codeguyas, “Body Performance Data EDA,” Kaggle, Dec. 19, 2021.](https://www.kaggle.com/code/codeguyas101/body-performance-data-eda)
 
 [3].
-[discretize](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)
+[“discretize function - RDocumentation.”](https://www.rdocumentation.org/packages/arules/versions/1.6-4/topics/discretize)
 
-[4].[Classification and Regression Trees (CART) in
-R](https://rpubs.com/camguild/803096)
+[4].[“RPubs - Classification and Regression Trees (CART) in R.”](https://rpubs.com/camguild/803096)
 
-[5]. [Cluster Analysis in
-R](https://rpubs.com/odenipinedo/cluster-analysis-in-R)
+[5]. [“RPubs - Cluster Analysis in R.”](https://rpubs.com/odenipinedo/cluster-analysis-in-R)
 
-[6].[guide to complete statistical
-analysis](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
+[6].[Shivanirana, “📌🧐Guide to Complete Statistical Analysis📊✅,” Kaggle, Mar. 11, 2022. ](https://www.kaggle.com/code/shivanirana63/guide-to-complete-statistical-analysis)
 
 [overall].[Body performance note
 book](https://rpubs.com/TeraPutera/LBB-CM-2)
