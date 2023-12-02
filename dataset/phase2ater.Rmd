@@ -800,6 +800,10 @@ library(rpart.plot)
 
 ------------------------------------------------------------------------
 
+### Partitioning Method:
+
+The chosen partitioning method for the dataset involves employing the train:test split technique. This approach entails dividing the dataset into three subsets: 70% for training and 30% for testing, 75% for training and 25% for testing, and finally, 80% for training and 20% for testing. The utilization of the train:test split method is a widely adopted practice in machine learning. This strategic partitioning aids in optimizing the effective use of available data for both training and testing purposes. By implementing this method, the risk of overfitting is mitigated, as it ensures a dedicated dataset for the evaluation of model performance.
+
 ### Partitioning 70/30
 
 We partition the data the data into (70% training, 30% testing). This
@@ -870,6 +874,16 @@ that the attribute (sit.and.bend.forward_cm) has the greatest
 information gain. As a result, it was placed at the root level,
 representing the first level of the tree.
 
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 .
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+For the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.085 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.085 the tree splits based on ‘body_fat’
+
 #### Prediction on test data and Confusion matrix:
 
 ```{r}
@@ -939,6 +953,16 @@ that the attribute (sit.and.bend.forward_cm) has the greatest gain
 ratio. As a result, it was placed at the root level, representing the
 first level of the tree.
 
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+For the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.012 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.012 the tree splits based on ‘body_fat’
+
 #### Prediction on test data and Confusion matrix:
 
 ```{r}
@@ -1002,6 +1026,16 @@ The decision tree representation was utilized, and the findings indicate
 that the attribute (sit.and.bend.forward_cm) has the greatest Gini index
 (impurity reduction) values. As a result, it was placed at the root
 level, representing the first level of the tree.
+
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+For the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.65 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.65 the tree splits based on ‘body_fat’
 
 ### Prediction on test data and Confusion matrix:
 
@@ -1100,6 +1134,16 @@ that the attribute (sit.and.bend.forward_cm) has the greatest
 information gain. As a result, it was placed at the root level,
 representing the first level of the tree.
 
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+For the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.048 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.048 the tree splits based on ‘body_fat’
+
 #### Prediction on test data and Confusion matrix:
 
 ```{r}
@@ -1165,6 +1209,16 @@ that the attribute (sit.and.bend.forward_cm) has the greatest gain
 ratio. As a result, it was placed at the root level, representing the
 first level of the tree.
 
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+For the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.036 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.036 the tree splits based on ‘body_fat’
+
 #### Prediction on test data and Confusion matrix:
 
 ```{r}
@@ -1226,6 +1280,16 @@ The decision tree representation was utilized, and the findings indicate
 that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex
 (impurity reduction) values. As a result, it was placed at the root
 level, representing the first level of the tree.
+
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 .
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+For the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.036 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.036 the tree splits based on ‘body_fat’
 
 #### Prediction on test data and Confusion matrix:
 
@@ -1311,13 +1375,23 @@ library(rpart.plot)
 rpart_model <- model$finalModel
 
 # Print the decision tree
-rpart.plot(rpart_model, box.palette = "auto", nn = TRUE, main = "Decision Tree for CART 80/20")
+rpart.plot(rpart_model, box.palette = "auto", nn = TRUE, main = "Decision Tree for ID3 80/20")
 ```
 
 The decision tree representation was utilized, and the findings indicate
 that the attribute (sit.and.bend.forward_cm) has the greatest
 information gain. As a result, it was placed at the root level,
 representing the first level of the tree.
+
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=-1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+Within the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.048 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.048 the tree splits based on ‘body_fat’
 
 #### Prediction on test data and Confusion matrix:
 
@@ -1383,6 +1457,16 @@ that the attribute (sit.and.bend.forward_cm) has the greatest gain
 ratio. As a result, it was placed at the root level, representing the
 first level of the tree.
 
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=-1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+Within the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.036 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.036 the tree splits based on ‘body_fat’
+
 #### Prediction on test data and Confusion matrix:
 
 ```{r}
@@ -1444,6 +1528,16 @@ The decision tree representation was utilized, and the findings indicate
 that the attribute (sit.and.bend.forward_cm) has the greatest Giniindex
 (impurity reduction) values. As a result, it was placed at the root
 level, representing the first level of the tree.
+
+Root Node - sit and bend forward_cm: This divides the tree into two main branches or subtrees:
+Right Subtree: if the sit and bend forward_cm < 0.73 
+Left Subtree: if the sit and bend forward_ cm >=0.73
+
+Within the right subtree:
+If the ‘sit and bend forward_cm’ >=-1.3 , the tree splits based on the ‘body_fat’ attribute. It checks whether the ‘body_fat’ < 0.31 
+
+Within the left subtree : 
+If the ‘sit and bend forward_cm’ >=0.036 the tree splits based on ‘sit up counts’ and if ‘sit and bend forward_cm’ <0.036 the tree splits based on ‘body_fat’
 
 #### Prediction on test data and Confusion matrix:
 
